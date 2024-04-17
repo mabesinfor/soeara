@@ -40,11 +40,11 @@ To clone the repository, follow these steps:
 2. Navigate to the directory where you want to clone the repository.
 3. Run the following command:
    ```
-   git clone https://github.com/send0moka/flobamora.git
+   git clone https://github.com/mabesinfor/soeara.git
    ```
 4. After the cloning process is complete, navigate to the cloned repository directory:
    ```
-   cd flobamora
+   cd soeara
    ```
 5. Now, you are ready to work on the project. To install dependencies, run:
    ```
