@@ -15,7 +15,7 @@
 
 Soeara stands for Soedirman Berbicara is a website specifically designed for the UNSOED campus community, enabling students, faculty, and staff to create and sign petitions related to campus-based issues.
 
-<img src="public/tech.svg" height="24">
+<img src="public/tech.svg" height="24"> + Laravel Socialite
 
 <h2 id="features">✨ Features</h2>
 
