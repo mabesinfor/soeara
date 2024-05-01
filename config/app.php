@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://soeara.ecom22a.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -97,7 +97,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'base64:eHJ5Zjc0YndpN25tczRhZDF1aTZjYnMwZDJwcnJzamQ='),
 
     'previous_keys' => [
         ...array_filter(
