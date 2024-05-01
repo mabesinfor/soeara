@@ -15,7 +15,7 @@
 
 Soeara stands for Soedirman Berbicara is a website specifically designed for the UNSOED campus community, enabling students, faculty, and staff to create and sign petitions related to campus-based issues.
 
-<img src="public/tech.svg" height="24">
+<img src="public/tech.svg" height="24"> + Laravel Socialite
 
 <h2 id="features">✨ Features</h2>
 
@@ -40,11 +40,11 @@ To clone the repository, follow these steps:
 2. Navigate to the directory where you want to clone the repository.
 3. Run the following command:
    ```
-   git clone https://github.com/send0moka/flobamora.git
+   git clone https://github.com/mabesinfor/soeara.git
    ```
 4. After the cloning process is complete, navigate to the cloned repository directory:
    ```
-   cd flobamora
+   cd soeara
    ```
 5. Now, you are ready to work on the project. To install dependencies, run:
    ```
@@ -57,4 +57,4 @@ To clone the repository, follow these steps:
 
 <h2 id="license">🔰 License</h2>
 
-Copyright © 2024 [@send0moka](https://github.com/send0moka/) & [@buriane](https://github.com/buriane/) & [@dzakwanIrfan](https://github.com/dzakwanIrfan/). This project is open-source licensed under the MIT License.
+Copyright © 2024 [Jehian H1D022006](https://github.com/send0moka/) & [Brian H1D022009](https://github.com/buriane/) & [Dzakwan H1D022043](https://github.com/dzakwanIrfan/). This project is open-source licensed under the MIT License.
