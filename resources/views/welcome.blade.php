@@ -3,21 +3,22 @@
 @section('title', 'Welcome')
 
 @section('content')
-    <div class="relative mx-auto py-8 text-center">
+    <div class="relative mx-auto py-8 md:text-center pl-2 md:pl-0">
         <img src="{{ url('clip.svg') }}" class="absolute inset-0 object-contain size-full z-10 -mt-80">
-        <h1 class="relative z-20 text-5xl font-bold mt-14">Terkam Bersama, Bangkit Bersama</h1>
-        <h1 class="relative z-20 text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#C82323] to-white">Suara Mahasiswa, Harapan Universitas</h1>
-        <p class= "relative z-20 opacity-80 my-10">Berabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman.<br>Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
+        <h1 class="relative z-20 text-4xl md:text-5xl font-bold mt-14">Terkam Bersama, Bangkit Bersama</h1>
+        <h1 class="relative z-20 text-4xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#C82323] to-white">Suara Mahasiswa, Harapan Universitas</h1>
+        <p class= "relative z-20 opacity-80 my-10 hidden md:block">Bergabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman.<br>Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
+        <p class= "relative z-20 opacity-80 my-10 md:hidden">Bergabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman. Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
         <a href="/" class="relative z-20 bg-[#121212] py-3 px-6 font-bold rounded-[10px] shadow-[#C82323_0px_0px_40px] hover:bg-[#C82323] transition ease-in-out duration-500">Mulai membuat petisi</a>
-        <div class="absolute z-30 w-full px-4 lg:px-64 mt-14 flex gap-4 items-center">
-            <div class="cursor-pointer scale-x-[-1]">
+        <div class="absolute z-30 md:w-full md:px-4 lg:px-64 mt-14 flex gap-4 items-center">
+            <div class="cursor-pointer scale-x-[-1] hidden md:flex">
                 <img src="{{ url('play.svg') }}" alt="arrow-left">
             </div>
-            <div class="flex gap-3 p-3 bg-[#242424] ring-1 ring-[#4a4949] w-full rounded-xl">
-                <div class="w-1/2 rounded-lg bg-[#121212]">
+            <div class="flex flex-col md:flex-row gap-3 p-3 bg-[#242424] ring-1 ring-[#4a4949] w-full rounded-xl">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
                     <img src="{{ url('img1.png') }}" class="object-cover size-full rounded-xl">
                 </div>
-                <div class="w-1/2 rounded-lg bg-[#121212]">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
                     <div class="p-5 flex flex-col gap-4 items-start text-left">
                         <div class="flex justify-between w-full">
                             <small class="opacity-50">Ekonomi | Politik | Sosial</small>
@@ -46,7 +47,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cursor-pointer">
+            <div class="cursor-pointer hidden md:flex">
                 <img src="{{ url('play.svg') }}" alt="arrow-right">
             </div>
         </div>
