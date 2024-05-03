@@ -9,11 +9,11 @@
         <h1 class="relative z-20 text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#C82323] to-white">Suara Mahasiswa, Harapan Universitas</h1>
         <p class= "relative z-20 opacity-80 my-10">Berabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman.<br>Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
         <a href="/" class="relative z-20 bg-[#121212] py-3 px-6 font-bold rounded-[10px] shadow-[#C82323_0px_0px_40px] hover:bg-[#C82323] transition ease-in-out duration-500">Mulai membuat petisi</a>
-        <div class="absolute z-30 w-full px-64 mt-14 flex gap-4 items-center">
+        <div class="absolute z-30 w-full px-4 lg:px-64 mt-14 flex gap-4 items-center">
             <div class="cursor-pointer scale-x-[-1]">
                 <img src="{{ url('play.svg') }}" alt="arrow-left">
             </div>
-            <div class="flex gap-3 p-3 bg-[#242424] ring-1 ring-[#4a4949] h-96 w-full rounded-xl">
+            <div class="flex gap-3 p-3 bg-[#242424] ring-1 ring-[#4a4949] w-full rounded-xl">
                 <div class="w-1/2 rounded-lg bg-[#121212]">
                     <img src="{{ url('img1.png') }}" class="object-cover size-full rounded-xl">
                 </div>
