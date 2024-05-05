@@ -50,7 +50,13 @@ To clone the repository, follow these steps:
    ```
    composer install && npm install
    ```
-6. To start the development server, use:
+6. Copy the `.env.dev` file and rename it to `.env`
+   ```
+   GOOGLE_CLIENT_ID=816812760502-l5mg5g1oai9vh48vda6r5fmk35gu8879.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=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
+   GOOGLE_REDIRECT=/auth/google/callback
+   ```
+7. To start the development server, use:
    ```
    php artisan serve && npm run dev
    ```
