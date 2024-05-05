@@ -1,19 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GoogleAuthController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
+Route::view('/login', 'login');
+Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
+Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
-Route::get('/buat', function () {
-    return view('buat.index');
-});
-
-Route::get('/petisi', function () {
-    return view('petisi.index');
-});
-
-Route::get('/tentang', function () {
-    return view('tentang');
-});
+Route::view('/buat', 'buat.index');
+Route::view('/petisi', 'petisi.index');
+Route::view('/tentang', 'tentang');
