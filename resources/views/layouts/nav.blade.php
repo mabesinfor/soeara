@@ -41,6 +41,9 @@
                 <div class="py-2">
                     <span class="block px-4 py-2 text-sm">Masuk sebagai:</span>
                     <span class="block px-4 py-2 text-sm opacity-70">{{ Auth::user()->name }} ({{ Auth::user()->email }})</span>
+                    @can('admin', Auth::user())
+                        <a href="/dashboard" class="block px-4 py-2 text-sm text-white hover:bg-black/30"">Dashboard</a>
+                    @endcan
                     <a href="/logout" class="block px-4 py-2 text-sm text-[#e00a24] hover:bg-black/30">Keluar</a>
                 </div>
             </div>
