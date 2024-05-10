@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('petitions', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('desc');
+            $table->string('image')->nullable();
+            $table->string('status')->default('pending');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

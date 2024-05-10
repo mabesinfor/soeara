@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Petition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminPetitionController extends Controller
 {
@@ -20,10 +21,34 @@ class AdminPetitionController extends Controller
     public function indexPending()
     {
         return view('dashboard.pending.index', [
-            'title' => 'pending'
+            'title' => 'pending',
+            'petitions' => Petition::where('status', 'pending')->get(),
         ]);
     }
 
+    public function terima($id)
+    {
+        try {
+            $petition = Petition::findOrFail($id);
+            $petition->status = 'terima';
+            $petition->save();
+            return redirect('/dashboard/pending')->with('success', 'Berhasil menerima petisi');
+        } catch (\Throwable $th) {
+            return redirect('/dashboard/pending')->with('error', 'Gagal menerima petisi!');
+        }
+    }
+
+    public function tolak($id)
+    {
+        try {
+            $petition = Petition::findOrFail($id);
+            $petition->status = 'tolak';
+            $petition->save();
+            return redirect('/dashboard/pending')->with('success', 'Berhasil menolak petisi');
+        } catch (\Throwable $th) {
+            return redirect('/dashboard/pending')->with('error', 'Gagal menolak petisi!');
+        }
+    }
     /**
      * Show the form for creating a new resource.
      */

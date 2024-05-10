@@ -16,15 +16,12 @@ Route::view('/buat', 'buat.index')->middleware('auth');
 Route::view('/petisi', 'petisi.index');
 Route::view('/tentang', 'tentang');
 
-Route::view('/dashboard', 'dashboard.index')->middleware('role:admin');
-
-Route::middleware('role:admin')->group(function () {
-    Route::view('/dashboard', 'dashboard.pending.index', [
-        'title' => 'pending'
-    ]);
-    
+Route::middleware('role:admin')->group(function () {    
+    Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);
     Route::get('/dashboard/pending', [AdminPetitionController::class, 'indexPending']);
-
+    Route::put('/dashboard/pending/{id}/terima', [AdminPetitionController::class, 'terima']);
+    Route::put('/dashboard/pending/{id}/tolak', [AdminPetitionController::class, 'tolak']);
+    
     Route::resource('/dashboard/kategori', CategoryController::class);
 
     Route::resource('/dashboard/pengguna', UserController::class);
