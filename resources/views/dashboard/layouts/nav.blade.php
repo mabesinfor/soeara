@@ -1,4 +1,4 @@
-<nav class="relative py-6 px-6 lg:px-48 flex justify-between items-center bg-[#1e1e1e] z-50">
+<nav class="relative py-6 px-6 lg:px-48 flex justify-between items-center bg-[#1e1e1e] z-50 border-b border-[#e00a24]">
     <a class="text-3xl font-bold leading-none" href="/">
         <img src="{{ url('Logo.svg') }}" alt="logo">
     </a>
@@ -18,17 +18,6 @@
         </button>
         @endauth
     </div>
-    <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
-        <li>
-            <a href="buat" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Mulai Petisi</a>
-        </li>
-        <li>
-            <a href="petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
-        </li>
-        <li>
-            <a href="tentang" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
-        </li>
-    </ul>
     @auth
         <div class="hidden lg:block relative z-30">
             <div class="flex items-center gap-2 cursor-pointer" id="profile-dropdown">
@@ -41,9 +30,6 @@
                 <div class="py-2">
                     <span class="block px-4 py-2 text-sm">Masuk sebagai:</span>
                     <span class="block px-4 py-2 text-sm opacity-70">{{ Auth::user()->name }} ({{ Auth::user()->email }})</span>
-                    @can('admin', Auth::user())
-                        <a href="/dashboard" class="block px-4 py-2 text-sm text-white hover:bg-black/30"">Dashboard</a>
-                    @endcan
                     <a href="/logout" class="block px-4 py-2 text-sm text-[#e00a24] hover:bg-black/30">Keluar</a>
                 </div>
             </div>
@@ -66,28 +52,12 @@
                 </svg>
             </button>
         </div>
-        <div>
-            <ul>
-                <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="#">Mulai Petisi</a>
-                </li>
-                <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="#">Telusuri Petisi</a>
-                </li>
-                <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="#">Tentang Kami</a>
-                </li>
-            </ul>
-        </div>
         <div class="mt-auto">
             <div class="pt-6">
                 @auth
                 <p class="text-gray-400">Masuk sebagai:</p>
                 <p>{{ Auth::user()->name }}</p>
                 <p>{{ Auth::user()->email }}</p>
-                @can('admin', Auth::user())
-                    <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-white rounded-xl text-[#e00a24] hover:bg-white" href="/dashboard">Dashboard</a>  
-                @endcan
                 <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-[#e00a24] rounded-xl hover:bg-[#e00a24]" href="/logout">Keluar</a>
                 @else
                 <a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-[#e00a24] rounded-xl hover:bg-[#e00a24]" href="/login">Masuk</a>
