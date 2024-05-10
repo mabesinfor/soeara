@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -31,5 +33,25 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function petitions(): HasMany
+    {
+        return $this->hasMany(Petition::class);
+    }
+
+    public function supportedPetitions(): BelongsToMany
+    {
+        return $this->belongsToMany(Petition::class)->using(Support::class);
+    }
+
+    public function likedPetitions(): BelongsToMany
+    {
+        return $this->belongsToMany(Petition::class)->using(Like::class);
+    }
+
+    public function commentedPetitions(): BelongsToMany
+    {
+        return $this->belongsToMany(Petition::class)->using(Comment::class);
     }
 }
