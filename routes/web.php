@@ -12,9 +12,9 @@ Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
-Route::view('/buat', 'buat.index')->middleware('auth');
-Route::view('/petisi', 'petisi.index');
-Route::view('/tentang', 'tentang');
+Route::view('/buat-petisi', 'buat.index')->middleware('auth');
+Route::view('/telusuri-petisi', 'telusuri');
+Route::view('/tentang-kami', 'tentang');
 
 Route::middleware('role:admin')->group(function () {    
     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);

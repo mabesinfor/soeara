@@ -20,13 +20,13 @@
     </div>
     <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
         <li>
-            <a href="buat" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Mulai Petisi</a>
+            <a href="buat-petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Mulai Petisi</a>
         </li>
         <li>
-            <a href="petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
+            <a href="telusuri-petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
         </li>
         <li>
-            <a href="tentang" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
+            <a href="tentang-kami" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
         </li>
     </ul>
     @auth
@@ -69,13 +69,13 @@
         <div>
             <ul>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="#">Mulai Petisi</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="buat-petisi">Mulai Petisi</a>
                 </li>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="#">Telusuri Petisi</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="telusuri-petisi">Telusuri Petisi</a>
                 </li>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="#">Tentang Kami</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="tentang-kami">Tentang Kami</a>
                 </li>
             </ul>
         </div>
