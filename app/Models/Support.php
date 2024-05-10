@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class Support extends Pivot
@@ -14,4 +15,14 @@ class Support extends Pivot
         'user_id',
         'petition_id',
     ];
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function petitions(): BelongsTo
+    {
+        return $this->belongsTo(Petition::class, 'petition_id');
+    }
 }

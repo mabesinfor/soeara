@@ -16,7 +16,7 @@ class CategoryPetition extends Pivot
 
     public function petitions(): BelongsTo
     {
-        return $this->belongsTo(Petition::class, 'user_id');
+        return $this->belongsTo(Petition::class, 'petition_id');
     }
 
     public function categories(): BelongsTo
