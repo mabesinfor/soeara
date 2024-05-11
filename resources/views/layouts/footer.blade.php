@@ -8,9 +8,9 @@
         <li>
             <b>Soeara</b>
             <div class="flex flex-col mt-4 text-sm gap-2">
-                <a href="buat" class="opacity-70 hover:opacity-100">Mulai Petisi</a>
-                <a href="petisi" class="opacity-70 hover:opacity-100">Telusuri Petisi</a>
-                <a href="tentang" class="opacity-70 hover:opacity-100">Tentang Kami</a>
+                <a href="buat-petisi" class="opacity-70 hover:opacity-100">Mulai Petisi</a>
+                <a href="telusuri-petisi" class="opacity-70 hover:opacity-100">Telusuri Petisi</a>
+                <a href="tentang-kami" class="opacity-70 hover:opacity-100">Tentang Kami</a>
             </div>
         </li>
         <li>
