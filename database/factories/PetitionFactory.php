@@ -17,7 +17,11 @@ class PetitionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->text,
+            'desc' => $this->faker->text(255),
+            'image' => 'img1.png',
+            'status' => 'pending',
+            'user_id' => 1,
         ];
     }
 }

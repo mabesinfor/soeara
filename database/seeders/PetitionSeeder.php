@@ -12,6 +12,7 @@ class PetitionSeeder extends Seeder
      */
     public function run(): void
     {
+        Petition::factory(25)->create();
         Petition::create([
             'title' => 'Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!',
             'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.

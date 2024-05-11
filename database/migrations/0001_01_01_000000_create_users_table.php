@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role')->default('mahasiswa');
+            $table->enum('role', ['mahasiswa', 'admin'])->default('mahasiswa');
+            $table->string('address')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
