@@ -11,6 +11,15 @@ class Petition extends Model
 {
     use HasFactory;
 
+    protected $table = 'petitions';
+    protected $fillable = [
+        'title',
+        'desc',
+        'image',
+        'status',
+        'user_id',
+    ];
+
     public function users(): BelongsTo 
     {
         return $this->belongsTo(User::class);

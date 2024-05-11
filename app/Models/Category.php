@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Category extends Model
 {
     use HasFactory;
+    protected $fillable = ['name'];
+    protected $guard = ['id'];
 
     public function petitions(): BelongsToMany
     {
