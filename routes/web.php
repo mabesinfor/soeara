@@ -15,6 +15,7 @@ Route::get('/logout', [GoogleAuthController::class, 'logout']);
 Route::view('/buat-petisi', 'buat.index')->middleware('auth');
 Route::view('/telusuri-petisi', 'telusuri');
 Route::view('/tentang-kami', 'tentang');
+Route::view('/petisi', 'petisi/index');
 
 Route::middleware('role:admin')->group(function () {    
     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);
