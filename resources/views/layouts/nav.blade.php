@@ -42,7 +42,7 @@
                     <span class="block px-4 py-2 text-sm">Masuk sebagai:</span>
                     <span class="block px-4 py-2 text-sm opacity-70">{{ Auth::user()->name }} ({{ Auth::user()->email }})</span>
                     @can('admin', Auth::user())
-                        <a href="/dashboard" class="block px-4 py-2 text-sm text-white hover:bg-black/30"">Dashboard</a>
+                        <a href="/admin" class="block px-4 py-2 text-sm text-white hover:bg-black/30"">Dashboard</a>
                     @endcan
                     <a href="/logout" class="block px-4 py-2 text-sm text-[#e00a24] hover:bg-black/30">Keluar</a>
                 </div>
@@ -86,7 +86,7 @@
                 <p>{{ Auth::user()->name }}</p>
                 <p>{{ Auth::user()->email }}</p>
                 @can('admin', Auth::user())
-                    <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-white rounded-xl text-[#e00a24] hover:bg-white" href="/dashboard">Dashboard</a>  
+                    <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-white rounded-xl text-[#e00a24] hover:bg-white" href="/admin">Dashboard</a>  
                 @endcan
                 <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-[#e00a24] rounded-xl hover:bg-[#e00a24]" href="/logout">Keluar</a>
                 @else

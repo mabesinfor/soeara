@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\User;
+use Filament\Forms\Components\CheckboxList;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -28,6 +29,9 @@ class UserResource extends Resource
                     'admin' => 'Admin'
                 ])
                 ->required(),
+                CheckboxList::make('roles')
+                ->relationship('roles', 'name')
+                ->searchable()
             ]);
     }
 
@@ -41,6 +45,7 @@ class UserResource extends Resource
                 TextColumn::make('twitter'),
                 TextColumn::make('image'),
                 TextColumn::make('role')->sortable(),
+                TextColumn::make('roles.name')->sortable(),
             ])
             ->filters([
                 //
