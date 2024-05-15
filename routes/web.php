@@ -16,6 +16,8 @@ Route::view('/buat-petisi', 'buat.index')->middleware('auth');
 Route::view('/telusuri-petisi', 'telusuri');
 Route::view('/tentang-kami', 'tentang');
 Route::view('/petisi', 'petisi/index');
+Route::view('/petisi/supported', 'petisi/supported');
+Route::view('/petisi/bagikan', 'petisi/bagikan');
 
 
 // Route::middleware('role:admin')->group(function () {    

@@ -68,15 +68,10 @@
             </div>
             {{-- End Progress Bar --}}
 
-            <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
-            <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                <img src="{{ url('pic5.svg') }}">
-                Maria Elizabeth Putri
-            </div>
-            <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
-            <form action="/supported" method="post" class="w-full md:w-3/4">
-                <textarea class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
-                <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
+            
+            <form action="/bagikan" method="post" class="w-full md:w-3/4">
+                <textarea class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3" rows="3">Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh 4. 298 dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?</textarea>
+                <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</button>
             </form>
         </div>
         {{-- End Dukung Petisi --}}
