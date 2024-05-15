@@ -68,7 +68,7 @@ class PetitionResource extends Resource
                     'close' => 'gray',
                     'win' => 'warning',
                     'reject' => 'danger'
-                }),
+                })->sortable(),
             ])
             ->filters([
                 //
