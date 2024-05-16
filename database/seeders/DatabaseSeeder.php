@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Petition::create([
             'title' => 'Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!',
+            'slug' => 'unsoed-darurat-pelecehan-seksual-bentuk-tim-investigasi-independent',
             'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
 
             Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
 
         Petition::create([
             'title' => 'Stop Komdis Marah-Marah Pada Masa Ospek Jurusan!',
+            'slug' => 'stop-komdis-marah-marah-pada-masa-ospek-jurusan',
             'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
 
             Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.
@@ -46,6 +48,7 @@ class DatabaseSeeder extends Seeder
 
         Petition::create([
             'title' => 'Benahi Aspal Jalan dan Parkiran di Fakultas Teknik Unsoed!',
+            'slug' => 'benahi-aspal-jalan-dan-parkiran-di-fakultas-teknik-unsoed',
             'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
 
             Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.

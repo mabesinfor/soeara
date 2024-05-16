@@ -23,10 +23,10 @@
             <a href="buat-petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Mulai Petisi</a>
         </li>
         <li>
-            <a href="telusuri" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
+            <a href="petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
         </li>
         <li>
-            <a href="tentang" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
+            <a href="tentang-kami" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
         </li>
     </ul>
     @auth
@@ -73,7 +73,7 @@
                     <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="buat-petisi">Mulai Petisi</a>
                 </li>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="telusuri">Telusuri Petisi</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="telusuri-petisi">Telusuri Petisi</a>
                 </li>
                 <li class="mb-1">
                     <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="tentang">Tentang Kami</a>
