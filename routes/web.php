@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PetitionController;
 
 Route::view('/', 'home')->name('home');
 Route::view('/login', 'login')->name('login');
@@ -13,15 +14,14 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
 Route::view('/buat-petisi', 'buat.index')->middleware('auth');
-Route::view('/telusuri', 'telusuri');
-Route::view('/tentang', 'tentang');
-Route::view('/petisi', 'petisi/index');
+Route::view('/petisi', 'petisi.index');
+Route::view('/tentang-kami', 'tentang');
 Route::view('/petisi/supported', 'petisi/supported');
 Route::view('/petisi/bagikan', 'petisi/bagikan');
+Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
 
 Route::get('/profil/{slug}', [UserController::class, 'show'])->name('users.show');
 Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('users.edit');
-
 
 // Route::middleware('role:admin')->group(function () {    
 //     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);

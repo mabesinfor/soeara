@@ -185,7 +185,7 @@
             <div class="w-full flex justify-center">
                 <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-fit rounded-xl">
                     <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-40">
-                        Telusuri lebih banyak petisi <a href="telusuri-petisi" class="hover:underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">disini</a>
+                        Telusuri lebih banyak petisi <a href="petisi" class="hover:underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">disini</a>
                     </div>
                 </div>
             </div>

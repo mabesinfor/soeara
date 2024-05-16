@@ -1,23 +1,73 @@
 @extends('layouts.app')
 
-@section('title', 'Petisi')
+@section('title', 'Telusuri Petisi')
 
 @section('content')
-    {{-- Start Judul --}}
-    <div class="flex items-center justify-center p-6">
-        <h1 class="text-2xl text-center font-bold">Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!</h1>
-    </div>
-    {{-- End Judul --}}
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {{-- Start Konten Petisi --}}
-        <div class="bg-transparent p-4 col-span-2 md:ml-20">
-            <div class="relative z-30 flex flex-col gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl md:ml-20">
-                <div class="w-full rounded-lg bg-[#121212]">
+    <div class="relative py-8 pl-2 mx-auto md:pl-0">
+        <img src="{{ url('clip2.svg') }}" class="absolute inset-0 z-10 object-cover size-full">
+        <div class="relative z-20 flex flex-col items-center gap-10 my-10 md:mx-40">
+            <div class="w-full">
+                <p>Cari Petisi</p>
+                <form action="" class="flex items-center w-full gap-4">
+                    <input type="text" name="search" id="search"
+                        class="mt-2 border border-white bg-[#121212] rounded-lg py-3 px-4 w-4/5 placeholder-white/70"
+                        placeholder="Stop Kekerasan Pada Hewan di Lingkungan Kampus! Beri Sanksi Pelaku Kekerasan!">
+                    <div class="h-fit w-1/5 bg-[#e00a24] rounded-xl mt-[6px] transition ease-in-out duration-500 hover:bg-[#c94958]">
+                        <button type="submit"
+                        class="flex items-center justify-center w-full gap-2 py-4 font-semibold">
+                        <img src="{{ url('search.svg') }}" class="size-4">
+                        <span class="hidden md:flex">Cari Petisi</span>
+                    </button>
+                    </div>
+                </form>
+            </div>
+            <div
+                class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
+                    <img src="{{ url('img2.png') }}" class="object-cover size-full rounded-xl">
+                </div>
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
+                    <div class="flex flex-col items-start gap-4 p-5 text-left">
+                        <div class="flex justify-between w-full">
+                            <small class="opacity-50">Sosial</small>
+                            <small class="opacity-50">02/12/2023</small>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <img src="{{ url('pic2.svg') }}">
+                            <small>Putri Aisyah Qomariyah</small>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <b>Stop Komdis Marah-Marah Pada Masa Ospek Jurusan! </b>
+                            <small class="opacity-80">Pemangku kepentingan harus segera menghentikan praktik marah-marah
+                                yang sering terjadi selama masa orientasi studi di berbagai jurusan. Perilaku tersebut tidak
+                                hanya tidak mendidik ...</small>
+                            <a href=""><small
+                                    class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca
+                                    Selanjutnya</small></a>
+                        </div>
+                        <div class="flex justify-end w-full"><a href=""
+                                class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan
+                                Dukungan!</a></div>
+                    </div>
+                    <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
+                        <div class="flex items-center gap-2 p-3 rounded-lg cursor-pointer hover:bg-black/30">
+                            <img src="{{ url('like.svg') }}">
+                            <small>Suka</small>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <img src="{{ url('support.svg') }}">
+                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
                     <img src="{{ url('img3.png') }}" class="object-cover size-full rounded-xl">
                 </div>
-                <div class="w-full rounded-lg bg-[#121212] flex flex-col justify-between">
-                    <div class="p-5 flex flex-col gap-4 items-start text-left">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
+                    <div class="flex flex-col items-start gap-4 p-5 text-left">
                         <div class="flex justify-between w-full">
                             <small class="opacity-50">Sosial | Lingkungan</small>
                             <small class="opacity-50">24/02/2022</small>
@@ -28,147 +78,88 @@
                         </div>
                         <div class="flex flex-col gap-2">
                             <b>Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!</b>
-                            <p class="opacity-80 text-justify">Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.</p>
-                            <p class="opacity-80 text-justify">Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.</p>
-                            <p class="opacity-80 text-justify">Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.</p>
+                            <small class="opacity-80">Dalam menghadapi situasi darurat pelecehan seksual di lingkungan
+                                Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk
+                                menyelidiki kasus-kasus ...</small>
+                            <a href=""><small
+                                    class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca
+                                    Selanjutnya</small></a>
                         </div>
+                        <div class="flex justify-end w-full"><a href=""
+                                class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan
+                                Dukungan!</a></div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
+                        <div class="flex items-center gap-2 p-3 rounded-lg cursor-pointer hover:bg-black/30">
                             <img src="{{ url('like.svg') }}">
                             <small>Suka</small>
                         </div>
-                        <div class="flex gap-2 items-center">
+                        <div class="flex items-center gap-2">
                             <img src="{{ url('support.svg') }}">
                             <small class="text-[#C82323] mr-3">5071 Pendukung</small>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {{-- End Konten Petisi --}}
-
-        {{-- Start Dukung Petisi --}}
-        <div class="flex flex-col items-center md:items-start bg-transparent p-4 col-span-2 md:ml-20">
-            {{-- Start Progress Bar --}}
-            <div class="border border-[#C82323] rounded-xl w-full md:w-3/4">
-                <div class="w-full h-2 rounded-full">
-                    <div class="h-full bg-[#C82323] rounded-full" style="width: 50%;"></div>
+            <div
+                class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
+                    <img src="{{ url('img4.png') }}" class="object-cover size-full rounded-xl">
                 </div>
-            </div>
-            <div class="bg-transparent flex justify-between items-center w-full md:w-3/4 mt-2">
-                <div>
-                    <h3 class="text-xl text-center md:text-start font-bold text-[#C82323]">5.701</h3>
-                    <p class="text-center md:text-start text-[#C82323]">Pendukung</p>
-                </div>
-                <div>
-                    <h3 class="text-xl text-center md:text-right font-bold">10.000</h3>
-                    <p class="text-center md:text-right">Tujuan Berikutnya</p>
-                </div>
-            </div>
-            {{-- End Progress Bar --}}
-
-            <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
-            <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                <img src="{{ url('pic5.svg') }}">
-                Maria Elizabeth Putri
-            </div>
-            <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
-            <form action="/supported" method="post" class="w-full md:w-3/4">
-                <textarea class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
-                <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
-            </form>
-        </div>
-        {{-- End Dukung Petisi --}}
-
-        <div class="bg-transparent w-full p-4 col-span-2 md:ml-20">
-            <h3 class="text-2xl text-start font-bold mb-7 md:ml-20">24 Komentar</h3>
-            {{-- Start submit komentar --}}
-            <div class="flex items-start gap-4 mb-4 md:ml-20">
-                <img src="{{ url('pic5.svg') }}" class="self-start">
-                <div class="flex flex-col w-full relative">
-                    <form action="/submitkomen" method="post">
-                        <textarea class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600">Tambahkan komentar ...</textarea>
-                        <button type="submit" class="absolute right-0 bottom-6 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2">Kirim Komentar</button>
-                    </form>
-                </div>
-            </div>
-            {{-- End submit komentar --}}
-
-            {{-- Start Komentar --}}
-            <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                <img src="{{ url('pic6.svg') }}" class="self-start">
-                <div class="flex flex-col w-full">
-                    <div class="flex justify-between">
-                        <div class="flex gap-2">
-                            <p class="font-bold">Alisia Hendrawan</p>
-                            <p class="text-gray-500">13 menit yang lalu</p>
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
+                    <div class="flex flex-col items-start gap-4 p-5 text-left">
+                        <div class="flex justify-between w-full">
+                            <small class="opacity-50">Transportasi dan Infrastruktur</small>
+                            <small class="opacity-50">13/03/2024</small>
                         </div>
-                        <button onclick="deleteFunction()">
-                            <img src="{{ url('delete.svg') }}">
-                        </button>
-                    </div>
-                    <p class="mt-5">Saya menandatangani ini karena saya ingin adanya keadilan bagi korban pelecehan seksual</p>
-                    <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                        <button id="likeButton" onclick="toggleLike()">
-                            <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                        </button>
-                        <small>12 Suka</small>
-                    </div>
-                </div>
-            </div>
-            <hr class="md:ml-20">
-            <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                <img src="{{ url('pic7.svg') }}" class="self-start">
-                <div class="flex flex-col w-full">
-                    <div class="flex justify-between">
-                        <div class="flex gap-2">
-                            <p class="font-bold">David Indra Ibrahim</p>
-                            <p class="text-gray-500">2 jam yang lalu</p>
+                        <div class="flex items-center gap-4">
+                            <img src="{{ url('pic4.svg') }}">
+                            <small>Raden Mas Said</small>
                         </div>
-                        <button onclick="deleteFunction()">
-                            <img src="{{ url('delete.svg') }}">
-                        </button>
-                    </div>
-                    <p class="mt-5">Tindakan pelecahan tidak bisa di toleransi, karena memurunkan harkat dan martabat manusia. Kita harus menghormari dan respect kepada lawan jenis, dalam islam diwajibkan untuk menundukkan pandangan agar terhindar dari zina dan pelecehan. Sekian.</p>
-                    <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                        <button id="likeButton" onclick="toggleLike()">
-                            <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                        </button>
-                        <small>8 Suka</small>
-                    </div>
-                </div>
-            </div>
-            <hr class="md:ml-20">
-            <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                <img src="{{ url('pic8.svg') }}" class="self-start">
-                <div class="flex flex-col w-full">
-                    <div class="flex justify-between">
-                        <div class="flex gap-2">
-                            <p class="font-bold">Siti Aisyah</p>
-                            <p class="text-gray-500">2 jam yang lalu</p>
+                        <div class="flex flex-col gap-2">
+                            <b>Benahi Aspal Jalan dan Parkiran di Fakultas Teknik Unsoed!</b>
+                            <small class="opacity-80">Kami, mahasiswa akademik Fakultas Teknik Universitas Jenderal
+                                Soedirman (Unsoed), dengan ini menyuarakan keprihatinan kami terhadap kondisi infrastruktur
+                                yang memprihatinkan ...</small>
+                            <a href=""><small
+                                    class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca
+                                    Selanjutnya</small></a>
                         </div>
-                        <button onclick="deleteFunction()">
-                            <img src="{{ url('delete.svg') }}">
-                        </button>
+                        <div class="flex justify-end w-full"><a href=""
+                                class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan
+                                Dukungan!</a></div>
                     </div>
-                    <p class="mt-5">Karena pelecehan seksual adalah sebuah kasus serius. Jika satu kasus bisa terungkap dan pelakunya mendapat konsekuensi yang maksimal sampai dgn pemecatan dari institusinya, maka akan bisa mengungkap kasus-kasus serupa di institusi tersebut. Dunia pendidikan tidak hanya mengedepankan kompetensi intelektual semata-mata, namun harus juga menguatamakan nilai dan moral dalam proses berkegiatan di kampus. Saya prihatin dengan hal ini, karena saya adalah seorang guru. Jangan sampai profesi pendidik ternoda oleh perbuatan oknum-oknumnya yang mengabaikan amanah moralnya.</p>
-                    <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                        <button id="likeButton" onclick="toggleLike()">
-                            <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                        </button>
-                        <small>2 Suka</small>
+                    <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
+                        <div class="flex items-center gap-2 p-3 rounded-lg cursor-pointer hover:bg-black/30">
+                            <img src="{{ url('like.svg') }}">
+                            <small>Suka</small>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <img src="{{ url('support.svg') }}">
+                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
+                        </div>
                     </div>
                 </div>
             </div>
-            <hr class="md:ml-20">
-            {{-- End Komentar --}}
-        </div>
-    </div>
-    <div class="w-full md:w-1/2 md:ml-20 flex p-5 mb-20">
-        <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl md:ml-20">
-            <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-50 text-center">
-                <a href="#">Lihat lebih banyak komentar</a>
+            <div class="flex justify-center w-full">
+                <div class="relative z-30 flex p-2 bg-[#303030]/50 ring-1 ring-[#646464] rounded-xl gap-2 text-[#C82323] font-bold">
+                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] p-3">
+                        <img src="{{ url('play.svg') }}" class="size-3 scale-x-[-1]">
+                    </button>
+                    <button class="rounded-lg bg-[#C82323] hover:bg-[#be4141] px-3 text-[#121212]">1</button>
+                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3">2</button>
+                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3">3</button>
+                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3">
+                        <img src="{{ url('play.svg') }}" class="size-3">
+                    </button>
+                </div>
+            </div>
+            <div class="flex justify-center w-full">
+                <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-fit rounded-xl">
+                    <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-40 text-center">
+                        Tidak menemukan petisi yang Anda cari? <a href="buat-petisi" class="hover:underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Buat petisi Anda sendiri!</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -29,15 +29,23 @@ class PetitionController extends Controller
      */
     public function store(StorePetitionRequest $request)
     {
-        //
+        $data = $request->validated();
+        Petition::create($data);
+        return redirect()->route('petisi.show', ['slug' => Str::slug($data['title'])]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Petition $petition)
+    public function show($slug)
     {
-        //
+        $petisi = Petition::where('slug', $slug)->first();
+
+        if ($petisi) {
+            return view('petisi.show', compact('petisi'));
+        } else {
+            abort(404, 'Petisi tidak ditemukan');
+        }
     }
 
     /**

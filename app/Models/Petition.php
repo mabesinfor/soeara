@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Petition extends Model
 {
@@ -14,11 +15,19 @@ class Petition extends Model
     protected $table = 'petitions';
     protected $fillable = [
         'title',
+        'slug',
         'desc',
         'image',
         'status',
         'user_id',
     ];
+
+    // Mutator for creating slug from title
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     public function user(): BelongsTo 
     {
