@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPetitionController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleAuthController;
@@ -21,6 +22,8 @@ Route::view('/petisi/bagikan', 'petisi/bagikan');
 
 Route::get('/profil/{slug}', [UserController::class, 'show'])->name('users.show');
 Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::get('/api/provinces', [ApiController::class, 'getProvinces']);
+Route::get('/api/districts/{province_id}', [ApiController::class, 'getDistricts']);
 
 
 // Route::middleware('role:admin')->group(function () {    
