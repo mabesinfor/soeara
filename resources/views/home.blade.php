@@ -83,105 +83,45 @@
         <img src="{{ url('clip2.svg') }}" class="absolute inset-0 object-contain size-full z-10 -mt-28 sm:mt-72 md:mt-96 lg:mt-[20rem] lg:pl-[54px]">
         <div class="text-left md:px-10 lg:px-40 py-20 flex flex-col gap-10">
             <h1 class="relative z-20 text-2xl font-bold my-10">Beri dukungan untuk perubahan!</h1>
+            @foreach ($petisi as $petisi)
             <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-                    <img src="{{ url('img2.png') }}" class="object-cover size-full rounded-xl">
+                    <img src="{{ asset($petisi->image) }}" class="object-cover size-full rounded-xl" alt="{{ $petisi->title }}">
                 </div>
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
                     <div class="p-5 flex flex-col gap-4 items-start text-left">
                         <div class="flex justify-between w-full">
-                            <small class="opacity-50">Sosial</small>
-                            <small class="opacity-50">02/12/2023</small>
+                            <small class="opacity-50">Kategori</small>
+                            <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                         </div>
                         <div class="flex items-center gap-4">
-                            <img src="{{ url('pic2.svg') }}">
-                            <small>Putri Aisyah Qomariyah</small>
+                            <img src="{{ asset('pic2.svg') }}">
+                            <small>{{ $petisi->user->name }}</small>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <b>Stop Komdis Marah-Marah Pada Masa Ospek Jurusan! </b>
-                            <small class="opacity-80">Pemangku kepentingan harus segera menghentikan praktik marah-marah yang sering terjadi selama masa orientasi studi di berbagai jurusan. Perilaku tersebut tidak hanya tidak mendidik ...</small>
-                            <a href=""><small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small></a>
+                            <b>{{ $petisi->title }}</b>
+                            <small class="opacity-80">{{ Str::limit($petisi->desc, 100) }}</small>
+                            <a href="{{ route('petisi.show', $petisi->slug) }}">
+                                <small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small>
+                            </a>
                         </div>
-                        <div class="w-full flex justify-end"><a href="" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a></div>
+                        <div class="w-full flex justify-end">
+                            <a href="{{ route('petisi.show', $petisi->slug) }}" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a>
+                        </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
                         <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
-                            <img src="{{ url('like.svg') }}">
+                            <img src="{{ asset('like.svg') }}">
                             <small>Suka</small>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <img src="{{ url('support.svg') }}">
+                            <img src="{{ asset('support.svg') }}">
                             <small class="text-[#C82323] mr-3">5071 Pendukung</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
-                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-                    <img src="{{ url('img3.png') }}" class="object-cover size-full rounded-xl">
-                </div>
-                <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
-                    <div class="p-5 flex flex-col gap-4 items-start text-left">
-                        <div class="flex justify-between w-full">
-                            <small class="opacity-50">Sosial | Lingkungan</small>
-                            <small class="opacity-50">24/02/2022</small>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <img src="{{ url('pic3.svg') }}">
-                            <small>Maulana Rizqy Ridho</small>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <b>Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!</b>
-                            <small class="opacity-80">Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus ...</small>
-                            <a href=""><small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small></a>
-                        </div>
-                        <div class="w-full flex justify-end"><a href="" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a></div>
-                    </div>
-                    <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
-                            <img src="{{ url('like.svg') }}">
-                            <small>Suka</small>
-                        </div>
-                        <div class="flex gap-2 items-center">
-                            <img src="{{ url('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
-                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-                    <img src="{{ url('img4.png') }}" class="object-cover size-full rounded-xl">
-                </div>
-                <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
-                    <div class="p-5 flex flex-col gap-4 items-start text-left">
-                        <div class="flex justify-between w-full">
-                            <small class="opacity-50">Transportasi dan Infrastruktur</small>
-                            <small class="opacity-50">13/03/2024</small>
-                        </div>
-                        <div class="flex items-center gap-4">
-                            <img src="{{ url('pic4.svg') }}">
-                            <small>Raden Mas Said</small>
-                        </div>
-                        <div class="flex flex-col gap-2">
-                            <b>Benahi Aspal Jalan dan Parkiran di Fakultas Teknik Unsoed!</b>
-                            <small class="opacity-80">Kami, mahasiswa akademik Fakultas Teknik Universitas Jenderal Soedirman (Unsoed), dengan ini menyuarakan keprihatinan kami terhadap kondisi infrastruktur yang memprihatinkan ...</small>
-                            <a href=""><small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small></a>
-                        </div>
-                        <div class="w-full flex justify-end"><a href="" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a></div>
-                    </div>
-                    <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
-                            <img src="{{ url('like.svg') }}">
-                            <small>Suka</small>
-                        </div>
-                        <div class="flex gap-2 items-center">
-                            <img src="{{ url('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @endforeach
             <div class="w-full flex justify-center">
                 <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-fit rounded-xl">
                     <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-40">

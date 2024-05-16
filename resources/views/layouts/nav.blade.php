@@ -26,7 +26,7 @@
             <a href="petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
         </li>
         <li>
-            <a href="tentang" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
+            <a href="tentang-kami" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
         </li>
     </ul>
     @auth
