@@ -24,16 +24,23 @@ class GoogleAuthController extends Controller
             return redirect('/login')->with('error', 'Anda bukan bagian dari Unsoed.');
         }
 
-        $user = User::updateOrCreate(
-            ['google_id' => $googleUser->id],
-            [
-                'name' => $googleUser->name,
-                'email' => $googleUser->email,
-                'password' => Str::password(12),
-                'email_verified_at' => now(),
-                'avatar' => $googleUser->avatar,
-            ]
-        );
+        $slug = Str::slug($googleUser->name, '-');
+        $counter = 1;
+        while (User::where('slug', $slug)->exists()) {
+            $slug = Str::slug($googleUser->name, '-') . '-' . $counter;
+            $counter++;
+        }
+
+        $user = User::firstOrNew(['email' => $googleUser->email]);
+        $user->google_id = $googleUser->id;
+        $user->name = ucwords(strtolower($googleUser->name));
+        $user->email = $googleUser->email;
+        $user->password = bcrypt(Str::random(12)); 
+        $user->email_verified_at = now();
+        $user->avatar = $googleUser->avatar;
+        $user->slug = $slug;
+
+        $user->save(); 
 
         Auth::login($user);
         return redirect('/');

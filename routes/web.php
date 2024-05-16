@@ -13,11 +13,14 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
 Route::view('/buat-petisi', 'buat.index')->middleware('auth');
-Route::view('/telusuri-petisi', 'telusuri');
-Route::view('/tentang-kami', 'tentang');
+Route::view('/telusuri', 'telusuri');
+Route::view('/tentang', 'tentang');
 Route::view('/petisi', 'petisi/index');
 Route::view('/petisi/supported', 'petisi/supported');
 Route::view('/petisi/bagikan', 'petisi/bagikan');
+
+Route::get('/profil/{slug}', [UserController::class, 'show'])->name('users.show');
+Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('users.edit');
 
 
 // Route::middleware('role:admin')->group(function () {    
