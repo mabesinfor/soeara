@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PetitionController;
 use App\Http\Controllers\UserController;
