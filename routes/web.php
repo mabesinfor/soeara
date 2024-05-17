@@ -13,8 +13,13 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
 Route::view('/buat-petisi', 'buat.index')->middleware('auth');
+Route::view('/buat-petisi/judul', 'buat.judul');
+Route::view('/buat-petisi/foto', 'buat.foto');
+Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi');
+
 Route::view('/telusuri-petisi', 'telusuri');
 Route::view('/tentang-kami', 'tentang');
+
 Route::view('/petisi', 'petisi/index');
 Route::view('/petisi/supported', 'petisi/supported');
 Route::view('/petisi/bagikan', 'petisi/bagikan');
