@@ -8,8 +8,8 @@
     @vite('resources/css/app.css')
 </head>
 
-<body class="antialiased font-sans">
-    <div class="min-h-screen bg-[#121212] text-white">
+<body class="antialiased font-sans bg-[#121212]">
+    <div class="min-h-screen text-white">
         @include('layouts.nav')
         <main>
             @if (session('error'))

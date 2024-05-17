@@ -22,10 +22,10 @@
                             <small class="opacity-50">Sosial | Lingkungan</small>
                             <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                         </div>
-                        <div class="flex items-center gap-4">
+                        <a href="/profil/{{ $petisi->user->slug }}" class="flex items-center gap-4">
                             <img src="{{ url('pic3.svg') }}">
                             <small>{{ $petisi->user->name }}</small>
-                        </div>
+                        </a>
                         <div class="flex flex-col gap-2">
                             <b>{{ $petisi->title }}</b>
                             <p class="opacity-80 text-justify">{{ $petisi->desc }}</p>
@@ -68,8 +68,8 @@
 
             <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
             <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                <img src="{{ url('pic5.svg') }}">
-                Maria Elizabeth Putri
+                <img src="{{ Auth::user()->avatar }}" class="rounded-full size-8">
+                {{ Auth::user()->name }}
             </div>
             <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
             <form action="/supported" method="post" class="w-full md:w-3/4">
@@ -86,7 +86,7 @@
                 <img src="{{ url('pic5.svg') }}" class="self-start">
                 <div class="flex flex-col w-full relative">
                     <form action="/submitkomen" method="post">
-                        <textarea class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600">Tambahkan komentar ...</textarea>
+                        <textarea class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600" placeholder="Tambahkan komentar ..."></textarea>
                         <button type="submit" class="absolute right-0 bottom-6 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2">Kirim Komentar</button>
                     </form>
                 </div>
