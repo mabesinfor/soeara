@@ -23,7 +23,7 @@
             <a href="buat-petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Mulai Petisi</a>
         </li>
         <li>
-            <a href="telusuri-petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
+            <a href="petisi" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Telusuri Petisi</a>
         </li>
         <li>
             <a href="tentang-kami" class="transition ease-in-out duration-500 hover:bg-black/30 py-4 px-6 rounded-md">Tentang Kami</a>
@@ -41,6 +41,7 @@
                 <div class="py-2">
                     <span class="block px-4 py-2 text-sm">Masuk sebagai:</span>
                     <span class="block px-4 py-2 text-sm opacity-70">{{ Auth::user()->name }} ({{ Auth::user()->email }})</span>
+                    <a href="/profil/{{ Auth::user()->slug }}" class="block px-4 py-2 text-sm text-white hover:bg-black/30"">Profil</a>
                     @can('admin', Auth::user())
                         <a href="/admin" class="block px-4 py-2 text-sm text-white hover:bg-black/30"">Dashboard</a>
                     @endcan
@@ -75,7 +76,7 @@
                     <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="telusuri-petisi">Telusuri Petisi</a>
                 </li>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="tentang-kami">Tentang Kami</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="tentang">Tentang Kami</a>
                 </li>
             </ul>
         </div>
@@ -85,8 +86,9 @@
                 <p class="text-gray-400">Masuk sebagai:</p>
                 <p>{{ Auth::user()->name }}</p>
                 <p>{{ Auth::user()->email }}</p>
+                <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-white rounded-xl text-[#e00a24] hover:bg-white" href="/profil/{{ Auth::user()->slug }}">Profil</a>  
                 @can('admin', Auth::user())
-                    <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-white rounded-xl text-[#e00a24] hover:bg-white" href="/admin">Dashboard</a>  
+                <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-white rounded-xl text-[#e00a24] hover:bg-white" href="/admin">Dashboard</a>  
                 @endcan
                 <a class="mt-3 block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold border-2 border-[#e00a24] rounded-xl hover:bg-[#e00a24]" href="/logout">Keluar</a>
                 @else

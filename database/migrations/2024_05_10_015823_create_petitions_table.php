@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('petitions', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug');
             $table->text('desc');
             $table->string('image')->nullable();
             $table->enum('status', ['pending', 'published', 'close', 'win', 'reject'])->default('pending');

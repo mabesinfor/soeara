@@ -36,17 +36,32 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($slug, Request $request)
     {
-        //
+        $petisi = $request->query('petisi');
+        $user = User::whereSlug($slug)->firstOrFail();
+
+        if ($petisi && $petisi == 'done') {
+            return view('profil.show', [
+                'user' => $user,
+                'title' => 'done'
+            ]);
+        }
+        return view('profil.show', [
+            'user' => $user,
+            'title' => 'reg'
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($slug)
     {
-        //
+        $user = User::whereSlug($slug)->firstOrFail();
+        return view('profil.edit', [
+            'user' => $user,
+        ]);
     }
 
     /**

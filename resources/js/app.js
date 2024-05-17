@@ -106,3 +106,42 @@ window.onscroll = function () {
         window.requestAnimationFrame(updateCount);
     }
 };
+
+//select provinsi dan kota
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch provinces
+    fetch('/api/provinces')
+        .then(response => response.json())
+        .then(provinces => {
+            const provinceSelect = document.getElementById('province');
+            
+            provinces.forEach(province => {
+                let option = document.createElement('option');
+                option.value = province.id;
+                option.text = province.name;
+                option.className = 'bg-[#121212] text-white'
+                provinceSelect.appendChild(option);
+            });
+        });
+
+    // Fetch districts based on selected province
+    document.getElementById('province').addEventListener('change', function() {
+        const provinceId = this.value;
+        const districtSelect = document.getElementById('district');
+        districtSelect.innerHTML = '<option value="">Pilih Kecamatan</option>';
+
+        if (provinceId) {
+            fetch(`/api/districts/${provinceId}`)
+                .then(response => response.json())
+                .then(districts => {
+                    districts.forEach(district => {
+                        let option = document.createElement('option');
+                        option.value = district.id;
+                        option.text = district.name;
+                        option.className = 'bg-[#121212] text-white'
+                        districtSelect.appendChild(option);
+                    });
+                });
+        }
+    });
+});
