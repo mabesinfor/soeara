@@ -18,8 +18,7 @@ Route::view('/buat-petisi/judul', 'buat.judul');
 Route::view('/buat-petisi/foto', 'buat.foto');
 Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi');
 
-Route::view('/telusuri-petisi', 'telusuri');
-Route::view('/tentang-kami', 'tentang');
+Route::view('/tentang', 'tentang');
 
 Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index');
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
