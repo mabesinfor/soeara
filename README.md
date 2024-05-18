@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to Soeara!<img src="https://raw.githubusercontent.com/send0moka/send0moka/main/wave.gif" width="26"></h1>
 
-[![](/public/underdev.svg)]()
+[![](/public/demo.gif)]()
 
 <p align="center">
   <a href="#about">About</a> •
@@ -9,13 +9,11 @@
   <a href="#license">License</a>
 </p>
 
-<img src="https://raw.githubusercontent.com/amertadev/analista101/main/public/assets/demo-button.svg" style="opacity: 0.3">
-
 <h2 id="about">🔍 About</h2>
 
 Soeara stands for Soedirman Berbicara is a website specifically designed for the UNSOED campus community, enabling students, faculty, and staff to create and sign petitions related to campus-based issues.
 
-<img src="public/tech.svg" height="24"> + Laravel Socialite
+<img src="public/tech.svg" height="24">
 
 <h2 id="features">✨ Features</h2>
 
