@@ -14,9 +14,9 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
 Route::view('/buat-petisi', 'buat.index')->middleware('auth');
-Route::view('/buat-petisi/judul', 'buat.judul');
-Route::view('/buat-petisi/foto', 'buat.foto');
-Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi');
+Route::view('/buat-petisi/judul', 'buat.judul')->middleware('auth');;
+Route::view('/buat-petisi/foto', 'buat.foto')->middleware('auth');;
+Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi')->middleware('auth');;
 
 Route::view('/tentang', 'tentang');
 
@@ -24,13 +24,17 @@ Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index'
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
 
 Route::view('/petisi', 'petisi/index');
-Route::view('/petisi/supported', 'petisi/supported');
-Route::view('/petisi/bagikan', 'petisi/bagikan');
+Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
+Route::view('/petisi/bagikan', 'petisi/bagikan')->middleware('auth');;
 
 Route::get('/profil/{slug}', [UserController::class, 'show'])->name('users.show');
 Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::get('/api/provinces', [ApiController::class, 'getProvinces']);
 Route::get('/api/districts/{province_id}', [ApiController::class, 'getDistricts']);
+
+Route::view('/tinjau', 'tinjau.index')->middleware('auth');
+Route::view('/tinjau/victory', 'tinjau.victory')->middleware('auth');
+Route::view('/tinjau/closed', 'tinjau.closed')->middleware('auth');
 
 // Route::middleware('role:admin')->group(function () {
 //     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);
