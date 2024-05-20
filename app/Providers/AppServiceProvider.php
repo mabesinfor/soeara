@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use App\Models\PersonalAccessToken;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('admin', function ($user) {
             return $user->role === 'admin';
+        });
+
+        Gate::define('user', function ($user, $userId) {
+            return $user->id === $userId || $user->role === 'admin';
         });
     }
 }

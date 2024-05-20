@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'abilities' => CheckAbilities::class,
             'ability' => CheckForAnyAbility::class,
             'role' => \App\Http\Middleware\CheckRole::class,
+            'check.profile.owner' => \App\Http\Middleware\CheckProfileOwner::class,
             'can' => \Illuminate\Auth\Middleware\Authorize::class,
         ]);
     })
