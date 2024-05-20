@@ -26,15 +26,15 @@
         <li class="md:hidden lg:block">
             <b>Tim Kami</b>
             <div class="flex flex-col mt-4 text-sm gap-2">
-                <a href="" class="opacity-70 hover:opacity-100">Jehian Athaya Tsani Az Zuhry</a>
-                <a href="" class="opacity-70 hover:opacity-100">Brian Cahya Purnama</a>
-                <a href="" class="opacity-70 hover:opacity-100">Dzakwan Irfan Ramdhani</a>
+                <a href="https://www.linkedin.com/in/jehianth/" class="opacity-70 hover:opacity-100">Jehian Athaya Tsani Az Zuhry</a>
+                <a href="https://www.linkedin.com/in/brian-cahya-purnama-180b1a12a/" class="opacity-70 hover:opacity-100">Brian Cahya Purnama</a>
+                <a href="https://www.linkedin.com/in/dzakwan-irfan/" class="opacity-70 hover:opacity-100">Dzakwan Irfan Ramdhani</a>
             </div>
         </li>
         <li>
             <b>Ikuti Media Sosial Kami</b>
             <div class="flex justify-center md:justify-start mt-4 text-sm gap-4">
-                <a href="" class="opacity-70 hover:opacity-100">
+                <a href="https://www.instagram.com/soearaunsoed/" class="opacity-70 hover:opacity-100">
                     <img src="{{ url('ig.svg') }}" alt="instagram">
                 </a>
                 <a href="" class="opacity-70 hover:opacity-100">
@@ -49,6 +49,6 @@
     <hr class="my-10 border-[#e00a24]">
     <div class="flex flex-col md:flex-row text-center md:text-left gap-3 md:gap-0 justify-between">
         <p class="text-sm opacity-70">© 2024 Soeara. All rights reserved.</p>
-        <p class="text-sm opacity-70">Made with ❤️ by <a href="" class="opacity-70 hover:opacity-100">Soeara Team</a></p>
+        <p class="text-sm opacity-70">Made with ❤️ by <a href="https://github.com/mabesinfor/soeara" class="opacity-70 hover:opacity-100">Soeara Team</a></p>
     </div>
 </footer>
