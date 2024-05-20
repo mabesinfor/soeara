@@ -4,7 +4,7 @@
 
 @section('content')
     <section id="profil" class="relative flex py-20 lg:px-40 px-8 justify-center items-center gap-12">
-        <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="h-80 rounded-full hidden md:block z-20">
+        <img src="{{ $user->avatar ? asset($user->avatar) : asset('user.jpg') }}" alt="{{ $user->name }}" class="h-80 rounded-full hidden md:block z-20">
         <div class="z-20">
             <div class="md:text-6xl text-5xl font-bold mb-2">{{ $user->name }}</div>
             <div class="text-sm md:text-base mb-3">Saya adalah seorang mahasiswa semester 4 Jurusan Ilmu Komunikasi</div>
@@ -23,7 +23,9 @@
                     <p>@dzakoneee</p>
                 </a>
             </div>
-            <a href="/profil/{{ $user->slug }}/edit" class="py-2 px-4 bg-[#C82323] rounded-lg font-bold hover:outline-[#c82323] hover:bg-transparent hover:outline transition-colors">Edit profil</a>
+            @can('user', $user->id)
+                <a href="/profil/{{ $user->slug }}/edit" class="py-2 px-4 bg-[#C82323] rounded-lg font-bold hover:outline-[#c82323] hover:bg-transparent hover:outline transition-colors">Edit profil</a>
+            @endcan
         </div>
         <img src="{{ url('clip.svg') }}" class="absolute inset-0 object-cover size-full z-10 pointer-events-none">
     </section>

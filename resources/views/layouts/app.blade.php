@@ -13,16 +13,18 @@
         @include('layouts.nav')
         <main>
             @if (session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Error!</strong>
-                    <span class="block sm:inline">{{ session('error') }}</span>
-                </div>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Error!</strong>
+                <span class="block sm:inline">{{ session('error') }}</span>
+            </div>
             @endif
             @yield('content')
         </main>
         @include('layouts.footer')
     </div>
+    @vite('resources/js/app.js')
+    <script src="/assets/jquery.js"></script>
+    @yield('javascripts')
 </body>
-@vite('resources/js/app.js')
 
 </html>

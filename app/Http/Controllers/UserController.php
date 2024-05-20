@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -75,8 +77,22 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $user = User::findOrFail($request->id);
+
+            if ($user->avatar) {
+                // Hapus file avatar dari server jika ada
+                Storage::delete($user->avatar);
+            }
+
+            $user->avatar = null;
+            $user->save();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 }

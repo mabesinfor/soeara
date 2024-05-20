@@ -28,9 +28,14 @@ Route::view('/petisi/supported', 'petisi/supported');
 Route::view('/petisi/bagikan', 'petisi/bagikan');
 
 Route::get('/profil/{slug}', [UserController::class, 'show'])->name('users.show');
-Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::get('/api/provinces', [ApiController::class, 'getProvinces']);
 Route::get('/api/districts/{province_id}', [ApiController::class, 'getDistricts']);
+
+Route::middleware(['auth', 'check.profile.owner'])->group(function () {
+    Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('profile.edit');
+    Route::post('/profil/{slug}/edit', [UserController::class, 'update'])->name('profile.update');
+});
+Route::delete('/profil/delete', [UserController::class, 'destroy'])->name('users.delete');
 
 // Route::middleware('role:admin')->group(function () {
 //     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);
