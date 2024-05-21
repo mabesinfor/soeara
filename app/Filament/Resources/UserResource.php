@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -41,9 +42,10 @@ class UserResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email'),
-                TextColumn::make('address'),
-                TextColumn::make('twitter'),
-                TextColumn::make('image'),
+                TextColumn::make('provinceT'),
+                TextColumn::make('regency'),
+                TextColumn::make('x'),
+                ImageColumn::make('avatar'),
                 TextColumn::make('role')->sortable(),
                 TextColumn::make('roles.name')->sortable(),
             ])
