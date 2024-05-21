@@ -6,6 +6,7 @@ use App\Http\Controllers\PetitionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Http;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/login', 'login')->name('login');
@@ -27,25 +28,20 @@ Route::view('/petisi', 'petisi/index');
 Route::view('/petisi/supported', 'petisi/supported');
 Route::view('/petisi/bagikan', 'petisi/bagikan');
 
-Route::get('/profil/{slug}', [UserController::class, 'show'])->name('users.show');
-Route::get('/api/provinces', [ApiController::class, 'getProvinces']);
-Route::get('/api/districts/{province_id}', [ApiController::class, 'getDistricts']);
 
+Route::get('/profil/{slug}', [UserController::class, 'show'])->name('profil.show');
 Route::middleware(['auth', 'check.profile.owner'])->group(function () {
-    Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('profile.edit');
-    Route::post('/profil/{slug}/edit', [UserController::class, 'update'])->name('profile.update');
+    Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('profil.edit');
+    Route::put('/profil/{slug}/edit', [UserController::class, 'update'])->name('profil.update');
 });
-Route::delete('/profil/delete', [UserController::class, 'destroy'])->name('users.delete');
+Route::delete('/profil/delete', [UserController::class, 'destroy'])->name('profil.delete');
 
-// Route::middleware('role:admin')->group(function () {
-//     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);
-//     Route::get('/dashboard/pending', [AdminPetitionController::class, 'indexPending']);
-//     Route::put('/dashboard/pending/{id}/terima', [AdminPetitionController::class, 'terima']);
-//     Route::put('/dashboard/pending/{id}/tolak', [AdminPetitionController::class, 'tolak']);
+Route::get('/api/provinces', function () {
+    $response = Http::get('https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json');
+    return $response->json();
+});
 
-//     Route::resource('/dashboard/kategori', CategoryController::class);
-
-//     Route::resource('/dashboard/pengguna', UserController::class);
-
-//     Route::get('/dashboard/petisi', [AdminPetitionController::class, 'index']);
-// });
+Route::get('/api/regencies/{provinceId}', function ($provinceId) {
+    $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/{$provinceId}.json");
+    return $response->json();
+});

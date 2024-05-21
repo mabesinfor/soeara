@@ -26,16 +26,3 @@
     color: rgb(186, 186, 186);
     background-color: rgb(48, 48, 48);
 }
-
-.hover-underline::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 4px;
-    background: #C82323;
-    transition: width 0.3s;
-    margin: 0 auto;
-}
-.hover-underline:hover::after {
-    width: 100%;
-}

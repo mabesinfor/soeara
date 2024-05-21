@@ -34,6 +34,7 @@ class GoogleAuthController extends Controller
                 $counter++;
             }
             $user->slug = $slug;
+            $user->avatar = $googleUser->avatar;
         }
     
         $user->google_id = $googleUser->id;
@@ -41,7 +42,6 @@ class GoogleAuthController extends Controller
         $user->email = $googleUser->email;
         $user->password = bcrypt(Str::random(12)); 
         $user->email_verified_at = now();
-        $user->avatar = $googleUser->avatar;
     
         $user->save();
     
