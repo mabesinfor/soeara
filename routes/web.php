@@ -15,9 +15,9 @@ Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
 Route::view('/buat-petisi', 'buat.index')->middleware('auth');
-Route::view('/buat-petisi/judul', 'buat.judul');
-Route::view('/buat-petisi/foto', 'buat.foto');
-Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi');
+Route::view('/buat-petisi/judul', 'buat.judul')->middleware('auth');;
+Route::view('/buat-petisi/foto', 'buat.foto')->middleware('auth');;
+Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi')->middleware('auth');;
 
 Route::view('/tentang', 'tentang');
 
@@ -25,8 +25,8 @@ Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index'
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
 
 Route::view('/petisi', 'petisi/index');
-Route::view('/petisi/supported', 'petisi/supported');
-Route::view('/petisi/bagikan', 'petisi/bagikan');
+Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
+Route::view('/petisi/bagikan', 'petisi/bagikan')->middleware('auth');;
 
 
 Route::get('/profil/{slug}', [UserController::class, 'show'])->name('profil.show');
@@ -45,3 +45,13 @@ Route::get('/api/regencies/{provinceId}', function ($provinceId) {
     $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/{$provinceId}.json");
     return $response->json();
 });
+
+Route::view('/tinjau', 'tinjau.index')->middleware('auth');
+Route::view('/tinjau/victory', 'tinjau.victory')->middleware('auth');
+Route::view('/tinjau/closed', 'tinjau.closed')->middleware('auth');
+
+// Route::middleware('role:admin')->group(function () {
+//     Route::get('/dashboard', [AdminPetitionController::class, 'indexPending']);
+//     Route::get('/dashboard/pending', [AdminPetitionController::class, 'indexPending']);
+//     Route::put('/dashboard/pending/{id}/terima', [AdminPetitionController::class, 'terima']);
+//     Route::put('/dashboard/pending/{id}/tolak', [AdminPetitionController::class, 'tolak']);
