@@ -1,0 +1,1 @@
+<span class="font-black">INI ADALAH HALAMAN REG</span>

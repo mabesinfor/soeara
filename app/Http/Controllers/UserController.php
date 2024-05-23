@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -42,7 +43,6 @@ class UserController extends Controller
     {
         $x = null;
         $address = null;
-        $petisi = $request->query('petisi');
         $user = User::whereSlug($slug)->firstOrFail();
 
         $province = $user->provinceT;
@@ -56,14 +56,6 @@ class UserController extends Controller
             $x = preg_replace('/^@/', '', $user->x);
         }
 
-        if ($petisi && $petisi == 'done') {
-            return view('profil.show', [
-                'user' => $user,
-                'title' => 'done',
-                'x' => $x,
-                'address' => $address,
-            ]);
-        }
         return view('profil.show', [
             'user' => $user,
             'title' => 'reg',
@@ -130,5 +122,22 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function updateSessionTabs(Request $request)
+    {
+        $tab_id = $request->input('tab_id');
+        session(['tab-profil' => $tab_id]);
+        return response()->json(['status' => 'berhasil', 'tab_id' => $tab_id]);
+    }
+
+    public function reg()
+    {
+        return view('profil.reg');
+    }
+
+    public function done()
+    {
+        return view('profil.done');
     }
 }

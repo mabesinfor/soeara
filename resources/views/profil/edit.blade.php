@@ -42,8 +42,8 @@
                 <div class="flex justify-between mb-2">
                     <div class="text-sm">Provinsi</div>
                 </div>
-                <select name="province" id="province" class="py-2 pl-4 bg-transparent rounded-lg border border-white focus:outline-none focus:border-[#c82323] focus:ring-0">
-                    <option value="" disabled selected class="bg-[#121212] text-white">Pilih provinsi anda!</option>
+                <select disabled name="province" id="province" class="py-2 pl-4 bg-transparent rounded-lg border border-white focus:outline-none focus:border-[#c82323] focus:ring-0">
+                    <option value="" selected class="bg-[#121212] text-white">Tunggu sebentar...</option>
                 </select>
                 <input type="text" name="provinceT" id="provinceT" hidden value="{{ $user->provinceT }}">
             </div>
@@ -51,8 +51,8 @@
                 <div class="flex justify-between mb-2">
                     <div class="text-sm">Kota/Kabupaten</div>
                 </div>
-                <select name="regency" id="regency" class="py-2 pl-4 bg-transparent rounded-lg border border-white focus:outline-none focus:border-[#c82323] focus:ring-0">
-                    <option value="" disabled selected class="bg-[#121212] text-white">Pilih kota/kabupaten anda!</option>
+                <select disabled name="regency" id="regency" class="py-2 pl-4 bg-transparent rounded-lg border border-white focus:outline-none focus:border-[#c82323] focus:ring-0">
+                    <option value="" selected class="bg-[#121212] text-white">Tunggu sebentar...</option>
                 </select>
             </div>
             <div class="flex gap-12 mt-8 items-center">
@@ -94,11 +94,10 @@
             var provinceSelect = $('#province');
             var provinceT = $('#provinceT');
             
-            // Clear the dropdown and add the default option
             provinceSelect.empty(); 
+            provinceSelect.removeAttr('disabled');
             provinceSelect.append('<option value="" disabled selected class="bg-[#121212] text-white">Pilih provinsi anda!</option>');
             
-            // Populate the dropdown with provinces
             data.forEach(function(province) {
                 var option = $('<option class="bg-[#121212] text-white"></option>')
                     .attr('value', province.id)
@@ -106,21 +105,17 @@
                 provinceSelect.append(option);
             });
             
-            // Get the selected province ID from the server-side variable
             var selectedProvinceId = "{{ $user->province }}";
             
-            // Set the selected province if it's defined
             if (selectedProvinceId) {
                 provinceSelect.val(selectedProvinceId).trigger('change');
             }
             
-            // Update the hidden input with the selected province name
             provinceSelect.change(function() {
                 var selectedProvinceName = $(this).find('option:selected').text();
                 provinceT.val(selectedProvinceName);
             });
             
-            // Trigger change to set the initial value of $provinceT if a province is already selected
             provinceSelect.trigger('change');
         }
     });
@@ -139,8 +134,11 @@
                 method: 'GET',
                 success: function(data) {
                     var regencySelect = $('#regency');
+
+                    regencySelect.removeAttr('disabled');
                     regencySelect.empty(); 
                     regencySelect.append('<option value="" disabled selected class="bg-[#121212] text-white">Pilih kota/kabupaten anda!</option>');
+
                     data.forEach(function(regency) {
                         var option = $('<option class="bg-[#121212] text-white"></option>')
                             .attr('value', regency.name)
@@ -150,7 +148,6 @@
 
                     var selectedRegencyName = "{{ $user->regency }}";
 
-                    // Set selected regency if it's defined
                     if (selectedRegencyName) {
                         regencySelect.val(selectedRegencyName).trigger('change');
                     }
