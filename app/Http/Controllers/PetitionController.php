@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePetitionRequest;
 use App\Http\Requests\UpdatePetitionRequest;
+use App\Models\Category;
 use App\Models\Petition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -18,7 +19,9 @@ class PetitionController extends Controller
 
     public function create()
     {
-        //
+        return view('petisi.create', [
+            'categories' => Category::all(),
+        ]);
     }
 
     public function store(StorePetitionRequest $request)

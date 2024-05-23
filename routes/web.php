@@ -8,16 +8,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Http;
 
+Route::get('/buat-petisi', [PetitionController::class, 'create'])->name('petisi.create');
+Route::post('/store-petisi', [PetitionController::class, 'store'])->name('petisi.store');
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/login', 'login')->name('login');
 Route::get('/auth/google/redirect', [GoogleAuthController::class, 'redirect']);
 Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback']);
 Route::get('/logout', [GoogleAuthController::class, 'logout']);
 
-Route::view('/buat-petisi', 'buat.index')->middleware('auth')->name('buat.index');
-Route::view('/buat-petisi/judul', 'buat.judul')->middleware('auth');;
-Route::view('/buat-petisi/foto', 'buat.foto')->middleware('auth');;
-Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi')->middleware('auth');;
+// Route::view('/buat-petisi', 'buat.index')->middleware('auth')->name('buat.index');
+// Route::view('/buat-petisi/judul', 'buat.judul')->middleware('auth');;
+// Route::view('/buat-petisi/foto', 'buat.foto')->middleware('auth');;
+// Route::view('/buat-petisi/konfirmasi', 'buat.konfirmasi')->middleware('auth');;
 
 Route::view('/tentang', 'tentang')->name('tentang');
 
