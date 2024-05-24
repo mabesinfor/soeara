@@ -4,7 +4,9 @@
 
 @section('content')
 <div x-data="{ step: 1, judul: '', deskripsi: '', foto: '' }">
-    <form id="dataForm" enctype="multipart/form-data">
+    <form action="{{ route('petisi.store') }}" method="POST" id="dataForm" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input name="user_id" type="text" value="{{ Auth::user()->id }}" hidden>
         <div class="relative mx-auto py-8 pl-2 md:pl-0" x-show="step === 1" x-data="{
             selected: {},
             maxSelection: 3,
@@ -46,14 +48,14 @@
                                 <label for="judul" class="block text-md font-bold mb-2 ml-20 md:ml-0">Judul petisi</label>
                                 <span x-bind:class="{ 'text-red-500': judulLength >= 90 }" class="text-sm text-white md:mr-80 mr-20" x-text="`${judulLength}/90`"></span>
                             </div>
-                            <input name="title" x-on:input="judulLength = $event.target.value.length; judul = $event.target.value" maxlength="90" type="text" id="judul" name="judul" class="w-3/4 px-3 py-2 bg-black border border-white focus:outline-none focus:border-[#c82323] focus:ring-0 rounded-md" placeholder="Masukkan judul petisi Anda ...">
+                            <input name="title" x-on:input="judulLength = $event.target.value.length; judul = $event.target.value" maxlength="90" type="text" id="judul" class="w-3/4 px-3 py-2 bg-black border border-white focus:outline-none focus:border-[#c82323] focus:ring-0 rounded-md" placeholder="Masukkan judul petisi Anda ..." required>
                         </div>
                         <div x-data="{ deskripsiLength: 0 }" class="mt-8">
                             <div class="flex justify-between items-center">
                                 <label for="deskripsi" class="block text-md font-bold mb-2 ml-20 md:ml-0">Deskripsi petisi</label>
                                 <span x-bind:class="{ 'text-red-500': deskripsiLength >= 1000 }" class="text-sm text-white md:mr-80 mr-20" x-text="`${deskripsiLength}/1000`"></span>
                             </div>
-                            <textarea name="desc" x-on:input="deskripsiLength = $event.target.value.length; deskripsi = $event.target.value" maxlength="1000" id="deskripsi" name="deskripsi" class="bg-black w-3/4 px-3 py-2 border border-white focus:outline-none focus:border-[#c82323] focus:ring-0 rounded-md" placeholder="Masukkan deskripsi petisi Anda ..." rows="6"></textarea>
+                            <textarea name="desc" x-on:input="deskripsiLength = $event.target.value.length; deskripsi = $event.target.value" maxlength="1000" id="deskripsi" class="bg-black w-3/4 px-3 py-2 border border-white focus:outline-none focus:border-[#c82323] focus:ring-0 rounded-md" placeholder="Masukkan deskripsi petisi Anda ..." rows="6" required></textarea>
                         </div>                    
                     <div class="flex gap-10 items-center justify-center md:justify-end mt-10 md:mr-60">
                         <button type="button"  @click="step = 1" class="text-sm text-white underline">Kembali</button>
@@ -109,9 +111,4 @@
         
     </form>
 </div>
-@endsection
-
-@section('javascripts')
-<script type="text/javascript">
-</script>
 @endsection

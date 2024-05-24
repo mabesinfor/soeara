@@ -26,9 +26,24 @@ class PetitionController extends Controller
 
     public function store(StorePetitionRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->validate([
+            'title' => 'required',
+            'desc' => 'required',
+            'image' => 'nullable|image',
+            'user_id' => 'required',
+        ]);
+
+        $data['slug'] = Str::slug($data['title']);
+        $data['status'] = 'pending';
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('petitions', 'public');
+        }
+
         Petition::create($data);
-        return redirect()->route('petisi.show', ['slug' => Str::slug($data['title'])]);
+        $user_slug = auth()->user()->slug;
+
+        return redirect()->route('profil.show', $user_slug);
     }
 
     public function show($slug)
