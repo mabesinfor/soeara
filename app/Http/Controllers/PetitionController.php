@@ -26,6 +26,8 @@ class PetitionController extends Controller
 
     public function store(StorePetitionRequest $request)
     {
+        // $all = $request->all();
+        // dd($all);
         $data = $request->validate([
             'title' => 'required',
             'desc' => 'required',
@@ -36,14 +38,27 @@ class PetitionController extends Controller
         $data['slug'] = Str::slug($data['title']);
         $data['status'] = 'pending';
 
+        if (Petition::where('slug', $data['slug'])->exists()) {
+            return redirect()->route('petisi.create')->with('error', 'Judul sudah ada, silahkan gunakan judul lain');
+        }
+
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('petitions', 'public');
         }
 
-        Petition::create($data);
+        $send = Petition::create($data);
         $user_slug = auth()->user()->slug;
 
-        return redirect()->route('profil.show', $user_slug);
+        if (!$send) {
+            return redirect()->route('petisi.create')->with('error', 'Petisi gagal dibuat');
+        }
+
+        if ($request->has('categories')) {
+            $petition = Petition::where('slug', $data['slug'])->first();
+            $petition->categories()->attach($request->categories);
+        }
+
+        return redirect()->route('profil.show', $user_slug)->with('success', 'Petisi berhasil dibuat');
     }
 
     public function show($slug)

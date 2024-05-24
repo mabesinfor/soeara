@@ -22,7 +22,7 @@
                         @foreach ($categories as $category)
                         <label class="hover:border-[#e00a24] hover:text-[#e00a24] cursor-pointer bg-transparent border-2 border-[#ffff] py-2 px-4 rounded-xl flex items-center"
                         :class="{ 'border-[#e00a24] text-[#e00a24]': selected['{{ $category->id }}'], 'border-[#ffff]': !selected['{{ $category->id }}'], 'pointer-events-none opacity-50': selectedCount() >= maxSelection && !selected['{{ $category->id }}'] }">
-                            <input type="checkbox" id="{{ $category->id }}" class="hidden" @change="if (selected['{{ $category->id }}']) { selected['{{ $category->id }}'] = false } else if (selectedCount() < maxSelection) { selected['{{ $category->id }}'] = true }">
+                            <input value="{{ $category->id }}" name="categories[]" type="checkbox" id="{{ $category->id }}" class="hidden" @change="if (selected['{{ $category->id }}']) { selected['{{ $category->id }}'] = false } else if (selectedCount() < maxSelection) { selected['{{ $category->id }}'] = true }" :checked="selected['{{ $category->id }}']">
                             <span>{{ $category->name }}</span>
                         </label>
                         @endforeach

@@ -11,8 +11,8 @@ class CategoryPetition extends Pivot
     use HasFactory;
 
     protected $guarded = ['id'];
-    
     protected $with = [];
+    protected $table = 'category_petition';
 
     public function petitions(): BelongsTo
     {
