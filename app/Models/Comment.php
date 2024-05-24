@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Pivot
+class Comment extends Model
 {
     use HasFactory;
 
@@ -14,16 +15,17 @@ class Comment extends Pivot
 
     protected $fillable = [
         'user_id',
-        'petition_id',
+        'petisi_id',
+        'content',
     ];
 
-    public function users(): BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function petitions(): BelongsTo
+    public function petition(): BelongsTo
     {
-        return $this->belongsTo(Petition::class, 'petition_id');
+        return $this->belongsTo(Petition::class, 'petisi_id');
     }
 }

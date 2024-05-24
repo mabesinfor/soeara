@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Petition;
 use App\Models\User;
+use App\Models\Comment;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'password' => Hash::make('admin1'),
         ]);
+        
         Petition::create([
             'title' => 'Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!',
             'slug' => 'unsoed-darurat-pelecehan-seksual-bentuk-tim-investigasi-independent',
@@ -56,6 +58,24 @@ class DatabaseSeeder extends Seeder
             Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
             'image' => 'img4.png',
             'user_id' => 1,
+        ]);
+
+        Comment::create([
+            'user_id' => 1, 
+            'petisi_id' => 1,
+            'content' => 'Petisi ini sangat penting dan saya mendukung sepenuhnya. Mari kita bersama-sama menciptakan perubahan positif!',
+        ]);
+
+        Comment::create([
+            'user_id' => 1, 
+            'petisi_id' => 2,
+            'content' => 'Saya setuju dengan petisi ini. Ini adalah langkah besar menuju perubahan yang kita butuhkan.',
+        ]);
+        
+        Comment::create([
+            'user_id' => 1, 
+            'petisi_id' => 3,
+            'content' => 'Petisi ini sangat penting. Mari kita bersatu dan berjuang untuk perubahan yang lebih baik.',
         ]);
     }
 }

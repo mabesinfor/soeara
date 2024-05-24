@@ -82,7 +82,7 @@
             <div class="font-bold text-xl w-full">
                 Tanggapan mahasiswa
             </div>
-            <div class="font-bold text-xl w-full ml-20 pl-4">
+            <div class="font-bold text-xl w-full ml-20 pl-4" id="supporterDiv">
                 Pendukung petisi Anda
             </div>
         </div>
@@ -160,6 +160,14 @@
             </div>
             {{-- End Tanggapan --}}
 
+            {{-- Start muncul ketika resolusi layar mobile --}}
+            <div class="bg-[#1E1E1E] flex p-6 rounded-xl mt-12" id="mobileDiv">
+                <div class="font-bold text-xl w-full">
+                    Pendukung petisi Anda
+                </div>
+            </div>
+            {{-- End muncul ketika resolusi layar mobile --}}
+
             {{-- Start Pendukung --}}
             <div class="w-full mt-4 ml-20">
                 <div class="flex items-center justify-start gap-4 mb-8">
@@ -211,4 +219,32 @@
             {{-- End Pendukung --}}
         </div>
     </div>
+
+    <script>
+        window.addEventListener('resize', checkSize);
+        window.addEventListener('DOMContentLoaded', checkSize);
+        
+        function checkSize() {
+            const supporterDiv = document.getElementById('supporterDiv');
+            if (window.innerWidth <= 768) {
+                if (supporterDiv) {
+                    supporterDiv.style.display = 'none';
+                }
+            } else {
+                if (supporterDiv) {
+                    supporterDiv.style.display = 'block';
+                }
+            }
+            const mobileDiv = document.getElementById('mobileDiv');
+            if (window.innerWidth <= 768) {
+                if (mobileDiv) {
+                    mobileDiv.style.display = 'block';
+                }
+            } else {
+                if (mobileDiv) {
+                    mobileDiv.style.display = 'none';
+                }
+            }
+        }
+    </script>
 @endsection

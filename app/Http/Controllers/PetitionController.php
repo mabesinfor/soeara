@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePetitionRequest;
 use App\Http\Requests\UpdatePetitionRequest;
 use App\Models\Petition;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -31,9 +32,10 @@ class PetitionController extends Controller
     public function show($slug)
     {
         $petisi = Petition::where('slug', $slug)->first();
+        $comments = Comment::where('petisi_id', $petisi->id)->get();
 
         if ($petisi) {
-            return view('petisi.show', compact('petisi'));
+            return view('petisi.show', compact('petisi', 'comments'));
         } else {
             abort(404, 'Petisi tidak ditemukan');
         }
@@ -53,4 +55,6 @@ class PetitionController extends Controller
     {
         //
     }
+
+
 }

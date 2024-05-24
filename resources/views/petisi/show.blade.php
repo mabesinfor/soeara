@@ -68,8 +68,8 @@
 
             <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
             <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                <img src="{{ Auth::user()->avatar }}" class="rounded-full size-8">
-                {{ Auth::user()->name }}
+                <img src="{{ optional(Auth::user())->avatar ?? url('user.jpg') }}" class="rounded-full size-8">
+                {{ optional(Auth::user())->name ?? 'Visitor' }}
             </div>
             <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
             <form action="/supported" method="post" class="w-full md:w-3/4">
@@ -83,10 +83,12 @@
             <h3 class="text-2xl text-start font-bold mb-7 md:ml-20">24 Komentar</h3>
             {{-- Start submit komentar --}}
             <div class="flex items-start gap-4 mb-4 md:ml-20">
-                <img src="{{ url('pic5.svg') }}" class="self-start">
+                <img src="{{ optional(Auth::user())->avatar ?? url('user.jpg') }}" class="rounded-full size-8">
                 <div class="flex flex-col w-full relative">
-                    <form action="/submitkomen" method="post">
-                        <textarea class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600" placeholder="Tambahkan komentar ..."></textarea>
+                    <form action="/submitkomen" method="post" onsubmit="return checkLogin()">
+                        @csrf
+                        <input type="hidden" name="petisi_id" value="{{ $petisi->id }}">
+                        <textarea name="content" class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600" placeholder="Tambahkan komentar ..."></textarea>
                         <button type="submit" class="absolute right-0 bottom-6 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2">Kirim Komentar</button>
                     </form>
                 </div>
@@ -94,72 +96,30 @@
             {{-- End submit komentar --}}
 
             {{-- Start Komentar --}}
-            <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                <img src="{{ url('pic6.svg') }}" class="self-start">
-                <div class="flex flex-col w-full">
-                    <div class="flex justify-between">
-                        <div class="flex gap-2">
-                            <p class="font-bold">Alisia Hendrawan</p>
-                            <p class="text-gray-500">13 menit yang lalu</p>
+            @foreach($comments as $comment)
+                <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
+                    <img src="{{ $comment->user && $comment->user->avatar ? url($comment->user->avatar) : url('user.jpg') }}" class="rounded-full size-8">
+                    <div class="flex flex-col w-full">
+                        <div class="flex justify-between">
+                            <div class="flex gap-2">
+                                <p class="font-bold">{{ $comment->user->name }}</p>
+                                <p class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
+                            </div>
+                            <button onclick="deleteFunction()">
+                                <img src="{{ url('delete.svg') }}">
+                            </button>
                         </div>
-                        <button onclick="deleteFunction()">
-                            <img src="{{ url('delete.svg') }}">
-                        </button>
-                    </div>
-                    <p class="mt-5">Saya menandatangani ini karena saya ingin adanya keadilan bagi korban pelecehan seksual</p>
-                    <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                        <button id="likeButton" onclick="toggleLike()">
-                            <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                        </button>
-                        <small>12 Suka</small>
+                        <p class="mt-5">{{ $comment->content }}</p>
+                        <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
+                            <button id="likeButton" onclick="toggleLike()">
+                                <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
+                            </button>
+                            <small>{{ $comment->likes_count }} Suka</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <hr class="md:ml-20">
-            <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                <img src="{{ url('pic7.svg') }}" class="self-start">
-                <div class="flex flex-col w-full">
-                    <div class="flex justify-between">
-                        <div class="flex gap-2">
-                            <p class="font-bold">David Indra Ibrahim</p>
-                            <p class="text-gray-500">2 jam yang lalu</p>
-                        </div>
-                        <button onclick="deleteFunction()">
-                            <img src="{{ url('delete.svg') }}">
-                        </button>
-                    </div>
-                    <p class="mt-5">Tindakan pelecahan tidak bisa di toleransi, karena memurunkan harkat dan martabat manusia. Kita harus menghormari dan respect kepada lawan jenis, dalam islam diwajibkan untuk menundukkan pandangan agar terhindar dari zina dan pelecehan. Sekian.</p>
-                    <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                        <button id="likeButton" onclick="toggleLike()">
-                            <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                        </button>
-                        <small>8 Suka</small>
-                    </div>
-                </div>
-            </div>
-            <hr class="md:ml-20">
-            <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                <img src="{{ url('pic8.svg') }}" class="self-start">
-                <div class="flex flex-col w-full">
-                    <div class="flex justify-between">
-                        <div class="flex gap-2">
-                            <p class="font-bold">Siti Aisyah</p>
-                            <p class="text-gray-500">2 jam yang lalu</p>
-                        </div>
-                        <button onclick="deleteFunction()">
-                            <img src="{{ url('delete.svg') }}">
-                        </button>
-                    </div>
-                    <p class="mt-5">Karena pelecehan seksual adalah sebuah kasus serius. Jika satu kasus bisa terungkap dan pelakunya mendapat konsekuensi yang maksimal sampai dgn pemecatan dari institusinya, maka akan bisa mengungkap kasus-kasus serupa di institusi tersebut. Dunia pendidikan tidak hanya mengedepankan kompetensi intelektual semata-mata, namun harus juga menguatamakan nilai dan moral dalam proses berkegiatan di kampus. Saya prihatin dengan hal ini, karena saya adalah seorang guru. Jangan sampai profesi pendidik ternoda oleh perbuatan oknum-oknumnya yang mengabaikan amanah moralnya.</p>
-                    <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                        <button id="likeButton" onclick="toggleLike()">
-                            <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                        </button>
-                        <small>2 Suka</small>
-                    </div>
-                </div>
-            </div>
-            <hr class="md:ml-20">
+                <hr class="md:ml-20">
+            @endforeach
             {{-- End Komentar --}}
         </div>
     </div>
@@ -170,4 +130,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function checkLogin() {
+            @if(Auth::guest())
+                window.location.href = "/login";
+                return false;
+            @endif
+            return true;
+        }
+    </script>
 @endsection

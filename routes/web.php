@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/login', 'login')->name('login');
@@ -23,6 +24,7 @@ Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index');
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
+Route::post('/submitkomen', [CommentController::class, 'store']);
 
 Route::view('/petisi', 'petisi/index');
 Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
