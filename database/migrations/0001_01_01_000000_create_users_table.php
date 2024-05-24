@@ -20,12 +20,10 @@ return new class extends Migration
             $table->string('province')->nullable();
             $table->string('provinceT')->nullable();
             $table->string('regency')->nullable();
-            $table->string('regencyT')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['mahasiswa', 'admin'])->default('mahasiswa');
-            $table->string('twitter')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -43,7 +41,6 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
             $table->longText('payload');
             $table->integer('last_activity')->index();
-            $table->string('tab-profil')->nullable();
         });
     }
 

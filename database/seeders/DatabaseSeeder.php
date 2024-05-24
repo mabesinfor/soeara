@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Petition;
 use App\Models\User;
 use App\Models\Comment;
@@ -59,6 +60,9 @@ class DatabaseSeeder extends Seeder
             'image' => 'img4.png',
             'user_id' => 1,
         ]);
+
+        $this->call(CategorySeeder::class);
+        
 
         Comment::create([
             'user_id' => 1, 

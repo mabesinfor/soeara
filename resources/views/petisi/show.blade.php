@@ -14,12 +14,12 @@
         <div class="bg-transparent p-4 col-span-2 md:ml-20">
             <div class="relative z-30 flex flex-col gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl md:ml-20">
                 <div class="w-full rounded-lg bg-[#121212]">
-                    <img src="{{ url($petisi->image) }}" class="object-cover size-full rounded-xl">
+                    <img src="{{ asset('storage/' . $petisi->image) }}" class="object-cover size-full rounded-xl">
                 </div>
                 <div class="w-full rounded-lg bg-[#121212] flex flex-col justify-between">
                     <div class="p-5 flex flex-col gap-4 items-start text-left">
                         <div class="flex justify-between w-full">
-                            <small class="opacity-50">Sosial | Lingkungan</small>
+                            <small class="opacity-50">{{ $petisi->categories->pluck('name')->implode(' | ') }}</small>
                             <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                         </div>
                         <a href="/profil/{{ $petisi->user->slug }}" class="flex items-center gap-4">
@@ -68,7 +68,7 @@
 
             <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
             <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                <img src="{{ optional(Auth::user())->avatar ?? url('user.jpg') }}" class="rounded-full size-8">
+                <img src="{{ optional(Auth::user())->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('user.jpg') ?? url('user.jpg') }}" class="rounded-full size-8">
                 {{ optional(Auth::user())->name ?? 'Visitor' }}
             </div>
             <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>

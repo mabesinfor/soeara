@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Petition;
+use App\Models\Support;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -131,13 +133,23 @@ class UserController extends Controller
         return response()->json(['status' => 'berhasil', 'tab_id' => $tab_id]);
     }
 
-    public function reg()
+    public function reg(Request $request)
     {
-        return view('profil.reg');
+        $slug = $request->slug;
+        $user = User::where('slug', $slug)->firstOrFail();
+        $petitions = Petition::where('user_id', $user->id)->with('categories')->get();
+        return view('profil.reg', [
+            'petitions' => $petitions,
+        ]);
     }
 
-    public function done()
+    public function done(Request $request)
     {
-        return view('profil.done');
+        $slug = $request->slug;
+        $user = User::where('slug', $slug)->firstOrFail();
+        $petitions = Support::where('user_id', $user->id)->get();
+        return view('profil.done', [
+            'petitions' => $petitions,
+        ]);
     }
 }

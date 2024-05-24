@@ -13,6 +13,7 @@ class Petition extends Model
     use HasFactory;
 
     protected $table = 'petitions';
+    protected $guarded = 'id';
     protected $fillable = [
         'title',
         'slug',
@@ -21,13 +22,6 @@ class Petition extends Model
         'status',
         'user_id',
     ];
-
-    // Mutator for creating slug from title
-    public function setTitleAttribute($value)
-    {
-        $this->attributes['title'] = $value;
-        $this->attributes['slug'] = Str::slug($value);
-    }
 
     public function user(): BelongsTo 
     {

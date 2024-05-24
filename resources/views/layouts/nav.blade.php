@@ -70,13 +70,13 @@
         <div>
             <ul>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="buat-petisi">Mulai Petisi</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="/buat-petisi">Mulai Petisi</a>
                 </li>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="petisi">Telusuri Petisi</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="/petisi">Telusuri Petisi</a>
                 </li>
                 <li class="mb-1">
-                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="tentang">Tentang Kami</a>
+                    <a class="block p-4 text-sm font-semibold hover:bg-black/30 rounded" href="/tentang">Tentang Kami</a>
                 </li>
             </ul>
         </div>
