@@ -86,12 +86,12 @@
             @foreach ($petisi as $petisi)
             <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-                    <img src="{{ asset($petisi->image) }}" class="object-cover size-full rounded-xl" alt="{{ $petisi->title }}">
+                    <img src="{{ $petisi->image ? asset('storage/' . $petisi->image) : 'https://source.unsplash.com/1200x400?' . urlencode($petisi->title) }}" class="object-cover size-full rounded-xl" alt="{{ $petisi->title }}">
                 </div>
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
                     <div class="p-5 flex flex-col gap-4 items-start text-left">
                         <div class="flex justify-between w-full">
-                            <small class="opacity-50">Kategori</small>
+                            <small class="opacity-50">{{ $petisi->categories->pluck('name')->implode(' | ') }}</small>
                             <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                         </div>
                         <div class="flex items-center gap-4">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+            @endforeach
             <div class="w-full flex justify-center">
                 <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-fit rounded-xl">
                     <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-40">

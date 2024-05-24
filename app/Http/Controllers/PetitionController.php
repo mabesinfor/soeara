@@ -63,10 +63,13 @@ class PetitionController extends Controller
 
     public function show($slug)
     {
-        $petisi = Petition::where('slug', $slug)->first();
+        $petisi = Petition::where('slug', $slug)->with('categories')->firstOrFail();
+        // dd($petisi);
 
         if ($petisi) {
-            return view('petisi.show', compact('petisi'));
+            return view('petisi.show', [
+                'petisi' => $petisi,
+            ]);
         } else {
             abort(404, 'Petisi tidak ditemukan');
         }

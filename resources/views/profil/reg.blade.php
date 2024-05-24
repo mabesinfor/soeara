@@ -3,7 +3,7 @@
     <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
         <div class="top-8 left-8 absolute px-4 py-2 rounded font-bold italic bg-white text-black">{{ Str::upper($petition->status) }}!!</div>
         <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-            <img src="{{ asset('storage/' . $petition->image) }}" class="object-cover size-full rounded-xl" alt="{{ $petition->title }}">
+            <img src="{{ $petition->image ? asset('storage/' . $petition->image) : 'https://source.unsplash.com/1200x400?' . urlencode($petition->title) }}" class="object-cover size-full rounded-xl" alt="{{ $petition->title }}">
         </div>
         <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
             <div class="p-5 flex flex-col gap-4 items-start text-left">

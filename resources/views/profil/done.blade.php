@@ -2,7 +2,7 @@
     @foreach ($petitions as $petition)
     <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
         <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-            <img src="{{ asset('storage/' . $petition->petitions->image) }}" class="object-cover size-full rounded-xl" alt="{{ $petition->petitions->title }}">
+            <img src="{{ $petition->petitions->image ? asset('storage/' . $petition->petitions->image) : 'https://source.unsplash.com/1200x400?' . urlencode($petition->petitions->title) }}" class="object-cover size-full rounded-xl" alt="{{ $petition->petitions->title }}">
         </div>
         <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
             <div class="p-5 flex flex-col gap-4 items-start text-left">
