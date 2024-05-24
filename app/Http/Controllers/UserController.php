@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Petition;
+use App\Models\Support;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -142,8 +143,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function done()
+    public function done(Request $request)
     {
-        return view('profil.done');
+        $slug = $request->slug;
+        $user = User::where('slug', $slug)->firstOrFail();
+        $petitions = Support::where('user_id', $user->id)->get();
+        return view('profil.done', [
+            'petitions' => $petitions,
+        ]);
     }
 }
