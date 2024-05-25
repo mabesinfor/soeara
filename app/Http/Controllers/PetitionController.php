@@ -7,11 +7,20 @@ use App\Http\Requests\UpdatePetitionRequest;
 use App\Models\Category;
 use App\Models\Petition;
 use App\Models\Comment;
+use App\Models\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class PetitionController extends Controller
 {
+    public function bar($slug)
+    {
+        $petisi = Petition::where('slug', $slug)->with('categories')->firstOrFail();
+        $supports = Support::where('petition_id', $petisi->id)->get();
+        return view('petisi.bar', [
+            'supports' => $supports,
+        ]);
+    }
     public function index()
     {
         $petisi = Petition::all();
@@ -65,13 +74,14 @@ class PetitionController extends Controller
     public function show($slug)
     {
         $petisi = Petition::where('slug', $slug)->with('categories')->firstOrFail();
-        // dd($petisi);
+        $supports = Support::where('petition_id', $petisi->id)->get();
         $comments = Comment::where('petisi_id', $petisi->id)->get();
-
+        
         if ($petisi) {
             return view('petisi.show', [
                 'petisi' => $petisi,
-                'comments' => $comments
+                'comments' => $comments,
+                'supports' => $supports
             ]);
         } else {
             abort(404, 'Petisi tidak ditemukan');

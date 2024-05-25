@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('petisi_id')->constrained('petitions')->onDelete('cascade');
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->integer('likes_count')->default(0);
             $table->timestamps();
         });

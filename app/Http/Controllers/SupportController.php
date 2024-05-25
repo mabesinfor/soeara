@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Support;
 use App\Http\Requests\StoreSupportRequest;
 use App\Http\Requests\UpdateSupportRequest;
+use App\Models\Comment;
+use App\Models\Petition;
+use GuzzleHttp\Psr7\Response;
 
 class SupportController extends Controller
 {
@@ -29,7 +32,27 @@ class SupportController extends Controller
      */
     public function store(StoreSupportRequest $request)
     {
-        //
+        Support::create([
+            'petition_id' => $request->petition_id,
+            'user_id' => $request->user_id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        if(!empty($request->content)) {
+            Comment::create([
+                'petisi_id' => $request->petition_id,
+                'user_id' => $request->user_id,
+                'content' => $request->content,
+                'likes_count' => 0,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'success',
+        ]);
     }
 
     /**

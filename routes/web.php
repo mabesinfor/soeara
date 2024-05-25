@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\PetitionController;
+use App\Http\Controllers\SupportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -21,8 +22,10 @@ Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index');
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
+Route::get('/bar/{slug}', [PetitionController::class, 'bar'])->name('petisi.bar');
 Route::post('/submitkomen', [CommentController::class, 'store'])->middleware('auth');
 Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show');
+Route::post('/support', [SupportController::class, 'store'])->name('petisi.support')->middleware('auth');
 
 
 Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;

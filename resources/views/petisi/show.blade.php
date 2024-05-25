@@ -1,3 +1,22 @@
+@php
+    $supportsCount = $supports->count();
+    if ($supportsCount < 5) {
+        $tujuan = 5;
+    } elseif ($supportsCount >= 5 && $supportsCount < 100) {
+        $tujuan = 100;
+    } elseif ($supportsCount >= 100 && $supportsCount < 1000) {
+        $tujuan = 1000;
+    } else {
+        $tujuan = 10000;
+    }
+@endphp
+{{-- {{ dd($supports->where('user_id', Auth::user()->id)->first()) }} --}}
+
+<!-- Penggunaan variabel $tujuan di dalam Blade -->
+<div style="width: {{ ($supportsCount / $tujuan) * 100 }}%;">
+    <!-- Konten elemen -->
+</div>
+
 @extends('layouts.app')
 
 @section('title', $petisi->title)
@@ -38,7 +57,7 @@
                         </div>
                         <div class="flex gap-2 items-center">
                             <img src="{{ url('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
+                            <small class="text-[#C82323] mr-3">{{ $supports->count() }} Pendukung</small>
                         </div>
                     </div>
                 </div>
@@ -49,37 +68,38 @@
         {{-- Start Dukung Petisi --}}
         <div class="flex flex-col items-center md:items-start bg-transparent p-4 col-span-2 md:ml-20">
             {{-- Start Progress Bar --}}
-            <div class="border border-[#C82323] rounded-xl w-full md:w-3/4">
-                <div class="w-full h-2 rounded-full">
-                    <div class="h-full bg-[#C82323] rounded-full" style="width: 50%;"></div>
-                </div>
-            </div>
-            <div class="bg-transparent flex justify-between items-center w-full md:w-3/4 mt-2">
-                <div>
-                    <h3 class="text-xl text-center md:text-start font-bold text-[#C82323]">5.701</h3>
-                    <p class="text-center md:text-start text-[#C82323]">Pendukung</p>
-                </div>
-                <div>
-                    <h3 class="text-xl text-center md:text-right font-bold">10.000</h3>
-                    <p class="text-center md:text-right">Tujuan Berikutnya</p>
-                </div>
+            <div id="bar" class="w-full">
+                <div class="">Tunggu sebentar...</div>
             </div>
             {{-- End Progress Bar --}}
 
-            <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
-            @if (Auth::check())
-                <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                    <img src="{{ Auth::user()->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('user.jpg') }}" class="rounded-full size-8">
-                    {{ optional(Auth::user())->name ?? 'Visitor' }}
-                </div>
-                <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
-                <form action="/supported" method="post" class="w-full md:w-3/4">
-                    <textarea class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
-                    <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
-                </form>
-            @else
-                <a href="/login" class="mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Masuk untuk mendukung petisi!</a>
-            @endif
+            <span id="support" class="w-full mt-2">
+                @if (Auth::check())
+                    @if ($supports->where('user_id', Auth::user()->id)->first())
+                        <div class="flex flex-col gap-4 w-full md:w-3/4 mt-5">
+                            <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh {{ $tujuan - $supports->count() }} dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?</div>
+                            <a href="/support" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
+                        </div>
+                    @else
+                        <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
+                        <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
+                            <img src="{{ Auth::user()->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('user.jpg') }}" class="rounded-full size-8">
+                            {{ optional(Auth::user())->name ?? 'Visitor' }}
+                        </div>
+                        <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
+                        <form id="supportForm" action="javascript:void(0)" method="POST" class="w-full md:w-3/4">
+                            @csrf
+                            <input name="petition_id" type="hidden" value="{{ $petisi->id }}">
+                            <input name="user_id" type="text" value="{{ Auth::user()->id }}" hidden>
+                            <textarea name="content" class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
+                            <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
+                        </form>
+                    @endif
+                @else
+                    <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
+                    <a href="/login" class="mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Masuk untuk mendukung petisi!</a>
+                @endif
+            </span>
         </div>
         {{-- End Dukung Petisi --}}
 
@@ -123,6 +143,42 @@
         $('#comments-container').load(
             '{{ route('comments.show', ['slug' => $petisi->slug]) }}'
         );
+        $('#bar').load(
+            '{{ route('petisi.bar', ['slug' => $petisi->slug]) }}'
+        );
+
+        $('#supportForm').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '{{ route('petisi.support') }}',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if(response.message === 'success') {
+                        $('#support').html(`
+                            <div class="flex flex-col gap-4 w-full md:w-3/4 mt-5">
+                                <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">
+                                    Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh ` + ({{ $tujuan }} - {{ $supportsCount }} + 1) + ` dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?
+                                </div>
+                                <a href="/support" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
+                            </div>
+                        `),
+                        $('#comments-container').load(
+                            '{{ route('comments.show', ['slug' => $petisi->slug]) }}'
+                        ),
+                        $('#bar').load(
+                            '{{ route('petisi.bar', ['slug' => $petisi->slug]) }}'
+                        );
+                    }
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText); // Display any error messages in the console
+                }
+            });
+        });
     });
 </script>
 @endsection
