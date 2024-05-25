@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
+use App\Models\Petition;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,14 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($slug)
     {
-        //
+        $petisi = Petition::where('slug', $slug)->firstOrFail();
+        $comments = Comment::where('petisi_id', $petisi->id)->get();
+
+        return view('petisi.comments', [
+            'comments' => $comments
+        ]);
     }
 
     /**

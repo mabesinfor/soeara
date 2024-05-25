@@ -67,23 +67,29 @@
             {{-- End Progress Bar --}}
 
             <h3 class="text-2xl text-center md:text-start font-bold mb-3 mt-5">Dukung petisi ini</h3>
-            <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
-                <img src="{{ optional(Auth::user())->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('user.jpg') ?? url('user.jpg') }}" class="rounded-full size-8">
-                {{ optional(Auth::user())->name ?? 'Visitor' }}
-            </div>
-            <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
-            <form action="/supported" method="post" class="w-full md:w-3/4">
-                <textarea class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
-                <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
-            </form>
+            @if (Auth::check())
+                <div class="flex items-center gap-4 mb-4 justify-center md:justify-start">
+                    <img src="{{ Auth::user()->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('user.jpg') }}" class="rounded-full size-8">
+                    {{ optional(Auth::user())->name ?? 'Visitor' }}
+                </div>
+                <p class="opacity-80 text-center md:text-start">Saya mendukung petisi ini karena ... (tidak wajib)</p>
+                <form action="/supported" method="post" class="w-full md:w-3/4">
+                    <textarea class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
+                    <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
+                </form>
+            @else
+                <a href="/login" class="mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Masuk untuk mendukung petisi!</a>
+            @endif
         </div>
         {{-- End Dukung Petisi --}}
 
         <div class="bg-transparent w-full p-4 col-span-2 md:ml-20">
-            <h3 class="text-2xl text-start font-bold mb-7 md:ml-20">24 Komentar</h3>
+            <h3 class="text-2xl text-start font-bold mb-7 md:ml-20">{{ $comments->count() }} Komentar</h3>
             {{-- Start submit komentar --}}
             <div class="flex items-start gap-4 mb-4 md:ml-20">
-                <img src="{{ optional(Auth::user())->avatar ?? url('user.jpg') }}" class="rounded-full size-8">
+                @if (Auth::check())
+                    <img src="{{ Auth::user()->avatar ? (filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL) ? Auth::user()->avatar : asset('storage/' . Auth::user()->avatar)) : asset('user.jpg') }}" class="rounded-full size-8">
+                @endif
                 <div class="flex flex-col w-full relative">
                     <form action="/submitkomen" method="post" onsubmit="return checkLogin()">
                         @csrf
@@ -95,32 +101,11 @@
             </div>
             {{-- End submit komentar --}}
 
-            {{-- Start Komentar --}}
-            @foreach($comments as $comment)
-                <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5">
-                    <img src="{{ $comment->user && $comment->user->avatar ? url($comment->user->avatar) : url('user.jpg') }}" class="rounded-full size-8">
-                    <div class="flex flex-col w-full">
-                        <div class="flex justify-between">
-                            <div class="flex gap-2">
-                                <p class="font-bold">{{ $comment->user->name }}</p>
-                                <p class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
-                            </div>
-                            <button onclick="deleteFunction()">
-                                <img src="{{ url('delete.svg') }}">
-                            </button>
-                        </div>
-                        <p class="mt-5">{{ $comment->content }}</p>
-                        <div class="inline-flex gap-2 items-center cursor-pointer mt-2">
-                            <button id="likeButton" onclick="toggleLike()">
-                                <img id="likeImage" src="{{ url('like.svg') }}" class="text-black">
-                            </button>
-                            <small>{{ $comment->likes_count }} Suka</small>
-                        </div>
-                    </div>
-                </div>
-                <hr class="md:ml-20">
-            @endforeach
-            {{-- End Komentar --}}
+            {{-- Separate comments view start --}}
+            <div id="comments-container">
+                <span class="flex justify-center my-4 md:ml-20">Tunggu sebentar...</span>
+            </div>
+            {{-- Separate comments view End --}}
         </div>
     </div>
     <div class="w-full md:w-1/2 md:ml-20 flex p-5 mb-20">
@@ -130,14 +115,14 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <script>
-        function checkLogin() {
-            @if(Auth::guest())
-                window.location.href = "/login";
-                return false;
-            @endif
-            return true;
-        }
-    </script>
+@section('javascripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#comments-container').load(
+            '{{ route('comments.show', ['slug' => $petisi->slug]) }}'
+        );
+    });
+</script>
 @endsection

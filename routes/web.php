@@ -21,7 +21,9 @@ Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index');
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
-Route::post('/submitkomen', [CommentController::class, 'store']);
+Route::post('/submitkomen', [CommentController::class, 'store'])->middleware('auth');
+Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show');
+
 
 Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
 Route::view('/petisi/bagikan', 'petisi/bagikan')->middleware('auth');;

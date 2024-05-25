@@ -70,7 +70,8 @@ class PetitionController extends Controller
 
         if ($petisi) {
             return view('petisi.show', [
-                'petisi', 'comments' => $petisi,
+                'petisi' => $petisi,
+                'comments' => $comments
             ]);
         } else {
             abort(404, 'Petisi tidak ditemukan');
