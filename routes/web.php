@@ -22,9 +22,9 @@ Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index');
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
-Route::get('/bar/{slug}', [PetitionController::class, 'bar'])->name('petisi.bar');
 Route::post('/submitkomen', [CommentController::class, 'store'])->middleware('auth');
-Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show');
+Route::get('/bar/{slug}', [PetitionController::class, 'bar'])->name('petisi.bar')->middleware('ajax');
+Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show')->middleware('ajax');
 Route::post('/support', [SupportController::class, 'store'])->name('petisi.support')->middleware('auth');
 
 
@@ -32,8 +32,8 @@ Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
 Route::view('/petisi/bagikan', 'petisi/bagikan')->middleware('auth');;
 
 Route::get('/profil/{slug}', [UserController::class, 'show'])->name('profil.show');
-Route::get('/profil/reg/{slug}', [UserController::class, 'reg'])->name('profil.reg');
-Route::get('/profil/done/{slug}', [UserController::class, 'done'])->name('profil.done');
+Route::get('/profil/reg/{slug}', [UserController::class, 'reg'])->name('profil.reg')->middleware('ajax');
+Route::get('/profil/done/{slug}', [UserController::class, 'done'])->name('profil.done')->middleware('ajax');
 Route::middleware(['auth', 'check.profile.owner'])->group(function () {
     Route::get('/profil/{slug}/edit', [UserController::class, 'edit'])->name('profil.edit');
     Route::put('/profil/{slug}/edit', [UserController::class, 'update'])->name('profil.update');

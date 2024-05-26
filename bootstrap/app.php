@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\CheckRole::class,
             'check.profile.owner' => \App\Http\Middleware\CheckProfileOwner::class,
             'can' => \Illuminate\Auth\Middleware\Authorize::class,
+            'ajax' => \App\Http\Middleware\AjaxOnly::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

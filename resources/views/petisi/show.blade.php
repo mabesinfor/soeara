@@ -10,12 +10,6 @@
         $tujuan = 10000;
     }
 @endphp
-{{-- {{ dd($supports->where('user_id', Auth::user()->id)->first()) }} --}}
-
-<!-- Penggunaan variabel $tujuan di dalam Blade -->
-<div style="width: {{ ($supportsCount / $tujuan) * 100 }}%;">
-    <!-- Konten elemen -->
-</div>
 
 @extends('layouts.app')
 
