@@ -23,7 +23,7 @@ class PetitionController extends Controller
     }
     public function index()
     {
-        $petisi = Petition::all();
+        $petisi = Petition::with('categories')->with('supporters')->with('likes')->get();
         return view('petisi.index', compact('petisi'));
     }
 
@@ -36,8 +36,6 @@ class PetitionController extends Controller
 
     public function store(StorePetitionRequest $request)
     {
-        // $all = $request->all();
-        // dd($all);
         $data = $request->validate([
             'title' => 'required',
             'desc' => 'required',
@@ -73,15 +71,11 @@ class PetitionController extends Controller
 
     public function show($slug)
     {
-        $petisi = Petition::where('slug', $slug)->with('categories')->firstOrFail();
-        $supports = Support::where('petition_id', $petisi->id)->get();
-        $comments = Comment::where('petisi_id', $petisi->id)->get();
+        $petisi = Petition::where('slug', $slug)->with('categories')->with('supporters')->with('likes')->firstOrFail();
         
         if ($petisi) {
             return view('petisi.show', [
                 'petisi' => $petisi,
-                'comments' => $comments,
-                'supports' => $supports
             ]);
         } else {
             abort(404, 'Petisi tidak ditemukan');

@@ -1,5 +1,5 @@
 @php
-    $supportsCount = $supports->count();
+    $supportsCount = $petisi->supporters->count();
     if ($supportsCount < 5) {
         $tujuan = 5;
     } elseif ($supportsCount >= 5 && $supportsCount < 100) {
@@ -45,13 +45,13 @@
                         </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
+                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg {{ $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'bg-black/30 text-[#C82323]' : '' }}">
                             <img src="{{ url('like.svg') }}">
-                            <small>Suka</small>
+                            <small>{{ $petisi->likes->count() }} Suka</small>
                         </div>
                         <div class="flex gap-2 items-center">
                             <img src="{{ url('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">{{ $supports->count() }} Pendukung</small>
+                            <small class="text-[#C82323] mr-3">{{ $petisi->supporters->count() }} Pendukung</small>
                         </div>
                     </div>
                 </div>
@@ -69,9 +69,9 @@
 
             <span id="support" class="w-full mt-2">
                 @if (Auth::check())
-                    @if ($supports->where('user_id', Auth::user()->id)->first())
+                    @if ($petisi->where('user_id', Auth::user()->id)->where('id', $petisi->id)->with('supporters')->first())
                         <div class="flex flex-col gap-4 w-full md:w-3/4 mt-5">
-                            <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh {{ $tujuan - $supports->count() }} dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?</div>
+                            <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh {{ $tujuan - $petisi->supporters->count() }} dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?</div>
                             <a href="/support" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
                         </div>
                     @else
@@ -98,7 +98,7 @@
         {{-- End Dukung Petisi --}}
 
         <div class="bg-transparent w-full p-4 col-span-2 md:ml-20">
-            <h3 class="text-2xl text-start font-bold mb-7 md:ml-20">{{ $comments->count() }} Komentar</h3>
+            <h3 class="text-2xl text-start font-bold mb-7 md:ml-20">{{ $petisi->comments->count() }} Komentar</h3>
             {{-- Start submit komentar --}}
             <div class="flex items-start gap-4 mb-4 md:ml-20">
                 @if (Auth::check())

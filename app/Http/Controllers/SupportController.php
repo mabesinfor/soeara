@@ -32,6 +32,10 @@ class SupportController extends Controller
      */
     public function store(StoreSupportRequest $request)
     {
+        if (Support::where('petition_id', $request->petition_id)->where('user_id', $request->user_id)->exists()) {
+            return redirect()->route('petisi.show', ['slug' => Petition::find($request->petition_id)->slug])->with('error', 'Anda sudah mendukung petisi ini!');
+        }
+
         Support::create([
             'petition_id' => $request->petition_id,
             'user_id' => $request->user_id,

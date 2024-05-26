@@ -27,7 +27,6 @@ Route::get('/bar/{slug}', [PetitionController::class, 'bar'])->name('petisi.bar'
 Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show')->middleware('ajax');
 Route::post('/support', [SupportController::class, 'store'])->name('petisi.support')->middleware('auth');
 
-
 Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
 Route::view('/petisi/bagikan', 'petisi/bagikan')->middleware('auth');;
 
@@ -44,11 +43,11 @@ Route::post('/profil/update_session_tabs', [UserController::class, 'updateSessio
 Route::get('/api/provinces', function () {
     $response = Http::get('https://emsifa.github.io/api-wilayah-indonesia/api/provinces.json');
     return $response->json();
-});
+})->middleware('ajax');
 Route::get('/api/regencies/{provinceId}', function ($provinceId) {
     $response = Http::get("https://emsifa.github.io/api-wilayah-indonesia/api/regencies/{$provinceId}.json");
     return $response->json();
-});
+})->middleware('ajax');
 
 Route::view('/tinjau', 'tinjau.index')->middleware('auth');
 Route::view('/tinjau/victory', 'tinjau.victory')->middleware('auth');

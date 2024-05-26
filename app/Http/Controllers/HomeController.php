@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $petisi = Petition::with('categories')->latest()->take(3)->get();
-        return view('home', compact('petisi'));
+        $petisis = Petition::with(['categories', 'supporters', 'likes'])->latest()->take(3)->get();
+        return view('home', compact('petisis'));
     }
 }

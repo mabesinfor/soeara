@@ -35,16 +35,17 @@ class Petition extends Model
 
     public function supporters(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->using(Support::class);
+        return $this->belongsToMany(User::class, 'supports')->using(Support::class);
     }
 
-    public function likedBy(): BelongsToMany
+    public function likes(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)->using(Like::class);
+        return $this->belongsToMany(User::class, 'likes')->using(Like::class);
     }
 
-    public function commentedBy(): BelongsToMany
+    public function comments()
     {
-        return $this->belongsToMany(User::class)->using(Comment::class);
+        return $this->hasMany(Comment::class, 'petisi_id');
     }
+
 }

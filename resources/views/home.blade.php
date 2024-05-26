@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('title', 'Welcome')
 
 @section('content')
@@ -83,7 +82,7 @@
         <img src="{{ url('clip2.svg') }}" class="absolute inset-0 object-contain size-full z-10 -mt-28 sm:mt-72 md:mt-96 lg:mt-[20rem] lg:pl-[54px]">
         <div class="text-left md:px-10 lg:px-40 py-20 flex flex-col gap-10">
             <h1 class="relative z-20 text-2xl font-bold my-10">Beri dukungan untuk perubahan!</h1>
-            @foreach ($petisi as $petisi)
+            @foreach ($petisis as $petisi)
             <div class="relative z-30 flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
                     <img src="{{ $petisi->image ? asset('storage/' . $petisi->image) : 'https://source.unsplash.com/1200x400?' . urlencode($petisi->title) }}" class="object-cover size-full rounded-xl" alt="{{ $petisi->title }}">
@@ -110,13 +109,13 @@
                         </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
+                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg {{ $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'bg-black/30 text-[#C82323]' : '' }}">
                             <img src="{{ asset('like.svg') }}">
-                            <small>Suka</small>
+                            <small>{{ $petisi->likes->count() }} Suka</small>
                         </div>
                         <div class="flex gap-2 items-center">
                             <img src="{{ asset('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
+                            <small class="text-[#C82323] mr-3">{{ $petisi->supporters->count() }} Pendukung</small>
                         </div>
                     </div>
                 </div>
