@@ -13,6 +13,13 @@ use Illuminate\Support\Str;
 
 class PetitionController extends Controller
 {
+    public function share($slug)
+    {
+        $petisi = Petition::where('slug', $slug)->firstOrFail();
+        return view('petisi.share', [
+            'petisi' => $petisi,
+        ]);
+    }
     public function bar($slug)
     {
         $petisi = Petition::where('slug', $slug)->with('categories')->firstOrFail();

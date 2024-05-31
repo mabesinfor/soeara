@@ -22,6 +22,7 @@ Route::view('/tentang', 'tentang')->name('tentang');
 
 Route::get('/petisi', [PetitionController::class, 'index'])->name('petisi.index');
 Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.show');
+Route::get('/bagikan/{slug}', [PetitionController::class, 'share'])->name('petisi.share');
 Route::post('/submitkomen', [CommentController::class, 'store'])->middleware('auth');
 Route::get('/bar/{slug}', [PetitionController::class, 'bar'])->name('petisi.bar')->middleware('ajax');
 Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show')->middleware('ajax');

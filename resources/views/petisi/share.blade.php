@@ -5,7 +5,7 @@
 @section('content')
     {{-- Start Judul --}}
     <div class="flex items-center justify-center p-6">
-        <h1 class="text-2xl text-center font-bold">Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!</h1>
+        <h1 class="text-2xl text-center font-bold">{{ $petisi->title }}</h1>
     </div>
     {{-- End Judul --}}
 
@@ -50,6 +50,6 @@
     {{-- End Bagikan --}}
 
     <div class="text-center md:text-right mb-4 md:p-4 md:pr-48">
-        <a href="/home" class="text-white underline">Kembali ke Beranda</a>
+        <a href="/petisi/{{ $petisi->slug }}" class="text-white underline">Kembali ke Petisi</a>
     </div>
 @endsection
