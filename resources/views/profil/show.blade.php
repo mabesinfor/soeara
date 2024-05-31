@@ -43,7 +43,15 @@
             <a id="done" href="#done" class="klik hover:border-b-4 hover:border-[#C82323] px-8 self-end pb-6" data-toggle="tab">Petisi yang saya dukung</a>
         </div>
         <div class="relative z-20 flex flex-col items-center gap-10 my-10 lg:mx-40 mx-4" id="isi-tab">
-            <p>Tunggu sebentar...</p>
+            <l-ring-2
+                size="40"
+                stroke="5"
+                stroke-length="0.25"
+                bg-opacity="0.1"
+                speed="0.8" 
+                color="red" 
+            >
+            </l-ring-2>
         </div>
     </section>
 @endsection
@@ -97,7 +105,14 @@
         $('.klik').click(function() {
             var tab_id = $(this).attr('href');
             $('#isi-tab').html(
-                '<p>Tunggu sebentar...</p>'
+                '<l-ring-2 ' +
+                    'size="40" ' +
+                    'stroke="5" ' +
+                    'stroke-length="0.25" ' +
+                    'bg-opacity="0.1" ' +
+                    'speed="0.8" ' +
+                    'color="red">' +
+                '</l-ring-2>'
             );
             if (tab_id == '#reg') {
                 $('#isi-tab').load(

@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg {{ $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'bg-black/30 text-[#C82323]' : '' }}">
+                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg {{ Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'bg-black/30 text-[#C82323]' : '' }}">
                             <img src="{{ asset('like.svg') }}">
                             <small>{{ $petisi->likes->count() }} Suka</small>
                         </div>

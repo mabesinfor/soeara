@@ -37,11 +37,11 @@
             <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
                 <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
                     <img src="{{ asset('like.svg') }}">
-                    <small>Suka</small>
+                    <small>{{ $petition->likes->count() }} Suka</small>
                 </div>
                 <div class="flex gap-2 items-center">
                     <img src="{{ asset('support.svg') }}">
-                    <small class="text-[#C82323] mr-3">5071 Pendukung</small>
+                    <small class="text-[#C82323] mr-3">{{ $petition->supporters->count() }} Pendukung</small>
                 </div>
             </div>
         </div>

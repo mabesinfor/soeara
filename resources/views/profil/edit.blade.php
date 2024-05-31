@@ -56,7 +56,7 @@
                 </select>
             </div>
             <div class="flex gap-12 mt-8 items-center">
-                <button type="submit" class="py-2 px-4 bg-[#c82323] rounded-lg font-bold">
+                <button type="submit" class="py-2 px-4 bg-[#c82323] rounded-lg font-bold" wire:loading.attr="disabled">
                     Simpan
                 </button>
                 <a href="/profil/{{ $user->slug }}" class="underline hover:text-[#c82323] font-bold transition-all">Batalkan</a>

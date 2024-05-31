@@ -1,5 +1,9 @@
 import $ from 'jquery';
 import Alpine from 'alpinejs'
+import { ring2, zoomies } from 'ldrs'
+
+ring2.register()
+zoomies.register()
 
 window.$ = window.jQuery = $;
  

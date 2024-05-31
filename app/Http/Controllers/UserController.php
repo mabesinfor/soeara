@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         $slug = $request->slug;
         $user = User::where('slug', $slug)->firstOrFail();
-        $petitions = Petition::where('user_id', $user->id)->with('categories')->get();
+        $petitions = Petition::where('user_id', $user->id)->with('categories', 'supporters', 'likes')->get();
         return view('profil.reg', [
             'petitions' => $petitions,
         ]);

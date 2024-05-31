@@ -63,7 +63,17 @@
         <div class="flex flex-col items-center md:items-start bg-transparent p-4 col-span-2 md:ml-20">
             {{-- Start Progress Bar --}}
             <div id="bar" class="w-full">
-                <div class="">Tunggu sebentar...</div>
+                <div class="text-center mr-40">
+                    <l-zoomies
+                        size="40"
+                        stroke="5"
+                        stroke-length="0.25"
+                        bg-opacity="0.1"
+                        speed="0.8" 
+                        color="red" 
+                    >
+                    </l-zoomies>
+                </div>
             </div>
             {{-- End Progress Bar --}}
 
@@ -117,7 +127,17 @@
 
             {{-- Separate comments view start --}}
             <div id="comments-container">
-                <span class="flex justify-center my-4 md:ml-20">Tunggu sebentar...</span>
+                <span class="flex justify-center my-4 md:ml-20">
+                    <l-ring-2
+                        size="40"
+                        stroke="5"
+                        stroke-length="0.25"
+                        bg-opacity="0.1"
+                        speed="0.8" 
+                        color="red" 
+                    >
+                    </l-ring-2>
+                </span>
             </div>
             {{-- Separate comments view End --}}
         </div>
