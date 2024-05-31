@@ -23,8 +23,8 @@ class PetitionController extends Controller
     }
     public function index()
     {
-        $petisi = Petition::with('categories')->with('supporters')->with('likes')->get();
-        return view('petisi.index', compact('petisi'));
+        $petisis = Petition::with(['categories', 'supporters', 'likes'])->latest()->get();
+        return view('petisi.index', compact('petisis'));
     }
 
     public function create()

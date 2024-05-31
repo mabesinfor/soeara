@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg {{ $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'bg-black/30 text-[#C82323]' : '' }}">
+                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg {{ Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'bg-black/30 text-[#C82323]' : '' }}">
                             <img src="{{ url('like.svg') }}">
                             <small>{{ $petisi->likes->count() }} Suka</small>
                         </div>
@@ -79,7 +79,7 @@
 
             <span id="support" class="w-full mt-2">
                 @if (Auth::check())
-                    @if ($petisi->where('user_id', Auth::user()->id)->where('id', $petisi->id)->with('supporters')->first())
+                    @if ($petisi->supporters()->where('user_id', Auth::user()->id)->where('petition_id', $petisi->id)->exists())                                                                                                  
                         <div class="flex flex-col gap-4 w-full md:w-3/4 mt-5">
                             <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh {{ $tujuan - $petisi->supporters->count() }} dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?</div>
                             <a href="/support" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
