@@ -30,7 +30,7 @@ class PetitionController extends Controller
     }
     public function index()
     {
-        $petisis = Petition::with(['categories', 'supporters', 'likes'])->latest()->get();
+        $petisis = Petition::with(['categories', 'supporters', 'likes'])->latest()->paginate(3);
         return view('petisi.index', compact('petisis'));
     }
 

@@ -4,6 +4,11 @@
 
 @section('content')
 <div x-data="{ step: 1, judul: '', deskripsi: '', foto: '' }">
+    <!-- Progress bar -->
+    <div class="h-2 bg-transparent">
+        <div x-bind:style="'width: ' + (step * 25) + '%'" class="h-full bg-[#e00a24] transition-all duration-500 ease-in-out"></div>
+    </div>
+    <!-- End Progress bar -->
     <form action="{{ route('petisi.store') }}" method="POST" id="dataForm" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input name="user_id" type="text" value="{{ Auth::user()->id }}" hidden>

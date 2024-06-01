@@ -62,15 +62,28 @@
             @endforeach
             <div class="flex justify-center w-full">
                 <div class="relative z-30 flex p-2 bg-[#303030]/50 ring-1 ring-[#646464] rounded-xl gap-2 text-[#C82323] font-bold">
-                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] p-3">
-                        <img src="{{ url('play.svg') }}" class="size-3 scale-x-[-1]">
-                    </button>
-                    <button class="rounded-lg bg-[#C82323] hover:bg-[#be4141] px-3 text-[#121212]">1</button>
-                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3">2</button>
-                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3">3</button>
-                    <button class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3">
-                        <img src="{{ url('play.svg') }}" class="size-3">
-                    </button>
+                    <!-- Link ke halaman sebelumnya -->
+                    @if (!$petisis->onFirstPage())
+                        <a href="{{ $petisis->previousPageUrl() }}" class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] p-3 flex items-center">
+                            <img src="{{ url('play.svg') }}" class="size-3 scale-x-[-1]">
+                        </a>
+                    @endif
+
+                    <!-- Link ke setiap halaman -->
+                    @foreach (range(1, $petisis->lastPage()) as $page)
+                        @if ($page == $petisis->currentPage())
+                            <button class="rounded-lg bg-[#C82323] hover:bg-[#be4141] px-3 text-[#121212] flex items-center">{{ $page }}</button>
+                        @else
+                            <a href="{{ $petisis->url($page) }}" class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] px-3 flex items-center">{{ $page }}</a>
+                        @endif
+                    @endforeach
+
+                    <!-- Link ke halaman berikutnya -->
+                    @if ($petisis->hasMorePages())
+                        <a href="{{ $petisis->nextPageUrl() }}" class="rounded-lg bg-[#121212] hover:bg-[#2f2f2f] p-3 flex items-center">
+                            <img src="{{ url('play.svg') }}" class="size-3">
+                        </a>
+                    @endif
                 </div>
             </div>
             <div class="flex justify-center w-full">
