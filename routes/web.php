@@ -53,3 +53,7 @@ Route::get('/api/regencies/{provinceId}', function ($provinceId) {
 Route::view('/tinjau', 'tinjau.index')->middleware('auth');
 Route::view('/tinjau/victory', 'tinjau.victory')->middleware('auth');
 Route::view('/tinjau/closed', 'tinjau.closed')->middleware('auth');
+
+Route::post('/petitions/{petition}/like', [PetitionController::class, 'like'])->name('petitions.like')->middleware('auth');
+Route::delete('/petitions/{petition}/like', [PetitionController::class, 'unlike'])->name('petitions.unlike')->middleware('auth');
+Route::get('/search', [PetitionController::class, 'search'])->name('petisi.search');

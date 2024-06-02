@@ -30,7 +30,11 @@ class PetitionController extends Controller
     }
     public function index()
     {
-        $petisis = Petition::with(['categories', 'supporters', 'likes'])->latest()->paginate(3);
+        $petisis = Petition::with(['categories', 'supporters'])
+            ->withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->paginate(3);
+    
         return view('petisi.index', compact('petisis'));
     }
 
@@ -87,6 +91,32 @@ class PetitionController extends Controller
         } else {
             abort(404, 'Petisi tidak ditemukan');
         }
+    }
+
+    public function like(Petition $petition)
+    {
+        $petition->likes()->attach(auth()->user()->id);
+        return back();
+    }
+
+    public function unlike(Petition $petition)
+    {
+        $petition->likes()->detach(auth()->user()->id);
+        return back();
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $petisis = Petition::where('title', 'like', '%' . $search . '%')
+            ->orWhereHas('user', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->withCount('likes')
+            ->orderBy('likes_count', 'desc')
+            ->paginate(3);
+
+        return view('petisi.index', compact('petisis'));
     }
 
     public function edit(Petition $petition)
