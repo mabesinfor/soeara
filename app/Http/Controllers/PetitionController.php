@@ -13,6 +13,19 @@ use Illuminate\Support\Str;
 
 class PetitionController extends Controller
 {
+    public function tinjau($slug)
+    {
+        $petisi = Petition::where('slug', $slug)->with('categories')->with('supporters')->with('likes')->firstOrFail();
+        
+        if ($petisi) {
+            return view('tinjau.index', [
+                'petisi' => $petisi,
+            ]);
+        } else {
+            abort(404, 'Petisi tidak ditemukan');
+        }
+    }
+
     public function share($slug)
     {
         $petisi = Petition::where('slug', $slug)->firstOrFail();

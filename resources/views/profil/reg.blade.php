@@ -26,12 +26,12 @@
                 <div class="flex flex-col gap-2">
                     <b>{{ $petition->title }}</b>
                     <small class="opacity-80">{{ Str::limit($petition->desc, 100) }}</small>
-                    <a href="{{ route('petisi.show', ['slug' => $petition->slug]) }}">
+                    <a href="{{ Auth::check() ? ($petition->user_id == Auth::user()->id ? route('tinjau.show', ['slug' => $petition->slug]) : route('petisi.show', ['slug' => $petition->slug])) : route('petisi.show', ['slug' => $petition->slug]) }}">
                         <small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small>
                     </a>
                 </div>
                 <div class="w-full flex justify-end">
-                    <a href="{{ route('petisi.show', ['slug' => $petition->slug]) }}" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a>
+                    <a href="{{ Auth::check() ? ($petition->user_id == Auth::user()->id ? route('tinjau.show', ['slug' => $petition->slug]) : route('petisi.show', ['slug' => $petition->slug])) : route('petisi.show', ['slug' => $petition->slug]) }}" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">{{ Auth::check() ? ($petition->user_id == Auth::user()->id ? 'Tinjau petisi Anda!' : 'Berikan Dukungan!') : 'Berikan Dukungan!' }}</a>
                 </div>
             </div>
             <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">

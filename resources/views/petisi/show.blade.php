@@ -174,9 +174,21 @@
 
 <!-- Modal -->
 <div id="comments-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-40 close-modal">
-    <div class="bg-[#1e1e1e] w-full md:w-2/3 rounded-lg p-6 h-2/3 overflow-scroll overflow-y-auto md:px-12 md:py-4">
-        <button class="absolute top-4 right-4 text-white hover:text-gray-700 close-modal">&times;</button>
-        <div id="comments-container-modal"></div>
+    <div class="bg-[#1e1e1e] w-full md:w-2/3 rounded-lg p-6 max-h-2/3 overflow-scroll overflow-y-auto md:px-12 md:py-4">
+        <button class="absolute top-4 right-4 text-white close-modal">&times;</button>
+        <div id="comments-container-modal">
+            <span class="flex justify-center my-4 md:ml-20">
+                <l-ring-2
+                    size="40"
+                    stroke="5"
+                    stroke-length="0.25"
+                    bg-opacity="0.1"
+                    speed="0.8" 
+                    color="red" 
+                >
+                </l-ring-2>
+            </span>
+        </div>
     </div>
 </div>
 @endsection

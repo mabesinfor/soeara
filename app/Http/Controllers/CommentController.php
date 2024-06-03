@@ -24,6 +24,16 @@ class CommentController extends Controller
         ]);
     }
 
+    public function index_tinjau($slug)
+    {
+        $petisi = Petition::where('slug', $slug)->firstOrFail();
+        $comments = Comment::where('petisi_id', $petisi->id)->get();
+
+        return view('tinjau.comments', [
+            'comments' => $comments
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

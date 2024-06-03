@@ -52,9 +52,10 @@ Route::get('/api/regencies/{provinceId}', function ($provinceId) {
     return $response->json();
 })->middleware('ajax');
 
-Route::view('/tinjau', 'tinjau.index')->middleware('auth');
-Route::view('/tinjau/victory', 'tinjau.victory')->middleware('auth');
-Route::view('/tinjau/closed', 'tinjau.closed')->middleware('auth');
+Route::view('/tinjau/closed', 'tinjau.closed');
+Route::get('/tinjau/{slug}', [PetitionController::class, 'tinjau'])->name('tinjau.show')->middleware('auth');
+Route::get('tinjau/comments/{slug}', [CommentController::class, 'index_tinjau'])->name('tinjau.comments.index')->middleware('ajax');
+Route::get('tinjau/supporters/{slug}', [SupportController::class, 'index_tinjau'])->name('tinjau.supporters.index')->middleware('ajax');
 
 Route::post('/petitions/{petition}/like', [PetitionController::class, 'like'])->name('petitions.like')->middleware('auth');
 Route::delete('/petitions/{petition}/like', [PetitionController::class, 'unlike'])->name('petitions.unlike')->middleware('auth');

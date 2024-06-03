@@ -7,7 +7,6 @@ use App\Http\Requests\StoreSupportRequest;
 use App\Http\Requests\UpdateSupportRequest;
 use App\Models\Comment;
 use App\Models\Petition;
-use GuzzleHttp\Psr7\Response;
 
 class SupportController extends Controller
 {
@@ -17,6 +16,16 @@ class SupportController extends Controller
     public function index()
     {
         //
+    }
+
+    public function index_tinjau($slug)
+    {
+        $petisi = Petition::where('slug', $slug)->firstOrFail();
+        $supporters = Support::where('petition_id', $petisi->id)->get();
+
+        return view('tinjau.supporters', [
+            'supporters' => $supporters
+        ]);
     }
 
     /**
