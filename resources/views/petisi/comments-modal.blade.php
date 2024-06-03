@@ -1,5 +1,5 @@
-@foreach($comments->take(3) as $comment)
-    <div class="flex items-start gap-4 mb-4 md:ml-20 mt-5" id="{{ $comment->id }}">
+@foreach($comments as $comment)
+    <div class="flex items-start gap-4 mb-4 mt-5" id="{{ $comment->id }}">
         <img src="{{ $comment->user->avatar ? (filter_var($comment->user->avatar, FILTER_VALIDATE_URL) ? $comment->user->avatar : asset('storage/' . $comment->user->avatar)) : asset('user.jpg') }}" class="rounded-full size-8">
         <div class="flex flex-col w-full">
             <div class="flex justify-between">
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <hr class="md:ml-20">
+    <hr>
 @endforeach
 
 {{-- MODAL DELETE --}}

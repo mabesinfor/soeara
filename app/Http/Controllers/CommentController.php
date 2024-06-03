@@ -54,9 +54,14 @@ class CommentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Comment $comment)
+    public function show($slug)
     {
-        //
+        $petisi = Petition::where('slug', $slug)->firstOrFail();
+        $comments = Comment::where('petisi_id', $petisi->id)->get();
+
+        return view('petisi.comments-modal', [
+            'comments' => $comments
+        ]);
     }
 
     /**
@@ -78,8 +83,9 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy(Request $request)
     {
-        //
+        Comment::destroy($request->id);
+        return response()->json(['success' => true, 'message' => 'Berhasil menghapus komentar!']);
     }
 }

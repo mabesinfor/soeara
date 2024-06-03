@@ -164,21 +164,39 @@
             {{-- Separate comments view End --}}
         </div>
     </div>
-    <div class="w-full md:w-1/2 md:ml-20 flex p-5 mb-20">
+    <div class="w-full md:w-1/2 md:ml-20 flex p-5 mb-20 cursor-pointer" id="show-all-comments">
         <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl md:ml-20">
             <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-50 text-center">
-                <a href="#">Lihat lebih banyak komentar</a>
+                <p>Lihat lebih banyak komentar</p>
             </div>
         </div>
     </div>
+
+<!-- Modal -->
+<div id="comments-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-40 close-modal">
+    <div class="bg-[#1e1e1e] w-full md:w-2/3 rounded-lg p-6 h-2/3 overflow-scroll overflow-y-auto md:px-12 md:py-4">
+        <button class="absolute top-4 right-4 text-white hover:text-gray-700 close-modal">&times;</button>
+        <div id="comments-container-modal"></div>
+    </div>
+</div>
 @endsection
 
 @section('javascripts')
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#show-all-comments').click(function() {
+            $('#comments-modal').removeClass('hidden');
+            $('#comments-container-modal').load('{{ route('comments.show', ['slug' => $petisi->slug]) }}');
+        });
+
+        $('.close-modal').click(function() {
+            $('#comments-modal').addClass('hidden');
+        });
+
         $('#comments-container').load(
-            '{{ route('comments.show', ['slug' => $petisi->slug]) }}'
+            '{{ route('comments.index', ['slug' => $petisi->slug]) }}'
         );
+
         $('#bar').load(
             '{{ route('petisi.bar', ['slug' => $petisi->slug]) }}'
         );
@@ -203,7 +221,7 @@
                             </div>
                         `),
                         $('#comments-container').load(
-                            '{{ route('comments.show', ['slug' => $petisi->slug]) }}'
+                            '{{ route('comments.index', ['slug' => $petisi->slug]) }}'
                         ),
                         $('#bar').load(
                             '{{ route('petisi.bar', ['slug' => $petisi->slug]) }}'

@@ -65,7 +65,7 @@
     </section>
 
     <!-- Custom Modal -->
-    <div id="myModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div id="myModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
         <div class="bg-[#1e1e1e] p-6 rounded-lg">
             <h2 class="text-xl font-bold mb-4">Hapus avatar?</h2>
             <p class="mb-4">Apakah kamu yakin ingin menghapus avatar ini?</p>

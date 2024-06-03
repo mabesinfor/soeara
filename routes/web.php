@@ -25,7 +25,9 @@ Route::get('/petisi/{slug}', [PetitionController::class, 'show'])->name('petisi.
 Route::get('/bagikan/{slug}', [PetitionController::class, 'share'])->name('petisi.share');
 Route::post('/submitkomen', [CommentController::class, 'store'])->middleware('auth');
 Route::get('/bar/{slug}', [PetitionController::class, 'bar'])->name('petisi.bar')->middleware('ajax');
-Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.show')->middleware('ajax');
+Route::get('/comments/{slug}', [CommentController::class, 'index'])->name('comments.index')->middleware('ajax');
+Route::get('/comments/show/{slug}', [CommentController::class, 'show'])->name('comments.show')->middleware('ajax');
+Route::delete('/comments/delete', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::post('/support', [SupportController::class, 'store'])->name('petisi.support')->middleware('auth');
 
 Route::view('/petisi/supported', 'petisi/supported')->middleware('auth');;
