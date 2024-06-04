@@ -48,7 +48,9 @@ class PetitionController extends Controller
             ->orderBy('likes_count', 'desc')
             ->paginate(3);
     
-        return view('petisi.index', compact('petisis'));
+        $categories = Category::all();
+    
+        return view('petisi.index', compact('petisis', 'categories'));
     }
 
     public function create()
@@ -121,15 +123,28 @@ class PetitionController extends Controller
     public function search(Request $request)
     {
         $search = $request->get('search');
-        $petisis = Petition::where('title', 'like', '%' . $search . '%')
-            ->orWhereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
-            })
-            ->withCount('likes')
+        $category = $request->get('category');
+    
+        $petisis = Petition::where(function ($query) use ($search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhereHas('user', function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                });
+        });
+    
+        if ($category != "") {
+            $petisis = $petisis->whereHas('categories', function ($query) use ($category) {
+                $query->where('categories.id', $category);
+            });
+        }
+    
+        $petisis = $petisis->withCount('likes')
             ->orderBy('likes_count', 'desc')
             ->paginate(3);
-
-        return view('petisi.index', compact('petisis'));
+    
+        $categories = Category::all(); // Get all categories
+    
+        return view('petisi.index', compact('petisis', 'categories')); // Pass categories to the view
     }
 
     public function edit(Petition $petition)
