@@ -142,9 +142,9 @@ class PetitionController extends Controller
             ->orderBy('likes_count', 'desc')
             ->paginate(3);
     
-        $categories = Category::all(); // Get all categories
+        $categories = Category::all();
     
-        return view('petisi.index', compact('petisis', 'categories')); // Pass categories to the view
+        return view('petisi.index', compact('petisis', 'categories'));
     }
 
     public function edit(Petition $petition)
