@@ -147,7 +147,7 @@
             {{-- End submit komentar --}}
 
             {{-- Separate comments view start --}}
-            <div id="comments-container">
+            <div id="comments-container" class="{{ $petisi->comments->count() > 3 ? '' : 'mb-20' }}">
                 <span class="flex justify-center my-4 md:ml-20">
                     <l-ring-2
                         size="40"

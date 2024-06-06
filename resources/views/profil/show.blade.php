@@ -58,6 +58,50 @@
 
 @section('javascripts')
 <script type="text/javascript">
+    function petitionLikeData(petitionId, initiallyLiked, initialLikesCount) {
+        return {
+            liked: initiallyLiked,
+            likesCount: initialLikesCount,
+            loading: false,
+            auth: @js(Auth::check()),
+    
+            get likesCountText() {
+                return this.likesCount === 0 ? '0 Suka' : `${this.likesCount} Suka`;
+            },
+    
+            async submitForm() {
+                if (!this.auth) {
+                    window.location.href = '/login';
+                    return;
+                }
+                this.loading = true;
+                const url = this.liked ? `/petitions/${petitionId}/unlike` : `/petitions/${petitionId}/like`;
+                const method = this.liked ? 'DELETE' : 'POST';
+    
+                try {
+                    const response = await fetch(url, {
+                        method: method,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                    });
+    
+                    const data = await response.json();
+                    if (response.ok) {
+                        this.liked = !this.liked;
+                        this.likesCount = data.likesCount;
+                    } else {
+                        console.error('An error occurred:', data.message);
+                    }
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                } finally {
+                    this.loading = false;
+                }
+            },
+        }
+    }
     $(document).ready(function() {
         var activeTab = "{{ session('tab-profil', '#reg') }}";
         $(activeTab).addClass('border-b-4 border-[#C82323]');
