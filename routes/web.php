@@ -57,7 +57,9 @@ Route::get('/tinjau/{slug}', [PetitionController::class, 'tinjau'])->name('tinja
 Route::get('tinjau/comments/{slug}', [CommentController::class, 'index_tinjau'])->name('tinjau.comments.index')->middleware('ajax');
 Route::get('tinjau/supporters/{slug}', [SupportController::class, 'index_tinjau'])->name('tinjau.supporters.index')->middleware('ajax');
 
-Route::post('/petitions/{petition}/like', [PetitionController::class, 'like'])->name('petitions.like')->middleware('auth');
-Route::delete('/petitions/{petition}/like', [PetitionController::class, 'unlike'])->name('petitions.unlike')->middleware('auth');
+// Route::post('/petitions/{petition}/like', [PetitionController::class, 'like'])->name('petitions.like')->middleware('auth');
+// Route::delete('/petitions/{petition}/like', [PetitionController::class, 'unlike'])->name('petitions.unlike')->middleware('auth');
+Route::post('/petitions/{petition}/like', [PetitionController::class, 'like'])->name('petitions.like.ajax')->middleware('auth');
+Route::delete('/petitions/{petition}/unlike', [PetitionController::class, 'unlike'])->name('petitions.unlike.ajax')->middleware('auth');
 
 Route::get('/search', [PetitionController::class, 'search'])->name('petisi.search');

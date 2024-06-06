@@ -44,36 +44,27 @@
                             <p class="opacity-80 text-justify">{!! $petisi->desc !!}</p>
                         </div>
                     </div>
-                    <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="{{ Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'text-[#C82323]' : '' }} hover:bg-black/30">
-                            @if (Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty())
-                                <!-- Form untuk 'unlike' -->
-                                <form action="{{ route('petitions.unlike', $petisi) }}" method="post" class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg text-[#C82323]">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="w-full h-full flex items-center gap-2">
-                                        <svg width="13" height="12" viewBox="0 0 13 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-[#C82323]">
-                                            <path d="M11.7861 4.28543L7.60742 3.96399L8.22352 1.56926C8.38424 0.856732 8.20262 0.447699 7.62162 0.267425L6.69239 0.00357569C6.6704 -0.00225284 6.64712 -0.000929677 6.62593 0.00735371C6.60474 0.0156371 6.58674 0.0304506 6.57453 0.0496487L3.11904 5.46967C3.09988 5.50084 3.07305 5.52658 3.04112 5.54445C3.00919 5.56231 2.97322 5.5717 2.93663 5.57173H0V11.1428H3.15038C3.28859 11.1428 3.42589 11.165 3.55701 11.2087L5.60083 11.8899C5.81935 11.9628 6.04818 12 6.27853 12H11.0447C11.5536 12 11.8885 11.6378 11.9884 11.1385L12.8576 7.32786V5.3569C12.8576 4.76598 12.3755 4.339 11.7861 4.28543Z"/>
+                    <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center px-5">
+                        <div x-data="petitionLikeData()" :class="{ 'text-[#C82323]': liked }" class="hover:bg-black/30">
+                            <form x-on:submit.prevent="submitForm">
+                                @csrf
+                                <button type="submit" class="w-full h-full flex items-center gap-2" :disabled="loading">
+                                    <svg width="13" height="12" viewBox="0 0 13 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" :class="{ 'text-[#C82323]': liked }">
+                                        <path d="M11.7861 4.28543L7.60742 3.96399L8.22352 1.56926C8.38424 0.856732 8.20262 0.447699 7.62162 0.267425L6.69239 0.00357569C6.6704 -0.00225284 6.64712 -0.000929677 6.62593 0.00735371C6.60474 0.0156371 6.58674 0.0304506 6.57453 0.0496487L3.11904 5.46967C3.09988 5.50084 3.07305 5.52658 3.04112 5.54445C3.00919 5.56231 2.97322 5.5717 2.93663 5.57173H0V11.1428H3.15038C3.28859 11.1428 3.42589 11.165 3.55701 11.2087L5.60083 11.8899C5.81935 11.9628 6.04818 12 6.27853 12H11.0447C11.5536 12 11.8885 11.6378 11.9884 11.1385L12.8576 7.32786V5.3569C12.8576 4.76598 12.3755 4.339 11.7861 4.28543Z"/>
+                                    </svg>
+                                    <small x-text="likesCountText"></small>
+                                    <div x-show="loading" class="ml-2">
+                                        <svg class="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                         </svg>
-                                        <small>{{ $petisi->likes->count() }} Suka</small>
-                                    </button>
-                                </form>
-                            @else
-                                <!-- Form untuk 'like' -->
-                                <form action="{{ route('petitions.like', $petisi) }}" method="post" class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
-                                    @csrf
-                                    <button type="submit" class="w-full h-full flex items-center gap-2">
-                                        <svg width="13" height="12" viewBox="0 0 13 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M11.7861 4.28543L7.60742 3.96399L8.22352 1.56926C8.38424 0.856732 8.20262 0.447699 7.62162 0.267425L6.69239 0.00357569C6.6704 -0.00225284 6.64712 -0.000929677 6.62593 0.00735371C6.60474 0.0156371 6.58674 0.0304506 6.57453 0.0496487L3.11904 5.46967C3.09988 5.50084 3.07305 5.52658 3.04112 5.54445C3.00919 5.56231 2.97322 5.5717 2.93663 5.57173H0V11.1428H3.15038C3.28859 11.1428 3.42589 11.165 3.55701 11.2087L5.60083 11.8899C5.81935 11.9628 6.04818 12 6.27853 12H11.0447C11.5536 12 11.8885 11.6378 11.9884 11.1385L12.8576 7.32786V5.3569C12.8576 4.76598 12.3755 4.339 11.7861 4.28543Z"/>
-                                        </svg>
-                                        <small>{{ $petisi->likes->count() }} Suka</small>
-                                    </button>
-                                </form>
-                            @endif
+                                    </div>
+                                </button>
+                            </form>
                         </div>
                         <div class="flex gap-2 items-center">
                             <img src="{{ url('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">{{ $petisi->supporters->count() }} Pendukung</small>
+                            <small class="text-[#C82323]">{{ $petisi->supporters->count() }} Pendukung</small>
                         </div>
                     </div>
                 </div>
@@ -118,7 +109,15 @@
                             <input name="petition_id" type="hidden" value="{{ $petisi->id }}">
                             <input name="user_id" type="text" value="{{ Auth::user()->id }}" hidden>
                             <textarea name="content" class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3"></textarea>
-                            <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Dukung Petisi Ini</button>
+                            <button type="submit" class="w-full mt-2 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic flex items-center justify-center" id="supportButton">
+                                <span id="buttonText" class="mr-2">Dukung Petisi Ini</span>
+                                <div id="loadingSpinner" class="hidden">
+                                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </div>
+                            </button>
                         </form>
                     @endif
                 @else
@@ -164,13 +163,13 @@
             {{-- Separate comments view End --}}
         </div>
     </div>
-    <div class="w-full md:w-1/2 md:ml-20 flex p-5 mb-20 cursor-pointer" id="show-all-comments">
+    <div class="w-full md:w-1/2 md:ml-20 flex p-5 mb-20 cursor-pointer {{ $petisi->comments->count() > 3 ? '' : 'hidden' }}" id="show-all-comments">
         <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl md:ml-20">
             <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-50 text-center">
                 <p>Lihat lebih banyak komentar</p>
             </div>
         </div>
-    </div>
+    </div>    
 
 <!-- Modal -->
 <div id="comments-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-40 close-modal">
@@ -195,6 +194,61 @@
 
 @section('javascripts')
 <script type="text/javascript">
+function petitionLikeData() {
+    return {
+        liked: @js(Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty()),
+        likesCount: @js($petisi->likes->count()),
+        loading: false,
+        auth: @js(Auth::check()),
+
+        get likesCountText() {
+            const count = this.likesCount;
+            return count === 0 ? '0 Suka' : `${count} Suka`;
+        },
+
+        async submitForm() {
+            if (!this.auth) {
+                window.location.href = '/login';
+                return;
+            }
+            this.loading = true;
+
+            const url = this.liked
+                ? '{{ route('petitions.unlike.ajax', $petisi) }}'
+                : '{{ route('petitions.like.ajax', $petisi) }}';
+
+            const method = this.liked ? 'DELETE' : 'POST';
+
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                });
+
+                if (response.headers.get('Content-Type').includes('application/json')) {
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        this.liked = !this.liked;
+                        this.likesCount = data.likesCount;
+                    } else {
+                        console.error('An error occurred:', data.message);
+                    }
+                } else {
+                    console.error('An error occurred: Unexpected response format');
+                }
+            } catch (error) {
+                console.error('An error occurred:', error);
+            } finally {
+                this.loading = false;
+            }
+        },
+    }
+}
+
     $(document).ready(function() {
         $('#show-all-comments').click(function() {
             $('#comments-modal').removeClass('hidden');
@@ -215,6 +269,10 @@
 
         $('#supportForm').submit(function(e) {
             e.preventDefault();
+            $('#supportButton').prop('disabled', true); 
+            $('#buttonText').hide(); 
+            $('#loadingSpinner').removeClass('hidden'); 
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -242,6 +300,11 @@
                 },
                 error: function(xhr) {
                     console.log(xhr.responseText); // Display any error messages in the console
+                },
+                complete: function() {
+                    $('#supportButton').prop('disabled', false); // Mengaktifkan kembali tombol
+                    $('#buttonText').show(); // Menampilkan kembali teks tombol
+                    $('#loadingSpinner').addClass('hidden'); // Menyembunyikan animasi loading
                 }
             });
         });

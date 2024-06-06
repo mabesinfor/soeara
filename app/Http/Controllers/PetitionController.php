@@ -109,16 +109,38 @@ class PetitionController extends Controller
         }
     }
 
-    public function like(Petition $petition)
+    // public function like(Petition $petition)
+    // {
+    //     $petition->likes()->attach(auth()->user()->id);
+    //     return back();
+    // }
+
+    // public function unlike(Petition $petition)
+    // {
+    //     $petition->likes()->detach(auth()->user()->id);
+    //     return back();
+    // }
+
+    public function like(Request $request, Petition $petition)
     {
         $petition->likes()->attach(auth()->user()->id);
-        return back();
+        $likesCount = $petition->likes()->count();
+
+        return response()->json([
+            'message' => 'Petisi berhasil disukai',
+            'likesCount' => $likesCount,
+        ]);
     }
 
-    public function unlike(Petition $petition)
+    public function unlike(Request $request, Petition $petition)
     {
         $petition->likes()->detach(auth()->user()->id);
-        return back();
+        $likesCount = $petition->likes()->count();
+
+        return response()->json([
+            'message' => 'Petisi berhasil tidak disukai',
+            'likesCount' => $likesCount,
+        ]);
     }
 
     public function search(Request $request)
