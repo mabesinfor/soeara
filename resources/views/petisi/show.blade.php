@@ -41,7 +41,7 @@
                         </a>
                         <div class="flex flex-col gap-2">
                             <b>{{ $petisi->title }}</b>
-                            <p class="opacity-80 text-justify">{{ $petisi->desc }}</p>
+                            <p class="opacity-80 text-justify">{!! $petisi->desc !!}</p>
                         </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">

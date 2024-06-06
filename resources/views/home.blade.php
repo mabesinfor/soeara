@@ -99,7 +99,7 @@
                         </div>
                         <div class="flex flex-col gap-2">
                             <b>{{ $petisi->title }}</b>
-                            <small class="opacity-80">{{ Str::limit($petisi->desc, 100) }}</small>
+                            <small class="opacity-80">{!! Str::limit($petisi->desc, 100) !!}</small>
                             <a href="{{ route('petisi.show', $petisi->slug) }}">
                                 <small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small>
                             </a>

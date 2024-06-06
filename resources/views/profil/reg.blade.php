@@ -25,7 +25,7 @@
                 </a>
                 <div class="flex flex-col gap-2">
                     <b>{{ $petition->title }}</b>
-                    <small class="opacity-80">{{ Str::limit($petition->desc, 100) }}</small>
+                    <small class="opacity-80">{!! Str::limit($petition->desc, 100) !!}</small>
                     <a href="{{ Auth::check() ? ($petition->user_id == Auth::user()->id ? route('tinjau.show', ['slug' => $petition->slug]) : route('petisi.show', ['slug' => $petition->slug])) : route('petisi.show', ['slug' => $petition->slug]) }}">
                         <small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small>
                     </a>

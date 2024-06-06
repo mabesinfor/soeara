@@ -63,14 +63,15 @@ class PetitionController extends Controller
     public function store(StorePetitionRequest $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'desc' => 'required',
-            'image' => 'nullable|image',
+            'title' => 'required|string|max:90',
+            'desc' => 'required|string|max:1000',
+            'image' => 'required|image',
             'user_id' => 'required',
         ]);
 
         $data['slug'] = Str::slug($data['title']);
         $data['status'] = 'pending';
+        $data['desc'] = nl2br(e($request->desc));
 
         if (Petition::where('slug', $data['slug'])->exists()) {
             return redirect()->route('petisi.create')->with('error', 'Judul sudah ada, silahkan gunakan judul lain');

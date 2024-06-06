@@ -3,7 +3,27 @@
 @section('title', 'Mulai Buat Petisi')
 
 @section('content')
-<div x-data="{ step: 1, judul: '', deskripsi: '', foto: '' }">
+<div x-data="{ 
+        step: 1, 
+        judul: '', 
+        deskripsi: '', 
+        foto: '', 
+        categoriesSelected: false, 
+        judulValid: false, 
+        deskripsiValid: false, 
+        fotoValid: false 
+    }" 
+    x-init="
+        $watch('step', value => {
+            if (value === 1) categoriesSelected = checkCategories();
+            if (value === 2) judulValid = judul.length > 0 && judul.length <= 90;
+            if (value === 3) deskripsiValid = deskripsi.length > 0 && deskripsi.length <= 1000;
+            if (value === 4) fotoValid = foto.length > 0;
+        });
+        $watch('judul', value => judulValid = value.length > 0 && value.length <= 90);
+        $watch('deskripsi', value => deskripsiValid = value.length > 0 && value.length <= 1000);
+        $watch('foto', value => fotoValid = value.length > 0);
+    ">
     <!-- Progress bar -->
     <div class="h-2 bg-transparent">
         <div x-bind:style="'width: ' + (step * 25) + '%'" class="h-full bg-[#e00a24] transition-all duration-500 ease-in-out"></div>
@@ -17,8 +37,11 @@
             maxSelection: 3,
             selectedCount() {
                 return Object.values(this.selected).filter(val => val).length;
+            },
+            checkCategories() {
+                return Object.values(this.selected).filter(val => val).length > 0;
             }
-        }">
+        }" x-init="$watch('selected', () => categoriesSelected = checkCategories())">
             <img src="{{ url('clip.svg') }}" class="absolute inset-0 object-cover size-full z-10">
             <div class="relative z-20 flex flex-col items-start justify-center gap-4 my-10 bg-transparent">
                 <div class="pl-4 pr-4 md:pl-60 md:pr-60">
@@ -37,7 +60,7 @@
                     </div>
                     <div class="flex gap-10 items-center justify-end mt-4">
                         <a href="/" class="text-sm text-white underline">Batal</a>
-                        <button type="button" @click="step = 2" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded">Lanjutkan</button>
+                        <button type="button" @click="step = 2" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded" :class="{ 'disabled cursor-not-allowed opacity-50': !categoriesSelected }" :disabled="!categoriesSelected">Lanjutkan</button>
                     </div>
                 </div>
             </div>
@@ -60,11 +83,11 @@
                                 <label for="deskripsi" class="block text-md font-bold mb-2 ml-20 md:ml-0">Deskripsi petisi</label>
                                 <span x-bind:class="{ 'text-red-500': deskripsiLength >= 1000 }" class="text-sm text-white md:mr-80 mr-20" x-text="`${deskripsiLength}/1000`"></span>
                             </div>
-                            <textarea name="desc" x-on:input="deskripsiLength = $event.target.value.length; deskripsi = $event.target.value" maxlength="1000" id="deskripsi" class="bg-black w-3/4 px-3 py-2 border border-white focus:outline-none focus:border-[#c82323] focus:ring-0 rounded-md" placeholder="Masukkan deskripsi petisi Anda ..." rows="6" required></textarea>
+                            <textarea id="desc" name="desc" x-on:input="deskripsiLength = $event.target.value.length; deskripsi = $event.target.value" maxlength="1000" class="bg-black w-3/4 px-3 py-2 border border-white focus:outline-none focus:border-[#c82323] focus:ring-0 rounded-md" placeholder="Masukkan deskripsi petisi Anda ..." rows="6" required></textarea>
                         </div>                    
                     <div class="flex gap-10 items-center justify-center md:justify-end mt-10 md:mr-60">
                         <button type="button"  @click="step = 1" class="text-sm text-white underline">Kembali</button>
-                        <button type="button"  @click="step = 3" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded">Lanjutkan</button>
+                        <button type="button"  @click="step = 3" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded" :class="{ 'disabled cursor-not-allowed opacity-50': !judulValid || !deskripsiValid }" :disabled="!judulValid || !deskripsiValid">Lanjutkan</button>
                     </div>
                 </div>
             </div>
@@ -82,13 +105,13 @@
                             <label for="photo" class="ml-5 outline outline-[#e00a24] rounded-md p-3 inline-block cursor-pointer">
                                 <img src="{{ url('image.svg') }}" alt="Upload Gambar" class="inline-block mr-2">
                                 <span x-text="fileName ? fileName : 'Tambahkan Foto'" class="font-bold text-[#e00a24] text-md"></span>
-                                <input type="file" id="photo" name="image" accept="image/" class="hidden" @change="fileName = $event.target.files[0].name; foto = URL.createObjectURL($event.target.files[0])">
+                                <input type="file" id="photo" name="image" accept="image/*" class="hidden" @change="fileName = $event.target.files[0].name; foto = URL.createObjectURL($event.target.files[0]); fotoValid = fileName.length > 0">
                             </label>
                         </div>
                     </div>
                     <div class="flex gap-10 items-center justify-center md:justify-end mt-10 md:mr-60">
                         <button type="button" @click="step = 2" class="text-sm text-white underline">Kembali</button>
-                        <button type="button" @click="step = 4" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded">Lanjutkan</button>
+                        <button type="button" @click="step = 4" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded" :class="{ 'disabled cursor-not-allowed opacity-50': !fotoValid }" :disabled="!fotoValid">Lanjutkan</button>
                     </div>
                 </div>
             </div>
@@ -102,7 +125,7 @@
                     <div class="relative z-30 flex flex-col gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full md:w-3/4 rounded-xl">
                         <div class="w-full rounded-lg bg-[#121212] items-center justify-center p-4">
                             <p class="font-bold text-xl" x-text="judul"></p>
-                            <p class="text-sm mb-4 text-justify" x-text="deskripsi"></p>
+                            <div class="text-sm mb-4 text-justify" x-html="deskripsi.split('\n').map(p => `<p>${p}</p>`).join('')"></div>
                             <img :src="foto" alt="Gambar Petisi">
                         </div>
                     </div>

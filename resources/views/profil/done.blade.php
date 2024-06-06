@@ -24,7 +24,7 @@
                 </a>
                 <div class="flex flex-col gap-2">
                     <b>{{ $petition->petitions->title }}</b>
-                    <small class="opacity-80">{{ Str::limit($petition->petitions->desc, 100) }}</small>
+                    <small class="opacity-80">{!! Str::limit($petition->desc, 100) !!}</small>
                     <a href="{{ route('petisi.show', ['slug' => $petition->petitions->slug]) }}">
                         <small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small>
                     </a>
