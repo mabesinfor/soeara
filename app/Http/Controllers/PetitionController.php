@@ -101,7 +101,9 @@ class PetitionController extends Controller
     {
         $petisi = Petition::where('slug', $slug)->with('categories')->with('supporters')->with('likes')->firstOrFail();
         if ($petisi->status !== 'published' && auth()->id() !== $petisi->user_id) {
-            abort(404, 'Petisi tidak ditemukan');
+            if ($petisi->status !== 'win') {
+                abort(404, 'Petisi tidak ditemukan');
+            }
         }
         
         if ($petisi) {

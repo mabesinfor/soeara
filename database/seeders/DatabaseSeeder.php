@@ -24,6 +24,14 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
             'password' => Hash::make('admin1'),
         ]);
+
+        User::create([
+            'name' => 'Soeara Admin2',
+            'slug' => 'soeara-admin2',
+            'email' => 'soeara.admin2@gmail.com',
+            'role' => 'admin',
+            'password' => Hash::make('admin2'),
+        ]);
         
         Petition::create([
             'title' => 'Unsoed Darurat Pelecehan Seksual! Bentuk Tim Investigasi Independent!',
@@ -35,6 +43,7 @@ class DatabaseSeeder extends Seeder
             Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
             'image' => 'img3.png',
             'user_id' => 1,
+            'status' => 'published'
         ]);
 
         Petition::create([
@@ -47,6 +56,7 @@ class DatabaseSeeder extends Seeder
             Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
             'image' => 'img2.png',
             'user_id' => 1,
+            'status' => 'published'
         ]);
 
         Petition::create([
@@ -58,7 +68,56 @@ class DatabaseSeeder extends Seeder
             
             Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
             'image' => 'img4.png',
+            'user_id' => 2,
+            'status' => 'published'
+        ]);
+
+        Petition::create([
+            'title' => 'Tingkatkan Fasilitas Laboratorium di Fakultas Kedokteran!',
+            'slug' => 'tingkatkan-fasilitas-laboratorium-di-fakultas-kedokteran',
+            'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
+
+Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.
+
+Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
             'user_id' => 1,
+            'status' => 'reject'
+        ]);
+
+        Petition::create([
+            'title' => 'Perbaiki Sistem Kesehatan Mental Mahasiswa!',
+            'slug' => 'perbaiki-sistem-kesehatan-mental-mahasiswa',
+            'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
+
+Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.
+
+Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
+            'user_id' => 2,
+            'status' => 'published'
+        ]);
+
+        Petition::create([
+            'title' => 'Sediakan WiFi Gratis di Seluruh Area Kampus!',
+            'slug' => 'sediakan-wifi-gratis-di-seluruh-area-kampus',
+            'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
+
+Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.
+
+Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
+            'user_id' => 2,
+            'status' => 'published'
+        ]);
+
+        Petition::create([
+            'title' => 'Optimalisasi Layanan Perpustakaan Digital!',
+            'slug' => 'optimalisasi-layanan-perpustakaan-digital',
+            'desc' => 'Dalam menghadapi situasi darurat pelecehan seksual di lingkungan Unsoed, penting untuk segera membentuk tim investigasi independen yang bertugas untuk menyelidiki kasus-kasus tersebut secara menyeluruh dan objektif. Langkah ini menjadi sangat penting dalam memastikan perlindungan yang tepat bagi korban, serta menegaskan komitmen institusi terhadap keamanan dan kesejahteraan seluruh anggota komunitas akademik.
+
+Selain itu, langkah pembentukan tim investigasi independen juga merupakan bentuk respons yang transparan dan akuntabel dari pihak universitas terhadap kasus-kasus pelecehan seksual. Dengan adanya tim investigasi independen, proses penyelidikan dapat dilakukan secara obyektif tanpa adanya intervensi atau kepentingan dari pihak-pihak yang terlibat secara langsung. Hal ini akan meningkatkan kepercayaan dan keadilan bagi korban serta memberikan pesan yang kuat bahwa pelecehan seksual tidak akan ditoleransi dalam lingkungan Unsoed.
+
+Selain membentuk tim investigasi independen, penting pula bagi Unsoed untuk meningkatkan kesadaran dan pemahaman mengenai isu pelecehan seksual di kalangan mahasiswa, dosen, dan staf. Ini dapat dilakukan melalui penyelenggaraan workshop, seminar, atau kampanye yang bertujuan untuk mengedukasi dan memberikan pemahaman yang lebih baik tentang konsekuensi dan tindakan pencegahan pelecehan seksual. Dengan demikian, universitas dapat menjadi lingkungan yang lebih aman dan inklusif bagi seluruh anggotanya.',
+            'user_id' => 2,
+            'status' => 'pending'
         ]);
 
         $this->call(CategorySeeder::class);
