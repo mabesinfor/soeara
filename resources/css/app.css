@@ -63,3 +63,7 @@
 .fade.show {
     opacity: 1;
 }
+
+.text-red-500 {
+    color: #c82323;
+}

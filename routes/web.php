@@ -71,3 +71,5 @@ Route::post('/petitions/win/{petition}', [PetitionController::class, 'win'])->mi
 Route::get('/search', [PetitionController::class, 'search'])->name('petisi.search');
 
 Route::view('/bantuan', 'bantuan')->name('bantuan');
+
+Route::post('/comments/{id}/like', [CommentController::class, 'like'])->name('comments.like');

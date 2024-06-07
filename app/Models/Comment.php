@@ -30,4 +30,9 @@ class Comment extends Model
     {
         return $this->belongsTo(Petition::class, 'petisi_id');
     }
+    
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'comment_user_likes');
+    }
 }
