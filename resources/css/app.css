@@ -54,3 +54,12 @@
 #arrow-right:hover #arrow-svg path {
     fill-opacity: 1;
 }
+
+.fade {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.fade.show {
+    opacity: 1;
+}

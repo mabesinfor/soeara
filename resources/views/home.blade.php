@@ -19,7 +19,7 @@
                 </svg>
             </div>
             @foreach ($trending as $trend)
-            <div class="petition-card flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl" style="display: none;">
+            <div class="petition-card fade flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl" style="display: none;">
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
                     <img src="{{ $trend->image ? asset('storage/' . $trend->image) : 'https://source.unsplash.com/1200x400?' . urlencode($trend->title) }}" class="object-cover size-full rounded-xl" alt="{{ $trend->title }}">
                     <h1 class="absolute top-7 bg-[#C82323] py-1 px-2 rounded-lg uppercase italic font-bold ml-4">Lagi Trending!</h1>
@@ -186,8 +186,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
 
     function showPetition(index) {
-        petitions.forEach(p => p.style.display = 'none'); 
+        petitions.forEach(p => {
+            p.classList.remove('show');
+            p.style.display = 'none';
+        });
         petitions[index].style.display = 'flex';
+        setTimeout(() => petitions[index].classList.add('show'), 50);
     }
 
     document.getElementById('arrow-right').addEventListener('click', function() {
