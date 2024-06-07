@@ -10,17 +10,17 @@
             <div class="flex flex-col mt-4 text-sm gap-2">
                 <a href="buat-petisi" class="opacity-70 hover:opacity-100">Mulai Petisi</a>
                 <a href="petisi" class="opacity-70 hover:opacity-100">Telusuri Petisi</a>
-                <a href="tentang-kami" class="opacity-70 hover:opacity-100">Tentang Kami</a>
+                <a href="tentang" class="opacity-70 hover:opacity-100">Tentang Kami</a>
             </div>
         </li>
         <li>
             <b>Bantuan</b>
             <div class="flex flex-col mt-4 text-sm gap-2">
-                <a href="" class="opacity-70 hover:opacity-100">Pusat Bantuan</a>
-                <a href="" class="opacity-70 hover:opacity-100">Panduan</a>
-                <a href="" class="opacity-70 hover:opacity-100">Privasi</a>
-                <a href="" class="opacity-70 hover:opacity-100">Ketentuan</a>
-                <a href="" class="opacity-70 hover:opacity-100">Cookie</a>
+                <a href="bantuan" class="opacity-70 hover:opacity-100">Pusat Bantuan</a>
+                <a href="bantuan#panduan" class="opacity-70 hover:opacity-100">Panduan</a>
+                <a href="bantuan#privasi" class="opacity-70 hover:opacity-100">Privasi</a>
+                <a href="bantuan#ketentuan" class="opacity-70 hover:opacity-100">Ketentuan</a>
+                <a href="bantuan#cookie" class="opacity-70 hover:opacity-100">Cookie</a>
             </div>
         </li>
         <li class="md:hidden lg:block">

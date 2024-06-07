@@ -69,3 +69,5 @@ Route::post('/petitions/open/{petition}', [PetitionController::class, 'open'])->
 Route::post('/petitions/win/{petition}', [PetitionController::class, 'win'])->middleware('ajax');
 
 Route::get('/search', [PetitionController::class, 'search'])->name('petisi.search');
+
+Route::view('/bantuan', 'bantuan')->name('bantuan');
