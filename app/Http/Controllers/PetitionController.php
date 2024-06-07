@@ -66,7 +66,6 @@ class PetitionController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:90',
             'desc' => 'required|string|max:1000',
-            'image' => 'required|image',
             'user_id' => 'required',
         ]);
 

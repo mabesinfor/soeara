@@ -43,7 +43,7 @@
                                 <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                             </div>
                             <div class="flex items-center gap-4">
-                                <img src="{{ asset('pic2.svg') }}">
+                                <img src="{{ $petisi->user->avatar ? (filter_var($petisi->user->avatar, FILTER_VALIDATE_URL) ? $petisi->user->avatar : asset('storage/' . $petisi->user->avatar)) : asset('user.jpg') }}" class="size-8 rounded-full">
                                 <small>{{ $petisi->user->name }}</small>
                             </div>
                             <div class="flex flex-col gap-2">

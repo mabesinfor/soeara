@@ -18,11 +18,9 @@
             if (value === 1) categoriesSelected = checkCategories();
             if (value === 2) judulValid = judul.length > 0 && judul.length <= 90;
             if (value === 3) deskripsiValid = deskripsi.length > 0 && deskripsi.length <= 1000;
-            if (value === 4) fotoValid = foto.length > 0;
         });
         $watch('judul', value => judulValid = value.length > 0 && value.length <= 90);
         $watch('deskripsi', value => deskripsiValid = value.length > 0 && value.length <= 1000);
-        $watch('foto', value => fotoValid = value.length > 0);
     ">
     <!-- Progress bar -->
     <div class="h-2 bg-transparent">
@@ -111,7 +109,7 @@
                     </div>
                     <div class="flex gap-10 items-center justify-center md:justify-end mt-10 md:mr-60">
                         <button type="button" @click="step = 2" class="text-sm text-white underline">Kembali</button>
-                        <button type="button" @click="step = 4" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded" :class="{ 'disabled cursor-not-allowed opacity-50': !fotoValid }" :disabled="!fotoValid">Lanjutkan</button>
+                        <button type="button" @click="step = 4" class="text-sm text-white bg-[#e00a24] hover:bg-[#c94958] py-2 px-4 rounded">Lanjutkan</button>
                     </div>
                 </div>
             </div>
@@ -126,7 +124,7 @@
                         <div class="w-full rounded-lg bg-[#121212] items-center justify-center p-4">
                             <p class="font-bold text-xl" x-text="judul"></p>
                             <div class="text-sm mb-4 text-justify" x-html="deskripsi.split('\n').map(p => `<p>${p}</p>`).join('')"></div>
-                            <img :src="foto" alt="Gambar Petisi">
+                            <img :src="foto" alt="Gambar Petisi" :class="{ 'hidden': !fotoValid || !foto }">
                         </div>
                     </div>
                     <div class="flex gap-10 items-center justify-center md:justify-end mt-10 md:mr-60">

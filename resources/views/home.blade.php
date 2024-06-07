@@ -2,7 +2,7 @@
 @section('title', 'Welcome')
 
 @section('content')
-    <div class="relative mx-auto py-8 md:text-center pl-2 md:pl-0">
+    <div class="relative mx-auto py-8 text-center pl-2 md:pl-0">
         {{-- hero --}}
         <img src="{{ url('clip.svg') }}" class="absolute inset-0 object-cover lg:object-contain size-full z-10 -mt-[100rem] md:-mt-[64rem] opacity-50 lg:opacity-100">
         <h1 class="relative z-20 text-4xl md:text-5xl font-bold mt-14">Terkam Bersama, Bangkit Bersama</h1>
@@ -12,7 +12,7 @@
         <a href="buat-petisi" class="relative z-20 bg-[#121212] py-3 px-6 font-bold rounded-[10px] shadow-[#C82323_0px_0px_40px] hover:bg-[#C82323] transition ease-in-out duration-500">Mulai membuat petisi</a>
         {{-- end hero --}}
         {{-- petisi card --}}
-        <div class="absolute z-30 md:w-full md:px-4 lg:px-64 mt-14 flex gap-4 items-center">
+        <div class="absolute z-30 md:w-full md:px-4 lg:px-64 mt-14 flex gap-4 items-center justify-center" id="carousel">
             <div id="arrow-left" class="cursor-pointer scale-x-[-1] hidden md:flex hover:scale-110 hover:scale-x-[-1]">
                 <svg id="arrow-svg" width="31" height="48" viewBox="0 0 31 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.80388 47.1433L29.6991 26.6671C30.0841 26.337 30.3931 25.9276 30.6049 25.4669C30.8168 25.0062 30.9265 24.5051 30.9265 23.9981C30.9265 23.491 30.8168 22.9899 30.6049 22.5292C30.3931 22.0685 30.0841 21.6591 29.6991 21.329L5.80388 0.852857C3.52305 -1.1013 0 0.518863 0 3.52188V44.4801C0 47.4831 3.52305 49.1033 5.80388 47.1433Z" fill="#C82323" fill-opacity="0.25"/>
@@ -31,7 +31,7 @@
                             <small class="opacity-50">{{ $trend->created_at->format('d/m/Y') }}</small>
                         </div>
                         <div class="flex items-center gap-4">
-                            <img src="{{ asset('pic2.svg') }}">
+                            <img src="{{ $trend->user->avatar ? (filter_var($trend->user->avatar, FILTER_VALIDATE_URL) ? $trend->user->avatar : asset('storage/' . $trend->user->avatar)) : asset('user.jpg') }}" class="size-8 rounded-full">
                             <small>{{ $trend->user->name }}</small>
                         </div>
                         <div class="flex flex-col gap-2">
@@ -115,7 +115,7 @@
                             <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                         </div>
                         <div class="flex items-center gap-4">
-                            <img src="{{ asset('pic2.svg') }}">
+                            <img src="{{ $petisi->user->avatar ? (filter_var($petisi->user->avatar, FILTER_VALIDATE_URL) ? $petisi->user->avatar : asset('storage/' . $petisi->user->avatar)) : asset('user.jpg') }}" class="size-8 rounded-full">
                             <small>{{ $petisi->user->name }}</small>
                         </div>
                         <div class="flex flex-col gap-2">
