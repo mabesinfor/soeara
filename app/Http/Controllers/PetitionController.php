@@ -9,6 +9,7 @@ use App\Models\Petition;
 use App\Models\Comment;
 use App\Models\Support;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PetitionController extends Controller
@@ -182,7 +183,37 @@ class PetitionController extends Controller
 
     public function destroy(Petition $petition)
     {
-        //
+        $userSlug = $petition->user->slug;
+    
+        Storage::disk('public')->delete($petition->image);
+    
+        $petition->delete();
+    
+        return redirect()->route('profil.show', $userSlug)->with('success', 'Petisi berhasil dihapus');
+    }
+
+    public function close(Petition $petition)
+    {
+        $petition->status = 'close';
+        $petition->save();
+    
+        return response()->json(['success' => 'Petition closed successfully']);
+    }
+
+    public function open(Petition $petition)
+    {
+        $petition->status = 'published';
+        $petition->save();
+    
+        return response()->json(['success' => 'Petition published successfully']);
+    }
+
+    public function win(Petition $petition)
+    {
+        $petition->status = 'win';
+        $petition->save();
+    
+        return response()->json(['success' => 'Petition Win!']);
     }
 
 

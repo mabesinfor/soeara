@@ -53,6 +53,7 @@ Route::get('/api/regencies/{provinceId}', function ($provinceId) {
 })->middleware('ajax');
 
 Route::view('/tinjau/closed', 'tinjau.closed');
+Route::view('/tinjau/victory', 'tinjau.victory');
 Route::get('/tinjau/{slug}', [PetitionController::class, 'tinjau'])->name('tinjau.show')->middleware('auth');
 Route::get('tinjau/comments/{slug}', [CommentController::class, 'index_tinjau'])->name('tinjau.comments.index')->middleware('ajax');
 Route::get('tinjau/supporters/{slug}', [SupportController::class, 'index_tinjau'])->name('tinjau.supporters.index')->middleware('ajax');
@@ -61,5 +62,10 @@ Route::get('tinjau/supporters/{slug}', [SupportController::class, 'index_tinjau'
 // Route::delete('/petitions/{petition}/like', [PetitionController::class, 'unlike'])->name('petitions.unlike')->middleware('auth');
 Route::post('/petitions/{petition}/like', [PetitionController::class, 'like'])->name('petitions.like.ajax')->middleware('auth');
 Route::delete('/petitions/{petition}/unlike', [PetitionController::class, 'unlike'])->name('petitions.unlike.ajax')->middleware('auth');
+
+Route::delete('/petitions/delete/{petition}', [PetitionController::class, 'destroy'])->middleware('ajax');
+Route::post('/petitions/close/{petition}', [PetitionController::class, 'close'])->middleware('ajax');
+Route::post('/petitions/open/{petition}', [PetitionController::class, 'open'])->middleware('ajax');
+Route::post('/petitions/win/{petition}', [PetitionController::class, 'win'])->middleware('ajax');
 
 Route::get('/search', [PetitionController::class, 'search'])->name('petisi.search');
