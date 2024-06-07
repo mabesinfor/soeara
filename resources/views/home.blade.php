@@ -14,7 +14,9 @@
         {{-- petisi card --}}
         <div class="absolute z-30 md:w-full md:px-4 lg:px-64 mt-14 flex gap-4 items-center">
             <div id="arrow-left" class="cursor-pointer scale-x-[-1] hidden md:flex hover:scale-110 hover:scale-x-[-1]">
-                <img src="{{ url('play.svg') }}" alt="arrow-left">
+                <svg id="arrow-svg" width="31" height="48" viewBox="0 0 31 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.80388 47.1433L29.6991 26.6671C30.0841 26.337 30.3931 25.9276 30.6049 25.4669C30.8168 25.0062 30.9265 24.5051 30.9265 23.9981C30.9265 23.491 30.8168 22.9899 30.6049 22.5292C30.3931 22.0685 30.0841 21.6591 29.6991 21.329L5.80388 0.852857C3.52305 -1.1013 0 0.518863 0 3.52188V44.4801C0 47.4831 3.52305 49.1033 5.80388 47.1433Z" fill="#C82323" fill-opacity="0.25"/>
+                </svg>
             </div>
             @foreach ($trending as $trend)
             <div class="petition-card flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl" style="display: none;">
@@ -68,7 +70,9 @@
             </div>
             @endforeach
             <div id="arrow-right" class="cursor-pointer hidden md:flex hover:scale-110">
-                <img src="{{ url('play.svg') }}" alt="array-right">
+                <svg id="arrow-svg" width="31" height="48" viewBox="0 0 31 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.80388 47.1433L29.6991 26.6671C30.0841 26.337 30.3931 25.9276 30.6049 25.4669C30.8168 25.0062 30.9265 24.5051 30.9265 23.9981C30.9265 23.491 30.8168 22.9899 30.6049 22.5292C30.3931 22.0685 30.0841 21.6591 29.6991 21.329L5.80388 0.852857C3.52305 -1.1013 0 0.518863 0 3.52188V44.4801C0 47.4831 3.52305 49.1033 5.80388 47.1433Z" fill="#C82323" fill-opacity="0.25"/>
+                </svg>
             </div>
         </div>
         {{-- end petisi card --}}

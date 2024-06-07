@@ -26,3 +26,31 @@
     color: rgb(186, 186, 186);
     background-color: rgb(48, 48, 48);
 }
+
+#arrow-left, #arrow-right {
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+#arrow-left, #arrow-right:hover {
+    transform: scale(1.1); 
+}
+
+#arrow-left {
+    transform: scaleX(-1); 
+}
+
+#arrow-left:hover {
+    transform: scaleX(-1.1) scale(1.1); 
+}
+
+#arrow-svg path {
+    transition: fill-opacity 0.3s ease;
+}
+
+#arrow-left:hover #arrow-svg path {
+    fill-opacity: 1;
+}
+
+#arrow-right:hover #arrow-svg path {
+    fill-opacity: 1;
+}
