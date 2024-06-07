@@ -13,45 +13,62 @@
         {{-- end hero --}}
         {{-- petisi card --}}
         <div class="absolute z-30 md:w-full md:px-4 lg:px-64 mt-14 flex gap-4 items-center">
-            <div class="cursor-pointer scale-x-[-1] hidden md:flex hover:scale-110 hover:scale-x-[-1]">
+            <div id="arrow-left" class="cursor-pointer scale-x-[-1] hidden md:flex hover:scale-110 hover:scale-x-[-1]">
                 <img src="{{ url('play.svg') }}" alt="arrow-left">
             </div>
-            <div class="flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl">
+            @foreach ($trending as $trend)
+            <div class="petition-card flex flex-col md:flex-row gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl" style="display: none;">
                 <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-                    <img src="{{ url('img1.png') }}" class="object-cover size-full rounded-xl">
+                    <img src="{{ $trend->image ? asset('storage/' . $trend->image) : 'https://source.unsplash.com/1200x400?' . urlencode($trend->title) }}" class="object-cover size-full rounded-xl" alt="{{ $trend->title }}">
                     <h1 class="absolute top-7 bg-[#C82323] py-1 px-2 rounded-lg uppercase italic font-bold ml-4">Lagi Trending!</h1>
                 </div>
-                <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
+                <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
                     <div class="p-5 flex flex-col gap-4 items-start text-left">
                         <div class="flex justify-between w-full">
-                            <small class="opacity-50">Ekonomi | Politik | Sosial</small>
-                            <small class="opacity-50">24/04/2024</small>
+                            <small class="opacity-50">{{ $trend->categories->pluck('name')->implode(' | ') }}</small>
+                            <small class="opacity-50">{{ $trend->created_at->format('d/m/Y') }}</small>
                         </div>
                         <div class="flex items-center gap-4">
-                            <img src="{{ url('pic1.svg') }}">
-                            <small>Muhammad Ali Prasetyo</small>
+                            <img src="{{ asset('pic2.svg') }}">
+                            <small>{{ $trend->user->name }}</small>
                         </div>
                         <div class="flex flex-col gap-2">
-                            <b>Desak Unsoed Tolak Kenaikan UKT!</b>
-                            <small class="opacity-80">Kenaikan Harga UKT sangat tidak sesuai dengan pelayanan yang diberikan oleh kampus dan justru merugikan mahasiswa karena menambah biaya perkuliahan</small>
-                            <a href=""><small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small></a>
+                            <b>{{ $trend->title }}</b>
+                            <small class="opacity-80">{!! Str::limit($trend->desc, 100) !!}</small>
+                            <a href="{{ route('petisi.show', $trend->slug) }}">
+                                <small class="underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">Baca Selanjutnya</small>
+                            </a>
                         </div>
-                        <div class="w-full flex justify-end"><a href="" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a></div>
+                        <div class="w-full flex justify-end">
+                            <a href="{{ route('petisi.show', $trend->slug) }}" class="italic font-bold bg-[#C82323] hover:bg-[#dc4d4d] py-2 px-4 rounded-lg">Berikan Dukungan!</a>
+                        </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        <div class="flex gap-2 items-center cursor-pointer hover:bg-black/30 p-3 rounded-lg">
-                            <img src="{{ url('like.svg') }}">
-                            <small>Suka</small>
+                        <div x-data="petitionLikeData({{ $trend->id }}, @js(Auth::check() && $trend->likes->where('pivot.petition_id', $trend->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty()), @js($trend->likes->count()))" :class="{ 'text-[#C82323]': liked }" class="flex gap-2 items-center p-3 rounded-lg hover:bg-black/30">
+                            <form x-on:submit.prevent="submitForm">
+                                @csrf
+                                <button type="submit" class="w-full h-full flex items-center gap-2" :disabled="loading">
+                                    <svg width="13" height="12" viewBox="0 0 13 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" :class="{ 'text-[#C82323]': liked }">
+                                        <path d="M11.7861 4.28543L7.60742 3.96399L8.22352 1.56926C8.38424 0.856732 8.20262 0.447699 7.62162 0.267425L6.69239 0.00357569C6.6704 -0.00225284 6.64712 -0.000929677 6.62593 0.00735371C6.60474 0.0156371 6.58674 0.0304506 6.57453 0.0496487L3.11904 5.46967C3.09988 5.50084 3.07305 5.52658 3.04112 5.54445C3.00919 5.56231 2.97322 5.5717 2.93663 5.57173H0V11.1428H3.15038C3.28859 11.1428 3.42589 11.165 3.55701 11.2087L5.60083 11.8899C5.81935 11.9628 6.04818 12 6.27853 12H11.0447C11.5536 12 11.8885 11.6378 11.9884 11.1385L12.8576 7.32786V5.3569C12.8576 4.76598 12.3755 4.339 11.7861 4.28543Z"/>
+                                    </svg>
+                                    <small x-text="likesCountText"></small>
+                                    <div x-show="loading" class="ml-2">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </div>
+                                </button>
+                            </form>
                         </div>
                         <div class="flex gap-2 items-center">
-                            <img src="{{ url('support.svg') }}">
-                            <small class="text-[#C82323] mr-3">5071 Pendukung</small>
+                            <img src="{{ asset('support.svg') }}">
+                            <small class="text-[#C82323] mr-3">{{ $trend->supporters->count() }} Pendukung</small>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="cursor-pointer hidden md:flex hover:scale-110">
-                <img src="{{ url('play.svg') }}" alt="arrow-right">
+            @endforeach
+            <div id="arrow-right" class="cursor-pointer hidden md:flex hover:scale-110">
+                <img src="{{ url('play.svg') }}" alt="array-right">
             </div>
         </div>
         {{-- end petisi card --}}
@@ -160,6 +177,28 @@
 
 @section('javascripts')
 <script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+    const petitions = document.querySelectorAll('.petition-card');
+    let currentIndex = 0;
+
+    function showPetition(index) {
+        petitions.forEach(p => p.style.display = 'none'); 
+        petitions[index].style.display = 'flex';
+    }
+
+    document.getElementById('arrow-right').addEventListener('click', function() {
+        currentIndex = (currentIndex + 1) % petitions.length;
+        showPetition(currentIndex);
+    });
+
+    document.getElementById('arrow-left').addEventListener('click', function() {
+        currentIndex = (currentIndex - 1 + petitions.length) % petitions.length; 
+        showPetition(currentIndex);
+    });
+
+    showPetition(currentIndex);
+});
+
 function petitionLikeData(petitionId, initiallyLiked, initialLikesCount) {
     return {
         liked: initiallyLiked,
