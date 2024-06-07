@@ -50,8 +50,12 @@ class UserController extends Controller
         $province = $user->provinceT;
         $regency = str_replace(['KABUPATEN ', 'KOTA '], '', $user->regency);
 
-        if ($province !== null && $regency !== null){
-            $address = ucwords(strtolower($regency.', '.$province));
+        if ($user->provinceT !== 'Pilih provinsi anda!'){
+            if ($user->regency !== null){
+                $address = ucwords(strtolower($regency.', '.$province));
+            } else {
+                $address = ucwords(strtolower($province));
+            }
         }
 
         if($user->x){
