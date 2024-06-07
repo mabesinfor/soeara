@@ -13,9 +13,10 @@ class HomeController extends Controller
         $trending = Petition::with(['categories', 'supporters', 'likes'])
             ->withCount('likes')
             ->orderBy('likes_count', 'desc')
+            ->whereIn('status', ['published', 'win'])
             ->take(5)
             ->get();
-        $petisis = Petition::with(['categories', 'supporters', 'likes'])->latest()->take(3)->get();
+        $petisis = Petition::with(['categories', 'supporters', 'likes'])->whereIn('status', ['published', 'win'])->latest()->take(3)->get();
         return view('home', compact('petisis', 'trending'));
     }
 }

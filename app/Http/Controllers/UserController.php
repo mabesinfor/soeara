@@ -141,7 +141,11 @@ class UserController extends Controller
     {
         $slug = $request->slug;
         $user = User::where('slug', $slug)->firstOrFail();
-        $petitions = Petition::where('user_id', $user->id)->with('categories', 'supporters', 'likes')->get();
+        if ($user->id !== auth()->id()) {
+            $petitions = Petition::where('user_id', $user->id)->whereIn('status', ['published', 'win'])->with('categories', 'supporters', 'likes')->get();
+        } else {
+            $petitions = Petition::where('user_id', $user->id)->with('categories', 'supporters', 'likes')->get();
+        }
         return view('profil.reg', [
             'petitions' => $petitions,
         ]);
@@ -151,7 +155,11 @@ class UserController extends Controller
     {
         $slug = $request->slug;
         $user = User::where('slug', $slug)->firstOrFail();
-        $petitions = Support::where('user_id', $user->id)->get();
+        $petitions = Support::where('user_id', $user->id)
+                    ->whereHas('petitions', function ($query) {
+                        $query->whereIn('status', ['published', 'win']);
+                    })
+                    ->get();
         return view('profil.done', [
             'petitions' => $petitions,
         ]);

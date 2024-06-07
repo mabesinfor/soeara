@@ -47,6 +47,7 @@ class PetitionController extends Controller
         $petisis = Petition::with(['categories', 'supporters'])
             ->withCount('likes')
             ->orderBy('likes_count', 'desc')
+            ->whereIn('status', ['published', 'win'])
             ->paginate(3);
     
         $categories = Category::all();
@@ -99,6 +100,9 @@ class PetitionController extends Controller
     public function show($slug)
     {
         $petisi = Petition::where('slug', $slug)->with('categories')->with('supporters')->with('likes')->firstOrFail();
+        if ($petisi->status !== 'published' && auth()->id() !== $petisi->user_id) {
+            abort(404, 'Petisi tidak ditemukan');
+        }
         
         if ($petisi) {
             return view('petisi.show', [

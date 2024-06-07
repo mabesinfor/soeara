@@ -4,7 +4,7 @@
         <div 
             class="flex gap-2 items-center top-8 left-8 absolute px-4 py-2 rounded font-bold italic
                 {{ $petition->status == 'pending' ? 'bg-white text-black' : '' }}
-                {{ $petition->status == 'win' ? 'bg-[#C82323] text-white' : '' }}
+                {{ $petition->status == 'win' ? 'bg-[#C82323] text-white' : ($petition->user_id !== Auth::user()->id ? 'hidden' : '') }}
                 {{ $petition->status == 'published' ? 'bg-black text-[#C82323]' : '' }}
                 {{ $petition->status == 'close' ? 'bg-black text-white' : '' }}
                 {{ $petition->status == 'reject' ? 'bg-white text-[#C82323]' : '' }}"
