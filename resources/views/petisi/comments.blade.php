@@ -66,7 +66,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error(error);
-                alert('Gagal memperbarui suka.');
+                alert('Anda harus masuk terlebih dahulu.');
             }
         });
     });
