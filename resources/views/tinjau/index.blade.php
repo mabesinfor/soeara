@@ -99,7 +99,7 @@
         <p class="mt-8 font-bold text-2xl mb-3">Tinjauan petisi Anda</p>
         <div class="bg-[#1E1E1E] flex flex-col md:flex-row gap-4 p-6 rounded-xl">
             {{-- Start Progress Bar --}}
-            <div id="bar" class="w-full md:w-3/4 p-4 ml-4">
+            <div id="bar" class="w-full md:w-3/4 p-4 md:ml-4 ml-0">
                 <div class="text-center">
                     <l-zoomies
                         size="40"

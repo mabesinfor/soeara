@@ -27,7 +27,7 @@
         <div class="bg-transparent p-4 col-span-2 md:ml-20">
             <div class="relative z-30 flex flex-col gap-3 p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-full rounded-xl md:ml-20">
                 <div class="w-full rounded-lg bg-[#121212]">
-                    <img src="{{ asset('storage/' . $petisi->image) }}" class="object-cover size-full rounded-xl">
+                    <img src="{{ $petisi->image ? asset('storage/' . $petisi->image) : 'https://source.unsplash.com/1200x400?' . urlencode($petisi->title) }}" class="object-cover size-full rounded-xl">
                 </div>
                 <div class="w-full rounded-lg bg-[#121212] flex flex-col justify-between">
                     <div class="p-5 flex flex-col gap-4 items-start text-left">
