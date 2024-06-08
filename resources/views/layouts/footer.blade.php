@@ -16,11 +16,11 @@
         <li>
             <b>Bantuan</b>
             <div class="flex flex-col mt-4 text-sm gap-2">
-                <a href="bantuan" class="opacity-70 hover:opacity-100">Pusat Bantuan</a>
-                <a href="bantuan#panduan" class="opacity-70 hover:opacity-100">Panduan</a>
-                <a href="bantuan#privasi" class="opacity-70 hover:opacity-100">Privasi</a>
-                <a href="bantuan#ketentuan" class="opacity-70 hover:opacity-100">Ketentuan</a>
-                <a href="bantuan#cookie" class="opacity-70 hover:opacity-100">Cookie</a>
+                <a href="/bantuan" class="opacity-70 hover:opacity-100">Pusat Bantuan</a>
+                <a href="/bantuan#panduan" class="opacity-70 hover:opacity-100">Panduan</a>
+                <a href="/bantuan#privasi" class="opacity-70 hover:opacity-100">Privasi</a>
+                <a href="/bantuan#ketentuan" class="opacity-70 hover:opacity-100">Ketentuan</a>
+                <a href="/bantuan#cookie" class="opacity-70 hover:opacity-100">Cookie</a>
             </div>
         </li>
         <li class="md:hidden lg:block">
