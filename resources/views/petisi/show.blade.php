@@ -16,8 +16,18 @@
 @section('title', $petisi->title)
 
 @section('content')
+    {{-- Start Kemenangan --}}
+    @if ($petisi->status == 'win')
+    <div class="flex items-center justify-center gap-2 text-[#C82323] pt-6">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+            <path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Zm0 2.629c0 1.196.312 2.32.857 3.294A5.266 5.266 0 0 1 3.16 5.337a45.6 45.6 0 0 1 2.006-.343v.256Zm13.5 0v-.256c.674.1 1.343.214 2.006.343a5.265 5.265 0 0 1-2.863 3.207 6.72 6.72 0 0 0 .857-3.294Z" clip-rule="evenodd" />
+        </svg>              
+        <div class="font-bold text-sm">KEMENANGAN!</div>
+    </div>
+    @endif
+    {{-- End Kemenangan --}}
     {{-- Start Judul --}}
-    <div class="flex items-center justify-center p-6">
+    <div class="flex items-center justify-center px-6 pb-6 {{ $petisi->status !== 'win' ? 'pt-6' : '' }}">
         <h1 class="text-2xl text-center font-bold">{{ $petisi->title }}</h1>
     </div>
     {{-- End Judul --}}
@@ -91,7 +101,12 @@
             {{-- End Progress Bar --}}
 
             <span id="support" class="w-full mt-2">
-                @if (Auth::check())
+                @if ($petisi->status == 'win')
+                    <div class="flex flex-col gap-2 w-full md:w-3/4 mt-5">
+                        <div class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Petisi sudah menang!</div>
+                        <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">Terimakasih, petisi ini sudah menang berkat dukungan kalian para mahasiswa yang peduli pada perubahan!</div>
+                    </div>
+                @elseif (Auth::check())
                     @if ($petisi->supporters()->where('user_id', Auth::user()->id)->where('petition_id', $petisi->id)->exists())                                                                                                  
                         <div class="flex flex-col gap-4 w-full md:w-3/4 mt-5">
                             <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh {{ $tujuan - $petisi->supporters->count() }} dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?</div>
@@ -289,7 +304,7 @@ function petitionLikeData() {
                         $('#support').html(`
                             <div class="flex flex-col gap-4 w-full md:w-3/4 mt-5">
                                 <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">
-                                    Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh ` + ({{ $tujuan }} - {{ $supportsCount }} + 1) + ` dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?
+                                    Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh ` + ({{ $tujuan }} - {{ $petisi->supporters->count() }} - 1) + ` dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?
                                 </div>
                                 <a href="/support" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
                             </div>

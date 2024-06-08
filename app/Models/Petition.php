@@ -43,6 +43,11 @@ class Petition extends Model
         return $this->belongsToMany(User::class, 'likes')->using(Like::class);
     }
 
+    public function shares(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'shares')->using(Like::class);
+    }
+
     public function comments()
     {
         return $this->hasMany(Comment::class, 'petisi_id');

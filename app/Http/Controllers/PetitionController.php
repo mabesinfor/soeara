@@ -41,14 +41,18 @@ class PetitionController extends Controller
     {
         $validated = $request->validate([
             'petition_id' => 'required|exists:petitions,id',
-            'platform' => 'required|string',
         ]);
 
-        Share::create([
-            'user_id' => Auth::id(),
-            'petition_id' => $validated['petition_id'],
-            'platform' => $validated['platform'],
-        ]);
+        Share::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'petition_id' => $validated['petition_id'],
+            ],
+            [
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
 
         return response()->json(['message' => 'Share logged successfully']);
     }

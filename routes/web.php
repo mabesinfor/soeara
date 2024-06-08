@@ -75,4 +75,4 @@ Route::view('/bantuan', 'bantuan')->name('bantuan');
 Route::post('/comments/{id}/like', [CommentController::class, 'like'])->name('comments.like');
 
 Route::get('/petisi/{slug}/bagikan', [PetitionController::class, 'share'])->name('petisi.share');
-Route::post('/petisi/log-share', [PetitionController::class, 'logShare'])->name('petisi.logShare');
+Route::post('/petisi/log-share', [PetitionController::class, 'logShare'])->name('petisi.logShare')->middleware('auth');
