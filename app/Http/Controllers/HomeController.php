@@ -16,7 +16,10 @@ class HomeController extends Controller
             ->whereIn('status', ['published', 'win'])
             ->take(5)
             ->get();
+        
         $petisis = Petition::with(['categories', 'supporters', 'likes'])->whereIn('status', ['published', 'win'])->latest()->take(3)->get();
-        return view('home', compact('petisis', 'trending'));
+
+        $publishedPetitionsCount = Petition::published()->count();
+        return view('home', compact('petisis', 'trending', 'publishedPetitionsCount'));
     }
 }

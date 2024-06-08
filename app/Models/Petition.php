@@ -48,4 +48,8 @@ class Petition extends Model
         return $this->hasMany(Comment::class, 'petisi_id');
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('status', 'published');
+    }
 }

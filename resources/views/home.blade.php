@@ -93,7 +93,7 @@
             </div>
             <div class="p-3 bg-[#303030]/50 ring-1 ring-[#646464] rounded-xl">
                 <div class="py-3 pl-4 pr-5 bg-[#121212] size-full rounded-lg flex flex-col justify-center items-center gap-3">
-                    <h1 class="count italic text-6xl font-bold text-[#C82323]" data-target="{{ \App\Models\Petition::count() }}">1</h1>
+                    <h1 class="count italic text-6xl font-bold text-[#C82323]" data-target="{{ $publishedPetitionsCount }}">1</h1>
                     <span>Suara!</span>
                 </div>
             </div>
@@ -205,17 +205,22 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => petitions[index].classList.add('show'), 50);
     }
 
-    document.getElementById('arrow-right').addEventListener('click', function() {
+    function nextPetition() {
         currentIndex = (currentIndex + 1) % petitions.length;
         showPetition(currentIndex);
-    });
+    }
 
-    document.getElementById('arrow-left').addEventListener('click', function() {
-        currentIndex = (currentIndex - 1 + petitions.length) % petitions.length; 
+    function prevPetition() {
+        currentIndex = (currentIndex - 1 + petitions.length) % petitions.length;
         showPetition(currentIndex);
-    });
+    }
+
+    document.getElementById('arrow-right').addEventListener('click', nextPetition);
+    document.getElementById('arrow-left').addEventListener('click', prevPetition);
 
     showPetition(currentIndex);
+
+    setInterval(nextPetition, 3500);
 });
 
 function petitionLikeData(petitionId, initiallyLiked, initialLikesCount) {
