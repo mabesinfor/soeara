@@ -7,8 +7,8 @@
         <img src="{{ url('clip.svg') }}" class="absolute inset-0 object-cover lg:object-contain size-full z-10 -mt-[100rem] md:-mt-[64rem] opacity-50 lg:opacity-100">
         <h1 class="relative z-20 text-4xl md:text-5xl font-bold mt-14">Terkam Bersama, Bangkit Bersama</h1>
         <h1 class="relative z-20 text-4xl md:text-5xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#C82323] to-white">Suara Mahasiswa, Harapan Universitas</h1>
-        <p class= "relative z-20 opacity-80 my-10 hidden md:block">Bergabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman.<br>Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
-        <p class= "relative z-20 opacity-80 my-10 md:hidden">Bergabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman. Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
+        <p class="relative z-20 opacity-80 my-10 hidden md:block">Bergabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman.<br>Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
+        <p class="relative z-20 opacity-80 my-10 md:hidden">Bergabunglah dengan kami di platform ini untuk menguatkan suara mahasiswa Universitas Jenderal Soedirman. Bersama, kita bangkit untuk membentuk masa depan yang lebih baik.</p>
         <a href="buat-petisi" class="relative z-20 bg-[#121212] py-3 px-6 font-bold rounded-[10px] shadow-[#C82323_0px_0px_40px] hover:bg-[#C82323] transition ease-in-out duration-500">Mulai membuat petisi</a>
         {{-- end hero --}}
         {{-- petisi card --}}
@@ -55,8 +55,10 @@
                                     </svg>
                                     <small x-text="likesCountText"></small>
                                     <div x-show="loading" class="ml-2">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        <svg class="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
                                     </div>
                                 </button>
                             </form>
@@ -74,10 +76,18 @@
                     <path d="M5.80388 47.1433L29.6991 26.6671C30.0841 26.337 30.3931 25.9276 30.6049 25.4669C30.8168 25.0062 30.9265 24.5051 30.9265 23.9981C30.9265 23.491 30.8168 22.9899 30.6049 22.5292C30.3931 22.0685 30.0841 21.6591 29.6991 21.329L5.80388 0.852857C3.52305 -1.1013 0 0.518863 0 3.52188V44.4801C0 47.4831 3.52305 49.1033 5.80388 47.1433Z" fill="#C82323" fill-opacity="0.25"/>
                 </svg>
             </div>
+            {{-- dots indicator --}}
+            <div id="dots" class="absolute z-30 -bottom-5 left-0 right-0 flex justify-center space-x-3">
+                @foreach ($trending as $index => $trend)
+                <div class="dot w-3 h-3 rounded-full bg-gray-300" data-index="{{ $index }}"></div>
+                @endforeach
+            </div>
+            {{-- end dots indicator --}}
         </div>
         {{-- end petisi card --}}
+        
         {{-- stats card --}}
-        <div class="relative h-[75rem] sm:h-[85rem] md:h-[32rem] lg:h-[30rem] w-full bg-[#1e1e1e] mt-40 z-20"></div>
+        <div class="relative h-[75rem] sm:h-[85rem] md:h-[32rem] lg:h-[30rem] w-full bg-[#1e1e1e] mt-44 z-20"></div>
         <div id="stats" class="relative z-20 -mt-[34rem] md:-mt-40 flex flex-col md:flex-row justify-center items-center gap-10 lg:gap-20">
             <div class="p-3 bg-[#303030]/50 ring-1 ring-[#646464] rounded-xl">
                 <div class="py-3 pl-4 pr-5 bg-[#121212] size-full rounded-lg flex flex-col justify-center items-center gap-3">
@@ -99,6 +109,7 @@
             </div>
         </div>
         {{-- end stats card --}}
+        
         {{-- other petisi card --}}
         <img src="{{ url('clip2.svg') }}" class="absolute inset-0 object-contain size-full z-10 -mt-28 sm:mt-72 md:mt-96 lg:mt-[20rem] lg:pl-[54px]">
         <div class="text-left md:px-10 lg:px-40 py-20 flex flex-col gap-10">
@@ -141,18 +152,6 @@
                         </div>
                     </div>
                     <div class="w-full bg-[#1e1e1e] p-3 rounded-b-lg flex justify-between items-center">
-                        {{-- <div class="flex gap-2 items-center p-3 rounded-lg {{ Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty() ? 'text-[#C82323]' : '' }}">
-                            @if (Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty())
-                                <svg width="13" height="12" viewBox="0 0 13 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-[#C82323]">
-                                    <path d="M11.7861 4.28543L7.60742 3.96399L8.22352 1.56926C8.38424 0.856732 8.20262 0.447699 7.62162 0.267425L6.69239 0.00357569C6.6704 -0.00225284 6.64712 -0.000929677 6.62593 0.00735371C6.60474 0.0156371 6.58674 0.0304506 6.57453 0.0496487L3.11904 5.46967C3.09988 5.50084 3.07305 5.52658 3.04112 5.54445C3.00919 5.56231 2.97322 5.5717 2.93663 5.57173H0V11.1428H3.15038C3.28859 11.1428 3.42589 11.165 3.55701 11.2087L5.60083 11.8899C5.81935 11.9628 6.04818 12 6.27853 12H11.0447C11.5536 12 11.8885 11.6378 11.9884 11.1385L12.8576 7.32786V5.3569C12.8576 4.76598 12.3755 4.339 11.7861 4.28543Z"/>
-                                </svg>
-                            @else
-                                <svg width="13" height="12" viewBox="0 0 13 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.7861 4.28543L7.60742 3.96399L8.22352 1.56926C8.38424 0.856732 8.20262 0.447699 7.62162 0.267425L6.69239 0.00357569C6.6704 -0.00225284 6.64712 -0.000929677 6.62593 0.00735371C6.60474 0.0156371 6.58674 0.0304506 6.57453 0.0496487L3.11904 5.46967C3.09988 5.50084 3.07305 5.52658 3.04112 5.54445C3.00919 5.56231 2.97322 5.5717 2.93663 5.57173H0V11.1428H3.15038C3.28859 11.1428 3.42589 11.165 3.55701 11.2087L5.60083 11.8899C5.81935 11.9628 6.04818 12 6.27853 12H11.0447C11.5536 12 11.8885 11.6378 11.9884 11.1385L12.8576 7.32786V5.3569C12.8576 4.76598 12.3755 4.339 11.7861 4.28543Z"/>
-                                </svg>
-                            @endif
-                            <small>{{ $petisi->likes->count() }} Suka</small>
-                        </div> --}}
                         <div x-data="petitionLikeData({{ $petisi->id }}, @js(Auth::check() && $petisi->likes->where('pivot.petition_id', $petisi->id)->where('pivot.user_id', Auth::user()->id)->isNotEmpty()), @js($petisi->likes->count()))" :class="{ 'text-[#C82323]': liked }" class="flex gap-2 items-center p-3 rounded-lg hover:bg-black/30">
                             <form x-on:submit.prevent="submitForm">
                                 @csrf
@@ -194,14 +193,19 @@
 <script type="text/javascript">
 document.addEventListener('DOMContentLoaded', function() {
     const petitions = document.querySelectorAll('.petition-card');
+    const dots = document.querySelectorAll('.dot');
     let currentIndex = 0;
 
     function showPetition(index) {
-        petitions.forEach(p => {
+        petitions.forEach((p, i) => {
             p.classList.remove('show');
             p.style.display = 'none';
+            dots[i].classList.remove('bg-[#C82323]');
+            dots[i].classList.add('bg-gray-300');
         });
         petitions[index].style.display = 'flex';
+        dots[index].classList.remove('bg-gray-300');
+        dots[index].classList.add('bg-[#C82323]');
         setTimeout(() => petitions[index].classList.add('show'), 50);
     }
 
@@ -217,6 +221,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('arrow-right').addEventListener('click', nextPetition);
     document.getElementById('arrow-left').addEventListener('click', prevPetition);
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            currentIndex = parseInt(e.target.getAttribute('data-index'));
+            showPetition(currentIndex);
+        });
+    });
 
     showPetition(currentIndex);
 
