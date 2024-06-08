@@ -10,6 +10,8 @@ class Share extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id', 'petition_id', 'platform'];
+
     public function users(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');

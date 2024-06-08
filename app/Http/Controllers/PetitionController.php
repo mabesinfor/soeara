@@ -11,6 +11,8 @@ use App\Models\Support;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Share;
+use Illuminate\Support\Facades\Auth;
 
 class PetitionController extends Controller
 {
@@ -34,6 +36,23 @@ class PetitionController extends Controller
             'petisi' => $petisi,
         ]);
     }
+
+    public function logShare(Request $request)
+    {
+        $validated = $request->validate([
+            'petition_id' => 'required|exists:petitions,id',
+            'platform' => 'required|string',
+        ]);
+
+        Share::create([
+            'user_id' => Auth::id(),
+            'petition_id' => $validated['petition_id'],
+            'platform' => $validated['platform'],
+        ]);
+
+        return response()->json(['message' => 'Share logged successfully']);
+    }
+    
     public function bar($slug)
     {
         $petisi = Petition::where('slug', $slug)->with('categories')->firstOrFail();
@@ -202,7 +221,7 @@ class PetitionController extends Controller
         $petition->status = 'close';
         $petition->save();
     
-        return response()->json(['success' => 'Petition closed successfully']);
+        return response()->json(['success' => 'Petisi berhasil ditutup']);
     }
 
     public function open(Petition $petition)
@@ -210,7 +229,7 @@ class PetitionController extends Controller
         $petition->status = 'published';
         $petition->save();
     
-        return response()->json(['success' => 'Petition published successfully']);
+        return response()->json(['success' => 'Petisi berhasil dibuka']);
     }
 
     public function win(Petition $petition)
@@ -218,7 +237,7 @@ class PetitionController extends Controller
         $petition->status = 'win';
         $petition->save();
     
-        return response()->json(['success' => 'Petition Win!']);
+        return response()->json(['success' => 'Petisi Menang!']);
     }
 
 
