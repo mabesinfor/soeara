@@ -48,7 +48,7 @@
                 Hapus petisi
             </a>
         
-            @if ($petisi->status == 'pending' || $petisi->status == 'published')
+            @if ($petisi->status == 'published')
             <!-- Tombol Tutup Petisi -->
             <a @click="showModal = true; action = 'close'; message = 'Apakah Anda yakin ingin menutup petisi ini?'" class="bg-transparent border border-[#e00a24] text-[#e00a24] py-2 px-4 rounded-xl flex items-center gap-2 cursor-pointer">
                 <svg class="size-4 text-[#C82323]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -68,13 +68,16 @@
             </a>
             @endif
         
+            @if ($petisi->status == 'pending' || $petisi->status == 'close' || $petisi->status == 'reject')
+            @else
             <!-- Tombol Nyatakan Kemenangan -->
-            <a @click="showModal = true; action = 'victory'; message = 'Apakah Anda yakin ingin menyatakan kemenangan untuk petisi ini?'" class="bg-[#e00a24] border border-[#e00a24] text-white py-2 px-4 rounded-xl flex items-center gap-2 cursor-pointer {{ $petisi->status == 'pending' || $petisi->status == 'close' || $petisi->status == 'reject' ? 'hidden' : '' }}">
+            <a @click="showModal = true; action = 'victory'; message = 'Apakah Anda yakin ingin menyatakan kemenangan untuk petisi ini?'" class="bg-[#e00a24] border border-[#e00a24] text-white py-2 px-4 rounded-xl flex items-center gap-2 cursor-pointer">
                 <svg class="size-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 7h-.7c.229-.467.349-.98.351-1.5a3.5 3.5 0 0 0-3.5-3.5c-1.717 0-3.215 1.2-4.331 2.481C10.4 2.842 8.949 2 7.5 2A3.5 3.5 0 0 0 4 5.5c.003.52.123 1.033.351 1.5H4a2 2 0 0 0-2 2v2a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V9a2 2 0 0 0-2-2Zm-9.942 0H7.5a1.5 1.5 0 0 1 0-3c.9 0 2 .754 3.092 2.122-.219.337-.392.635-.534.878Zm6.1 0h-3.742c.933-1.368 2.371-3 3.739-3a1.5 1.5 0 0 1 0 3h.003ZM13 14h-2v8h2v-8Zm-4 0H4v6a2 2 0 0 0 2 2h3v-8Zm6 0v8h3a2 2 0 0 0 2-2v-6h-5Z"/>
                 </svg>                  
                 Nyatakan kemenangan!
             </a>
+            @endif
         
             <!-- Modal -->
             <div x-show="showModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
