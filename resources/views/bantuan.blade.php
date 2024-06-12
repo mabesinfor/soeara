@@ -17,7 +17,7 @@
                 Selamat datang di Pusat Bantuan Soeara. Di sini, Anda dapat menemukan jawaban atas pertanyaan umum, panduan langkah demi langkah, dan berbagai sumber daya untuk membantu Anda memaksimalkan penggunaan Soeara. Jika Anda memerlukan bantuan lebih lanjut, jangan ragu untuk menghubungi tim dukungan kami.
             </p>
             <p class="mt-2 md:mt-4 text-base md:text-lg text-justify">
-                Pusat Bantuan ini juga menyediakan informasi tentang cara kerja sistem kami, seperti cara mengumpulkan minimal 500 pendukung untuk setiap petisi agar dapat diajukan kepada pihak berwenang. Kami juga menjelaskan bagaimana sistem ini dapat meningkatkan efisiensi dan efektivitas dalam menyampaikan aspirasi mahasiswa.
+                Pusat Bantuan ini juga menyediakan informasi tentang cara kerja sistem kami, seperti cara mengumpulkan minimal 100 pendukung untuk setiap petisi agar dapat diajukan kepada pihak berwenang. Kami juga menjelaskan bagaimana sistem ini dapat meningkatkan efisiensi dan efektivitas dalam menyampaikan aspirasi mahasiswa.
             </p>
         </a>
 
