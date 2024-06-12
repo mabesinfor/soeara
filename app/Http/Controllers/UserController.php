@@ -106,7 +106,7 @@ class UserController extends Controller
     
         $user->save();
     
-        return redirect("/profil/{$user->slug}/edit")->with('success', 'Profil berhasil diubah!');
+        return redirect("/profil/{$user->slug}")->with('success', 'Profil berhasil diubah!');
     }    
     
     /**

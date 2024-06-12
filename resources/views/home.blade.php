@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     showPetition(currentIndex);
 
-    setInterval(nextPetition, 3500);
+    setInterval(nextPetition, 5000);
 });
 
 function petitionLikeData(petitionId, initiallyLiked, initialLikesCount) {
