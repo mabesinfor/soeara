@@ -69,7 +69,7 @@
             @endif
         
             @if ($petisi->status == 'pending' || $petisi->status == 'close' || $petisi->status == 'reject')
-            @else
+            @elseif ($supportsCount > 99 && $petisi->status !== 'win')
             <!-- Tombol Nyatakan Kemenangan -->
             <a @click="showModal = true; action = 'victory'; message = 'Apakah Anda yakin ingin menyatakan kemenangan untuk petisi ini?'" class="bg-[#e00a24] border border-[#e00a24] text-white py-2 px-4 rounded-xl flex items-center gap-2 cursor-pointer">
                 <svg class="size-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -152,7 +152,7 @@
         <div class="flex flex-col md:flex-row">
             {{-- Start Tanggapan --}}
             <div class="w-full ml-4" id="comments-container">
-                <span class="flex justify-center my-4 md:ml-20">
+                <span class="flex justify-center w-full ml-4">
                     <l-ring-2
                         size="40"
                         stroke="5"
@@ -175,7 +175,7 @@
             {{-- End muncul ketika resolusi layar mobile --}}
 
             {{-- Start Pendukung --}}
-            <div class="w-full mt-4 ml-20" id="supporters-container">
+            <div class="w-full mt-4 md:ml-20 sm:ml-8" id="supporters-container">
                 <l-ring-2
                     size="40"
                     stroke="5"

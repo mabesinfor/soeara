@@ -3,10 +3,10 @@
         <img src="{{ $comment->user->avatar ? (filter_var($comment->user->avatar, FILTER_VALIDATE_URL) ? $comment->user->avatar : asset('storage/' . $comment->user->avatar)) : asset('user.jpg') }}" class="rounded-full size-8">
         <div class="flex flex-col w-full">
             <div class="flex justify-between">
-                <div class="flex gap-2">
+                <a href="/profil/{{ $comment->user->slug }}" class="flex gap-2">
                     <p class="font-bold">{{ $comment->user->name }}</p>
                     <p class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
-                </div>
+                </a>
                 @can('admin', Auth::user())
                     <button onclick="showConfirmModal('{{ $comment->id }}')">
                         <svg class="size-6 text-[#c82323]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -45,6 +45,26 @@
 {{-- SCRIPT --}}
 <script>
 $(document).ready(function() {
+    $('#confirmButton').click(function() {
+        var commentId = $(this).data('comment-id');
+        $.ajax({
+            type: 'DELETE',
+            url: "{{ route('comments.destroy') }}",
+            data: {
+                id: commentId,
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(response) {
+                $('#confirmModal').addClass('hidden');
+                $('#' + commentId).remove();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('Gagal menghapus komentar.');
+            }
+        });
+    });
+    
     $('.likeContainer').click(function() {
         var commentId = $(this).data('comment-id');
         var likeContainer = $(this);
@@ -70,5 +90,14 @@ $(document).ready(function() {
             }
         });
     });
+});
+
+function showConfirmModal(commentId) {
+        $('#confirmModal').removeClass('hidden');
+        $('#confirmButton').data('comment-id', commentId);
+    }
+
+$('#cancelButton').click(function() {
+    $('#confirmModal').addClass('hidden');
 });
 </script>

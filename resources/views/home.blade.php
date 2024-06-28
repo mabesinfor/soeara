@@ -30,10 +30,10 @@
                             <small class="opacity-50">{{ $trend->categories->pluck('name')->implode(' | ') }}</small>
                             <small class="opacity-50">{{ $trend->created_at->format('d/m/Y') }}</small>
                         </div>
-                        <div class="flex items-center gap-4">
+                        <a href="/profil/{{ $trend->user->slug }}" class="flex items-center gap-4">
                             <img src="{{ $trend->user->avatar ? (filter_var($trend->user->avatar, FILTER_VALIDATE_URL) ? $trend->user->avatar : asset('storage/' . $trend->user->avatar)) : asset('user.jpg') }}" class="size-8 rounded-full">
                             <small>{{ $trend->user->name }}</small>
-                        </div>
+                        </a>
                         <div class="flex flex-col gap-2">
                             <b>{{ $trend->title }}</b>
                             <small class="opacity-80">{!! Str::limit($trend->desc, 100) !!}</small>
@@ -91,7 +91,7 @@
         <div id="stats" class="relative z-20 -mt-[34rem] md:-mt-40 flex flex-col md:flex-row justify-center items-center gap-10 lg:gap-20">
             <div class="p-3 bg-[#303030]/50 ring-1 ring-[#646464] rounded-xl">
                 <div class="py-3 pl-4 pr-5 bg-[#121212] size-full rounded-lg flex flex-col justify-center items-center gap-3">
-                    <h1 class="count italic text-6xl font-bold text-[#C82323]" data-target="13">1</h1>
+                    <h1 class="count italic text-6xl font-bold text-[#C82323]" data-target="12">1</h1>
                     <span>Fakultas</span>
                 </div>
             </div>
@@ -136,10 +136,10 @@
                             <small class="opacity-50">{{ $petisi->categories->pluck('name')->implode(' | ') }}</small>
                             <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                         </div>
-                        <div class="flex items-center gap-4">
+                        <a href="/profil/{{ $petisi->user->slug }}" class="flex items-center gap-4">
                             <img src="{{ $petisi->user->avatar ? (filter_var($petisi->user->avatar, FILTER_VALIDATE_URL) ? $petisi->user->avatar : asset('storage/' . $petisi->user->avatar)) : asset('user.jpg') }}" class="size-8 rounded-full">
                             <small>{{ $petisi->user->name }}</small>
-                        </div>
+                        </a>
                         <div class="flex flex-col gap-2">
                             <b>{{ $petisi->title }}</b>
                             <small class="opacity-80">{!! Str::limit($petisi->desc, 100) !!}</small>
@@ -180,7 +180,7 @@
             <div class="w-full flex justify-center">
                 <div class="relative z-30 flex p-3 bg-[#303030]/50 ring-1 ring-[#646464] w-fit rounded-xl">
                     <div class="w-full rounded-lg bg-[#121212] py-3 px-6 md:px-40">
-                        Telusuri lebih banyak petisi <a href="petisi" class="hover:underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">disini</a>
+                        Telusuri lebih banyak petisi <a href="petisi" class="hover:underline text-[#C82323] hover:text-[#dc4d4d] font-semibold">di sini</a>
                     </div>
                 </div>
             </div>

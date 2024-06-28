@@ -37,7 +37,7 @@
             {{ Str::upper($petition->status) }}!!
         </div>
         <div class="w-full md:w-1/2 rounded-lg bg-[#121212]">
-            <img src="{{ $petition->image ? asset('storage/' . $petition->image) : 'https://source.unsplash.com/1200x400?' . urlencode($petition->title) }}" class="object-cover size-full rounded-xl" alt="{{ $petition->title }}">
+            <img src="{{ $petition->image ? asset('storage/' . $petition->image) : 'https://api.unsplash.com/search/photos?query=' . urlencode($petition->title) }}" class="object-cover size-full rounded-xl" alt="{{ $petition->title }}">
         </div>
         <div class="w-full md:w-1/2 rounded-lg bg-[#121212] flex flex-col justify-between">
             <div class="p-5 flex flex-col gap-4 items-start text-left">
@@ -97,5 +97,4 @@
 @else
     <p class="font-black">Tidak ada petisi</p>
 @endif
-
 

@@ -53,10 +53,10 @@
                                 <small class="opacity-50">{{ $petisi->categories->pluck('name')->implode(' | ') }}</small>
                                 <small class="opacity-50">{{ $petisi->created_at->format('d/m/Y') }}</small>
                             </div>
-                            <div class="flex items-center gap-4">
+                            <a href="/profil/{{ $petisi->user->slug }}" class="flex items-center gap-4">
                                 <img src="{{ $petisi->user->avatar ? (filter_var($petisi->user->avatar, FILTER_VALIDATE_URL) ? $petisi->user->avatar : asset('storage/' . $petisi->user->avatar)) : asset('user.jpg') }}" class="size-8 rounded-full">
                                 <small>{{ $petisi->user->name }}</small>
-                            </div>
+                            </a>
                             <div class="flex flex-col gap-2">
                                 <b>{{ $petisi->title }}</b>
                                 <small class="opacity-80">{!! Str::limit($petisi->desc, 100) !!}</small>

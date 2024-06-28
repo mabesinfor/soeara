@@ -154,7 +154,7 @@
                     <form action="/submitkomen" method="post" onsubmit="return checkLogin()">
                         @csrf
                         <input type="hidden" name="petisi_id" value="{{ $petisi->id }}">
-                        <textarea name="content" class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600" placeholder="Tambahkan komentar ..."></textarea>
+                        <textarea name="content" class="w-full mb-20 h-20 pb-10 p-2 rounded-md bg-transparent border border-gray-600" placeholder="Tambahkan komentar ..." required></textarea>
                         <button type="submit" class="absolute right-0 bottom-6 bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2">Kirim Komentar</button>
                     </form>
                 </div>
@@ -306,7 +306,7 @@ function petitionLikeData() {
                                 <div class="w-full p-2 rounded-md bg-transparent border border-gray-600 mt-3">
                                     Berkat dukunganmu, petisi ini punya kemungkinan untuk menang! Kita hanya butuh ` + ({{ $tujuan }} - {{ $petisi->supporters->count() }} - 1) + ` dukungan lagi untuk tonggak target berikutnya - kamu bisa bantu?
                                 </div>
-                                <a href="/support" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
+                                <a href="/bagikan/{{ $petisi->slug }}" class="text-center w-full bg-[#C82323] hover:bg-[#dc4d4d] text-white rounded-xl px-4 py-2 font-bold italic">Bagikan Petisi</a>
                             </div>
                         `),
                         $('#comments-container').load(
